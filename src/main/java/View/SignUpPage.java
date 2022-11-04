@@ -1,23 +1,23 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package View;
 
 import java.awt.Color;
-import javax.swing.ImageIcon;
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
 
 /**
  *
  * @author ASUS
  */
-public class SignUpPage extends javax.swing.JDialog {
+public class SignUpPage extends javax.swing.JFrame {
 
     /**
-     * Creates new form SignUpPag
+     * Creates new form SignUpPage2
      */
-    public SignUpPage(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public SignUpPage() {
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -51,8 +51,6 @@ public class SignUpPage extends javax.swing.JDialog {
         GoBackLogin = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setAutoRequestFocus(false);
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(1000, 700));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -324,9 +322,9 @@ public class SignUpPage extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void ChooseAvatarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChooseAvatarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ChooseAvatarActionPerformed
+    private void SubmitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitBtnActionPerformed
+
+    }//GEN-LAST:event_SubmitBtnActionPerformed
 
     private void ChooseAvatarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ChooseAvatarFocusGained
 
@@ -336,23 +334,31 @@ public class SignUpPage extends javax.swing.JDialog {
 
     }//GEN-LAST:event_ChooseAvatarFocusLost
 
-    private void InputUsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_InputUsernameFocusGained
-        if (InputUsername.getText().equals("Enter username")) {
-            InputUsername.setText("");
-            InputUsername.setForeground(new Color(255, 255, 255));
-        }
-    }//GEN-LAST:event_InputUsernameFocusGained
-
-    private void InputUsernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_InputUsernameFocusLost
-        if (InputUsername.getText().equals("")) {
-            InputUsername.setText("Enter username");
-            InputUsername.setForeground(new Color(153, 153, 153));
-        }
-    }//GEN-LAST:event_InputUsernameFocusLost
-
-    private void InputUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InputUsernameActionPerformed
+    private void ChooseAvatarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChooseAvatarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_InputUsernameActionPerformed
+    }//GEN-LAST:event_ChooseAvatarActionPerformed
+
+    private void ChooseAvatarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChooseAvatarBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ChooseAvatarBtnActionPerformed
+
+    private void InputNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_InputNameFocusGained
+        if (InputName.getText().equals("Enter your name")) {
+            InputName.setText("");
+            InputName.setForeground(new Color(255, 255, 255));
+        }
+    }//GEN-LAST:event_InputNameFocusGained
+
+    private void InputNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_InputNameFocusLost
+        if (InputName.getText().equals("")) {
+            InputName.setText("Enter your name");
+            InputName.setForeground(new Color(153, 153, 153));
+        }
+    }//GEN-LAST:event_InputNameFocusLost
+
+    private void InputNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InputNameActionPerformed
+
+    }//GEN-LAST:event_InputNameActionPerformed
 
     private void InputPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_InputPasswordFocusGained
         if (InputPassword.getText().equals("Enter password")) {
@@ -372,31 +378,9 @@ public class SignUpPage extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_InputPasswordActionPerformed
 
-    private void InputNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_InputNameFocusGained
-         if (InputName.getText().equals("Enter your name")) {
-            InputName.setText("");
-            InputName.setForeground(new Color(255, 255, 255));
-        }
-    }//GEN-LAST:event_InputNameFocusGained
-
-    private void InputNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_InputNameFocusLost
-        if (InputName.getText().equals("")) {
-            InputName.setText("Enter your name");
-            InputName.setForeground(new Color(153, 153, 153));
-        }
-    }//GEN-LAST:event_InputNameFocusLost
-
-    private void InputNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InputNameActionPerformed
-        
-    }//GEN-LAST:event_InputNameActionPerformed
-
-    private void SubmitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitBtnActionPerformed
-        
-    }//GEN-LAST:event_SubmitBtnActionPerformed
-
     private void InputPhoneNumberFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_InputPhoneNumberFocusGained
         if (InputPhoneNumber.getText().equals("Enter phone number")) {
-            
+
             InputPhoneNumber.setText("");
             InputPhoneNumber.setForeground(new Color(255, 255, 255));
         }
@@ -413,8 +397,28 @@ public class SignUpPage extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_InputPhoneNumberActionPerformed
 
+    private void InputUsernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_InputUsernameFocusGained
+        if (InputUsername.getText().equals("Enter username")) {
+            InputUsername.setText("");
+            InputUsername.setForeground(new Color(255, 255, 255));
+        }
+    }//GEN-LAST:event_InputUsernameFocusGained
+
+    private void InputUsernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_InputUsernameFocusLost
+        if (InputUsername.getText().equals("")) {
+            InputUsername.setText("Enter username");
+            InputUsername.setForeground(new Color(153, 153, 153));
+        }
+    }//GEN-LAST:event_InputUsernameFocusLost
+
+    private void InputUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InputUsernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_InputUsernameActionPerformed
+
     private void GoBackLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GoBackLoginMouseClicked
-        System.exit(0);
+        close();
+        LoginPage form = new LoginPage();
+        form.setVisible(true);
     }//GEN-LAST:event_GoBackLoginMouseClicked
 
     private void GoBackLoginMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GoBackLoginMouseEntered
@@ -424,10 +428,6 @@ public class SignUpPage extends javax.swing.JDialog {
     private void GoBackLoginMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GoBackLoginMouseExited
         GoBackLogin.setForeground(new Color(204, 0, 204));
     }//GEN-LAST:event_GoBackLoginMouseExited
-
-    private void ChooseAvatarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChooseAvatarBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ChooseAvatarBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -456,26 +456,18 @@ public class SignUpPage extends javax.swing.JDialog {
         }
         //</editor-fold>
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the dialog */
+        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                SignUpPage dialog = new SignUpPage(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+                new SignUpPage().setVisible(true);
             }
         });
+    }
+    
+     private void close() {
+        WindowEvent closeWindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
