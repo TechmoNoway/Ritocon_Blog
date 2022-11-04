@@ -49,10 +49,17 @@ public class SignUpPage extends javax.swing.JFrame {
         InputUsername = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         GoBackLogin = new javax.swing.JLabel();
+        FirstLineError = new javax.swing.JLabel();
+        ExitBtn = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(1000, 700));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         kGradientPanel1.setkBorderRadius(0);
@@ -317,13 +324,46 @@ public class SignUpPage extends javax.swing.JFrame {
         });
         kGradientPanel1.add(GoBackLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 620, -1, -1));
 
+        FirstLineError.setForeground(new java.awt.Color(255, 0, 0));
+        FirstLineError.setText("Please Insert Enough Information !");
+        kGradientPanel1.add(FirstLineError, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 180, 200, -1));
+
+        ExitBtn.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        ExitBtn.setForeground(new java.awt.Color(255, 255, 255));
+        ExitBtn.setText("X");
+        ExitBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ExitBtnMouseClicked(evt);
+            }
+        });
+        kGradientPanel1.add(ExitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 40, 20, 30));
+
         getContentPane().add(kGradientPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, -30, 1040, 760));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void SubmitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitBtnActionPerformed
-
+        if (InputPhoneNumber.getText().equals("Enter phone number")) {
+            FirstLineError.setVisible(true);
+        } else {
+            FirstLineError.setVisible(false);
+        }
+        if (InputUsername.getText().equals("Enter username")) {
+            FirstLineError.setVisible(true);
+        } else {
+            FirstLineError.setVisible(false);
+        }
+        if (InputPassword.getText().equals("Enter password")) {
+            FirstLineError.setVisible(true);
+        } else {
+            FirstLineError.setVisible(false);
+        }
+        if (InputName.getText().equals("Enter your name")) {
+            FirstLineError.setVisible(true);
+        } else {
+            FirstLineError.setVisible(false);
+        }
     }//GEN-LAST:event_SubmitBtnActionPerformed
 
     private void ChooseAvatarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ChooseAvatarFocusGained
@@ -429,6 +469,14 @@ public class SignUpPage extends javax.swing.JFrame {
         GoBackLogin.setForeground(new Color(204, 0, 204));
     }//GEN-LAST:event_GoBackLoginMouseExited
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        FirstLineError.setVisible(false);
+    }//GEN-LAST:event_formWindowOpened
+
+    private void ExitBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitBtnMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_ExitBtnMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -464,7 +512,7 @@ public class SignUpPage extends javax.swing.JFrame {
             }
         });
     }
-    
+
     private void close() {
         WindowEvent closeWindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
@@ -474,6 +522,8 @@ public class SignUpPage extends javax.swing.JFrame {
     private javax.swing.JPanel AvatarPanel;
     private javax.swing.JTextField ChooseAvatar;
     private com.k33ptoo.components.KButton ChooseAvatarBtn;
+    private javax.swing.JLabel ExitBtn;
+    private javax.swing.JLabel FirstLineError;
     private javax.swing.JLabel GoBackLogin;
     private javax.swing.JTextField InputName;
     private javax.swing.JTextField InputPassword;
