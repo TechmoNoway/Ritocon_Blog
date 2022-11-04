@@ -29,14 +29,15 @@ public class LoginPage extends javax.swing.JFrame {
         InputPassword = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        kButton2 = new com.k33ptoo.components.KButton();
-        kButton3 = new com.k33ptoo.components.KButton();
+        ToSignUpBtn = new com.k33ptoo.components.KButton();
+        SignInBtn = new com.k33ptoo.components.KButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAutoRequestFocus(false);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(950, 600));
@@ -84,34 +85,34 @@ public class LoginPage extends javax.swing.JFrame {
         jLabel2.setText("password");
         kGradientPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 350, -1, -1));
 
-        kButton2.setText("Sign Up");
-        kButton2.setkBorderRadius(50);
-        kButton2.setkEndColor(new java.awt.Color(0, 204, 204));
-        kButton2.setkHoverEndColor(new java.awt.Color(204, 0, 204));
-        kButton2.setkHoverForeGround(new java.awt.Color(255, 204, 255));
-        kButton2.setkHoverStartColor(new java.awt.Color(0, 204, 204));
-        kButton2.setkStartColor(new java.awt.Color(204, 0, 204));
-        kButton2.addActionListener(new java.awt.event.ActionListener() {
+        ToSignUpBtn.setText("Sign Up");
+        ToSignUpBtn.setkBorderRadius(50);
+        ToSignUpBtn.setkEndColor(new java.awt.Color(0, 204, 204));
+        ToSignUpBtn.setkHoverEndColor(new java.awt.Color(204, 0, 204));
+        ToSignUpBtn.setkHoverForeGround(new java.awt.Color(255, 204, 255));
+        ToSignUpBtn.setkHoverStartColor(new java.awt.Color(0, 204, 204));
+        ToSignUpBtn.setkStartColor(new java.awt.Color(204, 0, 204));
+        ToSignUpBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                kButton2ActionPerformed(evt);
+                ToSignUpBtnActionPerformed(evt);
             }
         });
-        kGradientPanel1.add(kButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 430, 150, -1));
+        kGradientPanel1.add(ToSignUpBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 430, 150, -1));
 
-        kButton3.setText("Sign In");
-        kButton3.setkBorderRadius(50);
-        kButton3.setkEndColor(new java.awt.Color(0, 204, 204));
-        kButton3.setkFillButton(false);
-        kButton3.setkHoverEndColor(new java.awt.Color(204, 0, 204));
-        kButton3.setkHoverForeGround(new java.awt.Color(255, 204, 255));
-        kButton3.setkHoverStartColor(new java.awt.Color(0, 204, 204));
-        kButton3.setkStartColor(new java.awt.Color(255, 255, 255));
-        kButton3.addActionListener(new java.awt.event.ActionListener() {
+        SignInBtn.setText("Sign In");
+        SignInBtn.setkBorderRadius(50);
+        SignInBtn.setkEndColor(new java.awt.Color(0, 204, 204));
+        SignInBtn.setkFillButton(false);
+        SignInBtn.setkHoverEndColor(new java.awt.Color(204, 0, 204));
+        SignInBtn.setkHoverForeGround(new java.awt.Color(255, 204, 255));
+        SignInBtn.setkHoverStartColor(new java.awt.Color(0, 204, 204));
+        SignInBtn.setkStartColor(new java.awt.Color(255, 255, 255));
+        SignInBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                kButton3ActionPerformed(evt);
+                SignInBtnActionPerformed(evt);
             }
         });
-        kGradientPanel1.add(kButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 430, 150, -1));
+        kGradientPanel1.add(SignInBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 430, 150, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(204, 204, 204));
@@ -154,13 +155,15 @@ public class LoginPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_InputPasswordActionPerformed
 
-    private void kButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_kButton2ActionPerformed
+    private void ToSignUpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ToSignUpBtnActionPerformed
+        
+    }//GEN-LAST:event_ToSignUpBtnActionPerformed
 
-    private void kButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_kButton3ActionPerformed
+    private void SignInBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignInBtnActionPerformed
+        if (rootPaneCheckingEnabled) {
+            
+        }
+    }//GEN-LAST:event_SignInBtnActionPerformed
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         System.exit(0);
@@ -204,14 +207,14 @@ public class LoginPage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPasswordField InputPassword;
     private javax.swing.JTextField InputUsername;
+    private com.k33ptoo.components.KButton SignInBtn;
+    private com.k33ptoo.components.KButton ToSignUpBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private com.k33ptoo.components.KButton kButton2;
-    private com.k33ptoo.components.KButton kButton3;
     private com.k33ptoo.components.KGradientPanel kGradientPanel1;
     // End of variables declaration//GEN-END:variables
 }
