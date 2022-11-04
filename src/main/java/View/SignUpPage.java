@@ -465,7 +465,7 @@ public class SignUpPage extends javax.swing.JFrame {
         });
     }
     
-     private void close() {
+    private void close() {
         WindowEvent closeWindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
     }

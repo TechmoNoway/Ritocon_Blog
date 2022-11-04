@@ -2,6 +2,8 @@
 package View;
 
 import java.awt.Color;
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 
 
@@ -164,15 +166,27 @@ public class LoginPage extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void InputPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InputPasswordActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_InputPasswordActionPerformed
 
     private void ToSignUpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ToSignUpBtnActionPerformed
-        
+        close();
+        SignUpPage sup = new SignUpPage();
+        sup.setVisible(true);
     }//GEN-LAST:event_ToSignUpBtnActionPerformed
 
     private void SignInBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignInBtnActionPerformed
+        if(InputUsername.getText().equals("")){
+            UsernameError.setVisible(true);
+        } else {
+            UsernameError.setVisible(false);
+        }
         
+        if (InputPassword.getText().equals("")) {
+            PasswordError.setVisible(true);
+        } else {
+            PasswordError.setVisible(false);
+        }
     }//GEN-LAST:event_SignInBtnActionPerformed
 
     private void ExitBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitBtnMouseClicked
@@ -214,6 +228,11 @@ public class LoginPage extends javax.swing.JFrame {
         });
     }
 
+    private void close() {
+        WindowEvent closeWindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ExitBtn;
     private javax.swing.JPasswordField InputPassword;
