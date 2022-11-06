@@ -1,6 +1,7 @@
 
 package View;
 
+import DTO.LoginDTO;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
@@ -187,6 +188,8 @@ public class LoginPage extends javax.swing.JFrame {
         } else {
             PasswordError.setVisible(false);
         }
+        this.login(InputUsername.getText(), InputPassword.getText());
+        
     }//GEN-LAST:event_SignInBtnActionPerformed
 
     private void ExitBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitBtnMouseClicked
@@ -248,4 +251,9 @@ public class LoginPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private com.k33ptoo.components.KGradientPanel kGradientPanel1;
     // End of variables declaration//GEN-END:variables
+
+    public void login(String username, String password){
+        LoginDTO logindto = new LoginDTO();
+        logindto.login(username, password);
+    }
 }

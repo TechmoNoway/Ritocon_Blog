@@ -4,9 +4,11 @@
  */
 package View;
 
+import DTO.LoginDTO;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
+import Object.User;
 
 /**
  *
@@ -304,6 +306,8 @@ public class SignUpPage extends javax.swing.JFrame {
         } else {
             FirstLineError.setVisible(false);
         }
+        
+        this.register(InputUsername.getText(), InputName.getText(), InputPhoneNumber.getText(), InputPassword.getText(), "User");
     }//GEN-LAST:event_SubmitBtnActionPerformed
 
     private void InputNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_InputNameFocusGained
@@ -461,4 +465,15 @@ public class SignUpPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private com.k33ptoo.components.KGradientPanel kGradientPanel1;
     // End of variables declaration//GEN-END:variables
+
+    public void register(String name, String fullname, String phoneNumber, String password, String role){
+        User user = new User(name, fullname, phoneNumber, password, role);
+        LoginDTO logindto = new LoginDTO();
+        boolean check = logindto.register(user);
+        if(check){
+            close();
+            LoginPage form = new LoginPage();
+            form.setVisible(true);
+        }
+    }
 }
