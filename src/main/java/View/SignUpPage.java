@@ -469,9 +469,9 @@ public class SignUpPage extends javax.swing.JFrame {
     public void register(String name, String fullname, String phoneNumber, String password, String role){
         User user = new User(name, fullname, phoneNumber, password, role);
         LoginDTO logindto = new LoginDTO();
-        if(!name.equals("Enter username") || 
-                !fullname.equals("Enter your name")||
-                !phoneNumber.equals("Enter phone number") ||
+        if(!name.equals("Enter username") && 
+                !fullname.equals("Enter your name")&&
+                !phoneNumber.equals("Enter phone number") &&
                 !password.equals("Enter password"))
         {
             boolean check = logindto.register(user);

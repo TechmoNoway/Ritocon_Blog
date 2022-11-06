@@ -253,10 +253,9 @@ public class LoginPage extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public void login(String username, String password){
-        if(!username.equals("")||!password.equals("")){
+        if(!username.equals("")&&!password.equals("")){
             LoginDTO logindto = new LoginDTO();
             logindto.login(username, password);
         }
-        
     }
 }
