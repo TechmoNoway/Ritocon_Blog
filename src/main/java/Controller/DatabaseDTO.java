@@ -2,27 +2,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DTO;
+package Controller;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import JDBC.ConnectDTB;
 
 /**
  *
  * @author mphuc
  */
 public class DatabaseDTO {
-    String connectionURL = "jdbc:sqlserver://localhost:1433;databaseName=t1con";
+    ConnectDTB connect = new ConnectDTB();
     Connection conn;
     PreparedStatement prstm;
     ResultSet rs;
     
     public boolean queryHaveParameter(String sql, String[] parameter){
         try {
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            conn = DriverManager.getConnection(connectionURL, "sa", "songlong");
+            conn = connect.GetConnect();
             prstm = conn.prepareStatement(sql);
             for (int i = 0; i< parameter.length; i++){
                 prstm.setString(i+1, parameter[i]);
@@ -36,4 +36,6 @@ public class DatabaseDTO {
             return false;
         }
     }
+    
+    
 }

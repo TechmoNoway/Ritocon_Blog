@@ -1,7 +1,7 @@
 
 package View;
 
-import DTO.LoginDTO;
+import Controller.LoginDTO;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;

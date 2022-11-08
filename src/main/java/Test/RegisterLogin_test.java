@@ -4,8 +4,8 @@
  */
 package Test;
 
-import DTO.LoginDTO;
-import Object.User;
+import Controller.LoginDTO;
+import Model.User;
 
 /**
  *
