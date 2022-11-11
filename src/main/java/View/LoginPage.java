@@ -18,6 +18,7 @@ public class LoginPage extends javax.swing.JFrame {
     public LoginPage() {
         initComponents();
         setLocationRelativeTo(null);
+        checkIsLogin();
     }
 
     /**
@@ -190,7 +191,7 @@ public class LoginPage extends javax.swing.JFrame {
             PasswordError.setVisible(false);
         }
         this.login(InputUsername.getText(), InputPassword.getText());
-        
+       
     }//GEN-LAST:event_SignInBtnActionPerformed
 
     private void ExitBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitBtnMouseClicked
@@ -255,11 +256,17 @@ public class LoginPage extends javax.swing.JFrame {
 
     public void login(String username, String password){
         if(!username.equals("")&&!password.equals("")){
-            logindto.login(username, password);
+            if(logindto.login(username, password)){
+                close();
+                MainPage mainpage = new MainPage();
+                mainpage.setVisible(true);
+            }
         }
     }
     
     public void checkIsLogin(){
+        boolean check = logindto.isLogin();
+        System.out.println(""+check);
         if(logindto.isLogin()){
             close();
             MainPage mainpage = new MainPage();

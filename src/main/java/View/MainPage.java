@@ -4,6 +4,7 @@
  */
 package View;
 
+import Controller.LoginDTO;
 import View.*;
 import java.awt.Color;
 import java.awt.Image;
@@ -22,7 +23,7 @@ import javax.swing.ImageIcon;
  * @author ASUS
  */
 public class MainPage extends javax.swing.JFrame {
-
+    LoginDTO logindto = new LoginDTO();
     /**
      * Creates new form MainPage
      */
@@ -44,6 +45,7 @@ public class MainPage extends javax.swing.JFrame {
         MenuLine1 = new javax.swing.JPanel();
         SayWelcome = new javax.swing.JPanel();
         WelcomeLabel = new javax.swing.JLabel();
+        ExitBtn = new javax.swing.JLabel();
         LogoLabel = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         ExitPanel = new javax.swing.JPanel();
@@ -51,6 +53,7 @@ public class MainPage extends javax.swing.JFrame {
         LogoutPanel = new javax.swing.JPanel();
         LogoutLabel = new javax.swing.JLabel();
         ProfileLabel = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         MenuLine2 = new javax.swing.JPanel();
         DashboardPanel = new javax.swing.JPanel();
         DashboardLabel = new javax.swing.JLabel();
@@ -107,6 +110,16 @@ public class MainPage extends javax.swing.JFrame {
         WelcomeLabel.setForeground(new java.awt.Color(255, 255, 255));
         WelcomeLabel.setText("Welcome");
         SayWelcome.add(WelcomeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 200, 40));
+
+        ExitBtn.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        ExitBtn.setForeground(new java.awt.Color(255, 255, 255));
+        ExitBtn.setText("X");
+        ExitBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ExitBtnMouseClicked(evt);
+            }
+        });
+        SayWelcome.add(ExitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 20, -1));
 
         MenuLine1.add(SayWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 80));
 
@@ -206,6 +219,16 @@ public class MainPage extends javax.swing.JFrame {
         });
         MenuLine1.add(ProfileLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 20, -1, -1));
 
+        jButton1.setBackground(new java.awt.Color(153, 153, 153));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Log out");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        MenuLine1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 30, -1, -1));
+
         FramePanel.add(MenuLine1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
         MenuLine1.getAccessibleContext().setAccessibleName("");
 
@@ -259,6 +282,11 @@ public class MainPage extends javax.swing.JFrame {
         SearchBtn.setkHoverStartColor(new java.awt.Color(102, 102, 102));
         SearchBtn.setkSelectedColor(new java.awt.Color(102, 102, 102));
         SearchBtn.setkStartColor(new java.awt.Color(51, 51, 51));
+        SearchBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SearchBtnMouseClicked(evt);
+            }
+        });
         SearchBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SearchBtnActionPerformed(evt);
@@ -594,6 +622,19 @@ public class MainPage extends javax.swing.JFrame {
         CardLayoutPanel.revalidate();
     }//GEN-LAST:event_LogoLabelMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        logout();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void ExitBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitBtnMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_ExitBtnMouseClicked
+
+    private void SearchBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SearchBtnMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SearchBtnMouseClicked
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -670,7 +711,12 @@ public class MainPage extends javax.swing.JFrame {
         WelcomeLabel.setText(stringWelcome);
     } 
     
-    
+    public void logout(){
+        logindto.logout();
+        close();
+        LoginPage login = new LoginPage();
+        login.setVisible(true);
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AboutUsLabel;
@@ -680,6 +726,7 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel DashboardLabel;
     private javax.swing.JPanel DashboardLayout;
     private javax.swing.JPanel DashboardPanel;
+    private javax.swing.JLabel ExitBtn;
     private javax.swing.JLabel ExitLabel;
     private javax.swing.JPanel ExitPanel;
     private com.k33ptoo.components.KGradientPanel FramePanel;
@@ -706,6 +753,7 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel Thumbnail2;
     private javax.swing.JLabel TopicMainPost;
     private javax.swing.JLabel WelcomeLabel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -84,9 +84,19 @@ public class LoginDTO {
         }
     }
     
-    public void logout(String id){
+    public void logout() {
         String sql = "delete Currents where id_user like ?";
-        db.queryHaveParameter(sql, new String[]{id});
+        String sql1 = "select * from Currents";
+        
+        rs = db.queryHaveParameter(sql1, new String[]{});
+        
+        try {
+            if(rs.next()){   
+                db.queryHaveParameter(sql, new String[]{rs.getString("id_user")});
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginDTO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public boolean isLogin(){
