@@ -81,6 +81,8 @@ public class MainPage extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         NewPostLayout = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        SearchLayout = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -438,6 +440,15 @@ public class MainPage extends javax.swing.JFrame {
 
         CardLayoutPanel.add(NewPostLayout, "card2");
 
+        SearchLayout.setBackground(new java.awt.Color(255, 255, 255));
+        SearchLayout.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel6.setText("Search");
+        SearchLayout.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 270, -1, -1));
+
+        CardLayoutPanel.add(SearchLayout, "card2");
+
         FramePanel.add(CardLayoutPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, -1, 650));
 
         getContentPane().add(FramePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 860));
@@ -446,7 +457,10 @@ public class MainPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBtnActionPerformed
-
+        CardLayoutPanel.removeAll();
+        CardLayoutPanel.add(SearchLayout);
+        CardLayoutPanel.repaint();
+        CardLayoutPanel.revalidate();  
     }//GEN-LAST:event_SearchBtnActionPerformed
 
     private void NewPostPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewPostPanelMouseEntered
@@ -749,6 +763,7 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JPanel SayWelcome;
     private com.k33ptoo.components.KButton SearchBtn;
     private javax.swing.JTextField SearchInput;
+    private javax.swing.JPanel SearchLayout;
     private javax.swing.JLabel Thumbnail1;
     private javax.swing.JLabel Thumbnail2;
     private javax.swing.JLabel TopicMainPost;
@@ -758,6 +773,7 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }
