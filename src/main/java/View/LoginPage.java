@@ -1,6 +1,7 @@
 
 package View;
 
+import Controller.LoginDTO;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
@@ -9,6 +10,7 @@ import javax.swing.JOptionPane;
 
 
 public class LoginPage extends javax.swing.JFrame {
+    LoginDTO logindto = new LoginDTO();
 
     /**
      * Creates new form LoginPage
@@ -16,6 +18,7 @@ public class LoginPage extends javax.swing.JFrame {
     public LoginPage() {
         initComponents();
         setLocationRelativeTo(null);
+        checkIsLogin();
     }
 
     /**
@@ -187,6 +190,8 @@ public class LoginPage extends javax.swing.JFrame {
         } else {
             PasswordError.setVisible(false);
         }
+        this.login(InputUsername.getText(), InputPassword.getText());
+       
     }//GEN-LAST:event_SignInBtnActionPerformed
 
     private void ExitBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitBtnMouseClicked
@@ -248,4 +253,24 @@ public class LoginPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private com.k33ptoo.components.KGradientPanel kGradientPanel1;
     // End of variables declaration//GEN-END:variables
+
+    public void login(String username, String password){
+        if(!username.equals("")&&!password.equals("")){
+            if(logindto.login(username, password)){
+                close();
+                MainPage mainpage = new MainPage();
+                mainpage.setVisible(true);
+            }
+        }
+    }
+    
+    public void checkIsLogin(){
+        boolean check = logindto.isLogin();
+        System.out.println(""+check);
+        if(logindto.isLogin()){
+            close();
+            MainPage mainpage = new MainPage();
+            mainpage.setVisible(true);
+        }
+    }
 }
