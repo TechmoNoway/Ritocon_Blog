@@ -75,8 +75,6 @@ public class MainPage extends javax.swing.JFrame {
         LabelPost1 = new javax.swing.JLabel();
         DashboardLayout = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        MyProfileLayout = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
         AboutUsLayout = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         NewPostLayout = new javax.swing.JPanel();
@@ -413,15 +411,6 @@ public class MainPage extends javax.swing.JFrame {
 
         CardLayoutPanel.add(DashboardLayout, "card2");
 
-        MyProfileLayout.setBackground(new java.awt.Color(255, 255, 255));
-        MyProfileLayout.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel5.setText("MY PROFILE");
-        MyProfileLayout.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 280, -1, -1));
-
-        CardLayoutPanel.add(MyProfileLayout, "card2");
-
         AboutUsLayout.setBackground(new java.awt.Color(255, 255, 255));
         AboutUsLayout.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -615,10 +604,8 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void ProfileLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProfileLabelMouseClicked
-        CardLayoutPanel.removeAll();
-        CardLayoutPanel.add(MyProfileLayout);
-        CardLayoutPanel.repaint();
-        CardLayoutPanel.revalidate();
+        UserProfilePage form = new UserProfilePage();
+        form.setVisible(true);
     }//GEN-LAST:event_ProfileLabelMouseClicked
 
     private void ProfileLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProfileLabelMouseEntered
@@ -755,7 +742,6 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel MainThumbnail;
     private javax.swing.JPanel MenuLine1;
     private javax.swing.JPanel MenuLine2;
-    private javax.swing.JPanel MyProfileLayout;
     private javax.swing.JLabel NewPostLabel;
     private javax.swing.JPanel NewPostLayout;
     private javax.swing.JPanel NewPostPanel;
@@ -772,7 +758,6 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
