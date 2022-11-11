@@ -5,10 +5,11 @@
 package Controller;
 
 import Model.User;
-import View.SignUpPage;
-import java.awt.Component;
 import java.awt.Frame;
-import javax.management.Query;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -29,36 +30,61 @@ public class LoginDTO {
                                             user.getRole()
         };
         
-        if(db.queryHaveParameter(sql_check, new String[]{user.getName()})){
-            JOptionPane.showMessageDialog(SignUpPage, "This user is exist!",
-               "Enter again", JOptionPane.WARNING_MESSAGE);
+        try {
+            if(db.queryHaveParameter(sql_check, new String[]{user.getName()}).next()){
+                JOptionPane.showMessageDialog(SignUpPage, "This user is exist!",
+                        "Enter again", JOptionPane.WARNING_MESSAGE);
+                return false;
+            }
+            else {
+                db.queryHaveParameter(sql_insert, parameter);
+                JOptionPane.showMessageDialog(null,
+                        "Register is successfully",
+                        "SUCCESS",
+                        JOptionPane.DEFAULT_OPTION);
+                return true;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginDTO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
-        }
-        else {
-            db.queryHaveParameter(sql_insert, parameter);
-            JOptionPane.showMessageDialog(null, 
-                              "Register is successfully", 
-                              "SUCCESS", 
-                              JOptionPane.DEFAULT_OPTION);
-            return true;
         }
     }
     
     public boolean login(String username, String password){
         String sql = "select * from Users where name_user like ? and password_user like ?";
-        if(db.queryHaveParameter(sql, new String[]{username, password})){
-            JOptionPane.showMessageDialog(null, 
-                              "Login is sucessfully", 
-                              "SUCCESS", 
-                              JOptionPane.DEFAULT_OPTION);
-            return true;
-        }
-        else {
-            JOptionPane.showMessageDialog(null, 
-                              "Username or Password is wrong!!!", 
-                              "TITLE", 
-                              JOptionPane.WARNING_MESSAGE);
+        String sql1 = "insert into Currents values (?, ?, ? , ?, ?, ?)";
+        try {
+            ResultSet rs = db.queryHaveParameter(sql, new String[]{username, password});
+            if(rs.next()){
+                db.queryHaveParameter(sql1, new String[]{
+                    String.valueOf(rs.getInt("id_user")), 
+                    rs.getString("name_user"),
+                    rs.getString("fullname_user"),
+                    rs.getString("phoneNumber_user"),
+                    rs.getString("password_user"),
+                    rs.getString("role_user")
+                });
+                JOptionPane.showMessageDialog(null,
+                        "Login is sucessfully",
+                        "SUCCESS",
+                        JOptionPane.DEFAULT_OPTION);
+                return true;
+            }
+            else {
+                JOptionPane.showMessageDialog(null,
+                        "Username or Password is wrong!!!",
+                        "TITLE",
+                        JOptionPane.WARNING_MESSAGE);
+                return false;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginDTO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
+    }
+    
+    public void logout(String id){
+        String sql = "delete Currents where id_user like ?";
+        db.queryHaveParameter(sql, new String[]{id});
     }
 }

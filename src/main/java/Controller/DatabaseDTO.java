@@ -5,10 +5,11 @@
 package Controller;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import JDBC.ConnectDTB;
+import java.sql.Array;
+import java.util.Arrays;
 
 /**
  *
@@ -20,8 +21,9 @@ public class DatabaseDTO {
     PreparedStatement prstm;
     ResultSet rs;
     
-    public boolean queryHaveParameter(String sql, String[] parameter){
+    public ResultSet queryHaveParameter(String sql, String[] parameter){
         try {
+            System.out.println("" + Arrays.toString(parameter));
             conn = connect.GetConnect();
             prstm = conn.prepareStatement(sql);
             for (int i = 0; i< parameter.length; i++){
@@ -30,12 +32,10 @@ public class DatabaseDTO {
             
             rs = prstm.executeQuery();
             
-            return rs.next();
+            return rs;
         } catch (Exception e) {
             System.out.println("" + e);
-            return false;
+            return rs;
         }
     }
-    
-    
 }
