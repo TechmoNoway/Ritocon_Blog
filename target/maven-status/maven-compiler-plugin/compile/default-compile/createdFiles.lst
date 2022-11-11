@@ -4,10 +4,8 @@ View\SignUpPage$1.class
 View\SignUpPage$13.class
 View\LoginPage$6.class
 View\SignUpPage$3.class
-Object\User.class
 View\LoginPage$1.class
 View\SignUpPage$6.class
-Test\RegisterLogin_test.class
 View\SignUpPage$4.class
 View\LoginPage$4.class
 View\SignUpPage$11.class
@@ -22,5 +20,5 @@ View\SignUpPage$10.class
 View\SignUpPage$7.class
 View\SignUpPage$5.class
 View\LoginPage$5.class
-DTO\DatabaseDTO.class
+DBFunction\GetConnection.class
 View\LoginPage$3.class
