@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 public class LoginDTO {
     private final DatabaseDTO db = new DatabaseDTO();
     private Frame SignUpPage;
+    private ResultSet rs;
     
     public boolean register(User user){
         String sql_insert = "insert into Users values (?, ?, ? , ?, ?)";
@@ -54,7 +55,7 @@ public class LoginDTO {
         String sql = "select * from Users where name_user like ? and password_user like ?";
         String sql1 = "insert into Currents values (?, ?, ? , ?, ?, ?)";
         try {
-            ResultSet rs = db.queryHaveParameter(sql, new String[]{username, password});
+            rs = db.queryHaveParameter(sql, new String[]{username, password});
             if(rs.next()){
                 db.queryHaveParameter(sql1, new String[]{
                     String.valueOf(rs.getInt("id_user")), 
@@ -86,5 +87,21 @@ public class LoginDTO {
     public void logout(String id){
         String sql = "delete Currents where id_user like ?";
         db.queryHaveParameter(sql, new String[]{id});
+    }
+    
+    public boolean isLogin(){
+        String sql = "select * from Currents";
+        rs = db.queryHaveParameter(sql, new String[]{});
+        try {
+            if(rs.next()){
+                return true;
+            }
+            else {
+                return false;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginDTO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
     }
 }

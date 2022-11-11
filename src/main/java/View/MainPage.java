@@ -204,7 +204,7 @@ public class MainPage extends javax.swing.JFrame {
                 ProfileLabelMouseExited(evt);
             }
         });
-        MenuLine1.add(ProfileLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 20, -1, -1));
+        MenuLine1.add(ProfileLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 20, -1, -1));
 
         FramePanel.add(MenuLine1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
         MenuLine1.getAccessibleContext().setAccessibleName("");
@@ -246,9 +246,8 @@ public class MainPage extends javax.swing.JFrame {
         MenuLine2.add(DashboardPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, 120, 40));
 
         SearchInput.setBackground(new java.awt.Color(235, 235, 235));
-        SearchInput.setForeground(new java.awt.Color(0, 0, 0));
         SearchInput.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 1));
-        MenuLine2.add(SearchInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(1270, 50, 210, 40));
+        MenuLine2.add(SearchInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 50, 210, 40));
 
         SearchBtn.setText("Search");
         SearchBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -265,7 +264,7 @@ public class MainPage extends javax.swing.JFrame {
                 SearchBtnActionPerformed(evt);
             }
         });
-        MenuLine2.add(SearchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 50, 110, 40));
+        MenuLine2.add(SearchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 50, 110, 40));
 
         NewPostPanel.setBackground(new java.awt.Color(255, 255, 255));
         NewPostPanel.setForeground(new java.awt.Color(255, 255, 255));
@@ -351,30 +350,27 @@ public class MainPage extends javax.swing.JFrame {
         MainPostLabelPanel.add(TopicMainPost, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
 
         MainLabelPost.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
-        MainLabelPost.setForeground(new java.awt.Color(0, 0, 0));
         MainLabelPost.setText("<html> Picture about a snow mountain  very fantastic for everybody </html>");
         MainPostLabelPanel.add(MainLabelPost, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 350, 130));
 
-        HomeLayout.add(MainPostLabelPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 370, 430, 210));
+        HomeLayout.add(MainPostLabelPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 310, 430, 210));
 
         MainThumbnail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/thumb2.png"))); // NOI18N
-        HomeLayout.add(MainThumbnail, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 600, 440));
+        HomeLayout.add(MainThumbnail, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 600, 440));
 
         LabelPost2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        LabelPost2.setForeground(new java.awt.Color(0, 0, 0));
         LabelPost2.setText("<html>Windows 11 have some improvement about the performence of some game in many platform\n </html>");
-        HomeLayout.add(LabelPost2, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 410, 560, 70));
+        HomeLayout.add(LabelPost2, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 420, 560, 70));
 
         Thumbnail2.setText("Image 2 here");
-        HomeLayout.add(Thumbnail2, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 270, 710, 140));
+        HomeLayout.add(Thumbnail2, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 270, 710, 140));
 
         Thumbnail1.setText("Image 1 here");
-        HomeLayout.add(Thumbnail1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 40, 710, 140));
+        HomeLayout.add(Thumbnail1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 40, 710, 140));
 
         LabelPost1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        LabelPost1.setForeground(new java.awt.Color(0, 0, 0));
         LabelPost1.setText("<html>Sunrise Lake is now available for tourise who want to checkin </html>");
-        HomeLayout.add(LabelPost1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 180, 560, 70));
+        HomeLayout.add(LabelPost1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 180, 560, 70));
 
         CardLayoutPanel.add(HomeLayout, "card2");
 
@@ -382,7 +378,6 @@ public class MainPage extends javax.swing.JFrame {
         DashboardLayout.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("DASHBOARD");
         DashboardLayout.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 290, -1, -1));
 
@@ -392,7 +387,6 @@ public class MainPage extends javax.swing.JFrame {
         MyProfileLayout.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("MY PROFILE");
         MyProfileLayout.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 280, -1, -1));
 
@@ -402,7 +396,6 @@ public class MainPage extends javax.swing.JFrame {
         AboutUsLayout.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("We are a coder team with 4 people and we hope enjoy using our app ");
         AboutUsLayout.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, -1, 150));
 
@@ -412,7 +405,6 @@ public class MainPage extends javax.swing.JFrame {
         NewPostLayout.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("NEW POST");
         NewPostLayout.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 270, -1, -1));
 
@@ -420,7 +412,7 @@ public class MainPage extends javax.swing.JFrame {
 
         FramePanel.add(CardLayoutPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, -1, 650));
 
-        getContentPane().add(FramePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 860));
+        getContentPane().add(FramePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 860));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

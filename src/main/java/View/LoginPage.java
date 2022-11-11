@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 
 
 public class LoginPage extends javax.swing.JFrame {
+    LoginDTO logindto = new LoginDTO();
 
     /**
      * Creates new form LoginPage
@@ -254,8 +255,15 @@ public class LoginPage extends javax.swing.JFrame {
 
     public void login(String username, String password){
         if(!username.equals("")&&!password.equals("")){
-            LoginDTO logindto = new LoginDTO();
             logindto.login(username, password);
+        }
+    }
+    
+    public void checkIsLogin(){
+        if(logindto.isLogin()){
+            close();
+            MainPage mainpage = new MainPage();
+            mainpage.setVisible(true);
         }
     }
 }
