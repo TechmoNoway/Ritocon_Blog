@@ -31,7 +31,7 @@ public class MainPage extends javax.swing.JFrame {
     public MainPage() {
         initComponents();
         setLocationRelativeTo(null);
-        setWelcomeLabel();
+        setWelcomeLabel("TryKy");
     }
 
     /**
@@ -647,7 +647,7 @@ public class MainPage extends javax.swing.JFrame {
 
     private void HomeLayoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeLayoutMouseClicked
         // TODO add your handling code here:
-        setWelcomeLabel();
+        setWelcomeLabel("TryKy");
     }//GEN-LAST:event_HomeLayoutMouseClicked
 
     public static void main(String args[]) {
