@@ -30,6 +30,7 @@ public class MainPage extends javax.swing.JFrame {
     public MainPage() {
         initComponents();
         setLocationRelativeTo(null);
+        setWelcomeLabel();
     }
 
     /**
@@ -109,7 +110,7 @@ public class MainPage extends javax.swing.JFrame {
         WelcomeLabel.setFont(new java.awt.Font("Segoe Script", 0, 20)); // NOI18N
         WelcomeLabel.setForeground(new java.awt.Color(255, 255, 255));
         WelcomeLabel.setText("Welcome");
-        SayWelcome.add(WelcomeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 200, 40));
+        SayWelcome.add(WelcomeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 240, 40));
 
         ExitBtn.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         ExitBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -366,6 +367,11 @@ public class MainPage extends javax.swing.JFrame {
         CardLayoutPanel.setLayout(new java.awt.CardLayout());
 
         HomeLayout.setBackground(new java.awt.Color(255, 255, 255));
+        HomeLayout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                HomeLayoutMouseClicked(evt);
+            }
+        });
         HomeLayout.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         MainPostLabelPanel.setBackground(new java.awt.Color(220, 220, 220));
@@ -600,7 +606,7 @@ public class MainPage extends javax.swing.JFrame {
             Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        setWelcomeLabel("Tricky");
+        setWelcomeLabel();
     }//GEN-LAST:event_formWindowOpened
 
     private void ProfileLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProfileLabelMouseClicked
@@ -635,6 +641,11 @@ public class MainPage extends javax.swing.JFrame {
     private void SearchBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SearchBtnMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_SearchBtnMouseClicked
+
+    private void HomeLayoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeLayoutMouseClicked
+        // TODO add your handling code here:
+        setWelcomeLabel();
+    }//GEN-LAST:event_HomeLayoutMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -707,8 +718,8 @@ public class MainPage extends javax.swing.JFrame {
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
     }
 
-    public void setWelcomeLabel(String username){
-        String stringWelcome = "Welcome " + username;
+    public void setWelcomeLabel(){
+        String stringWelcome = "Welcome " + logindto.changeUsername();
         WelcomeLabel.setText(stringWelcome);
     } 
     

@@ -23,7 +23,7 @@ public class LoginDTO {
     
     public boolean register(User user){
         String sql_insert = "insert into Users values (?, ?, ? , ?, ?)";
-        String sql_check = "select * from Users where name_user like ?";
+        String sql_check = "select * from Users where name_user = ?";
         String[] parameter = new String[]{user.getName(), 
                                             user.getFullname(), 
                                             user.getPhoneNumber(), 
@@ -52,7 +52,7 @@ public class LoginDTO {
     }
     
     public boolean login(String username, String password){
-        String sql = "select * from Users where name_user like ? and password_user like ?";
+        String sql = "select * from Users where name_user = ? and password_user = ?";
         String sql1 = "insert into Currents values (?, ?, ? , ?, ?, ?)";
         try {
             rs = db.queryHaveParameter(sql, new String[]{username, password});
@@ -85,7 +85,7 @@ public class LoginDTO {
     }
     
     public void logout() {
-        String sql = "delete Currents where id_user like ?";
+        String sql = "delete Currents where id_user = ?";
         String sql1 = "select * from Currents";
         
         rs = db.queryHaveParameter(sql1, new String[]{});
@@ -113,5 +113,64 @@ public class LoginDTO {
             Logger.getLogger(LoginDTO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
+    }
+    
+    public String[] printAccount(){
+        String[] arr = null;
+        String sql = "select * from Currents";
+        
+        rs = db.queryHaveParameter(sql, new String[]{});
+        
+        try {
+            if(rs.next()){
+                arr = new String[]{rs.getString("fullname_user"),
+                                    rs.getString("phoneNumber_user"),
+                                    rs.getString("name_user"),
+                                    rs.getString("password_user")};
+            }
+        } catch (Exception e) {
+            System.out.println("");
+        }
+        
+        return arr;
+    }
+    
+    
+    public void changeInformation(String[] arr){
+        String sql = "update Currents set "
+                + "fullname_user = ?, "
+                + "phoneNumber_user = ?, "
+                + "name_user = ?, "
+                + "password_user = ? "
+                + "where id_user = ? ";
+        
+        rs = db.queryHaveParameter("select * from Currents", new String[]{});
+        try {
+            if(rs.next()){
+                System.out.println("Dit me may");
+                db.queryHaveParameter(sql, new String[]{arr[0], arr[1], arr[2], arr[3], rs.getString("id_user")});
+                JOptionPane.showMessageDialog(null,
+                        "Update profile is sucessfully",
+                        "SUCCESS",
+                        JOptionPane.DEFAULT_OPTION);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginDTO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }    
+    
+    public String changeUsername(){
+        String sql = "select * from Currents";
+        rs = db.queryHaveParameter(sql, new String[]{});
+        
+        try {
+            if(rs.next()){
+                return rs.getString("name_user");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginDTO.class.getName()).log(Level.SEVERE, null, ex);
+            return "";
+        }
+        return "";
     }
 }
