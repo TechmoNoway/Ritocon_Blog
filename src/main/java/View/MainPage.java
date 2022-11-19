@@ -759,6 +759,7 @@ public class MainPage extends javax.swing.JFrame {
 //Form Window Open
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
+            setImagePage("/thumb2.png", MainThumbnail);
             setImagePage("/SunriseLake.png", Thumbnail1);
             setImagePage("/WindowsB.png", Thumbnail2);
         } catch (Exception e) {
