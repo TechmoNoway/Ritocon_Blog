@@ -5,7 +5,7 @@
 package View;
 
 
-import Controller.LoginDTO;
+
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.awt.geom.RoundRectangle2D;
@@ -16,7 +16,7 @@ import java.awt.geom.RoundRectangle2D;
  * @author ASUS
  */
 public class UserProfilePage extends javax.swing.JFrame {
-    LoginDTO logindto = new LoginDTO();
+
     /**
      * Creates new form UserProfilePage
      */
@@ -24,7 +24,7 @@ public class UserProfilePage extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 20, 20));
-        enterDataIntoFrom();
+
     }
 
     /**
@@ -86,11 +86,7 @@ public class UserProfilePage extends javax.swing.JFrame {
         SaveBtn.setkHoverStartColor(new java.awt.Color(0, 0, 0));
         SaveBtn.setkSelectedColor(new java.awt.Color(255, 255, 255));
         SaveBtn.setkStartColor(new java.awt.Color(255, 255, 255));
-        SaveBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                SaveBtnMouseClicked(evt);
-            }
-        });
+
         SaveBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SaveBtnActionPerformed(evt);
@@ -104,7 +100,7 @@ public class UserProfilePage extends javax.swing.JFrame {
         TitleLabel.setText("Edit profile");
         MainPanel.add(TitleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, -1, -1));
 
-        ExitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_Close_20px_1.png"))); // NOI18N
+
         ExitButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ExitButtonMouseClicked(evt);
@@ -283,16 +279,18 @@ public class UserProfilePage extends javax.swing.JFrame {
 
         MainPanel.add(NamePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 550, 70));
 
-        ThumnailLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/SunriseLake.png"))); // NOI18N
+
         ThumnailLabel.setText("jLabel1");
-        MainPanel.add(ThumnailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 630, 130));
+        MainPanel.add(ThumnailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 620, 130));
+
 
         EmptyNotice.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         EmptyNotice.setForeground(new java.awt.Color(255, 0, 0));
         EmptyNotice.setText("Please Don't Let Any Information Box Empty!");
         MainPanel.add(EmptyNotice, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, -1, -1));
 
-        getContentPane().add(MainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, -20, 610, 570));
+        getContentPane().add(MainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, -20, 650, 590));
+
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -357,11 +355,6 @@ public class UserProfilePage extends javax.swing.JFrame {
         EmptyNotice.setVisible(false);
     }//GEN-LAST:event_formWindowOpened
 
-    private void SaveBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SaveBtnMouseClicked
-        // TODO add your handling code here:
-        changeInformation();
-        enterDataIntoFrom();
-    }//GEN-LAST:event_SaveBtnMouseClicked
 
     /**
      * @param args the command line arguments
@@ -404,21 +397,7 @@ public class UserProfilePage extends javax.swing.JFrame {
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
     }
     
-    public void enterDataIntoFrom(){
-        String[] arr = logindto.printAccount();
-        InputName.setText(arr[0]);
-        PNumberTF.setText(arr[1]);
-        InputUsername.setText(arr[2]);
-        InputPassword.setText(arr[3]);
-    }
 
-    public void changeInformation(){
-        if(!InputName.getText().equals("")&&!InputPassword.getText().equals("")&&!InputPhoneNumber.getText().equals("")&&!PNumberTF.getText().equals("")){
-            System.out.println("Dit me may");
-            String[] arr = new String[]{InputName.getText(), PNumberTF.getText(), InputUsername.getText(), InputPassword.getText()};
-            logindto.changeInformation(arr);
-        }
-    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel EmptyNotice;

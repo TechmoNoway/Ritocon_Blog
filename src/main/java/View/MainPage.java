@@ -4,11 +4,7 @@
  */
 package View;
 
-import Controller.ArticleDTO;
-import Controller.CommentDTO;
-import Controller.LoginDTO;
-import View.UserProfilePage;
-import View.*;
+
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -16,37 +12,26 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.table.DefaultTableModel;
-import Model.Comment;
+
 
 /**
  *
  * @author ASUS
  */
 public class MainPage extends javax.swing.JFrame {
-    LoginDTO logindto = new LoginDTO();
-    ArticleDTO articledto = new ArticleDTO();
-    CommentDTO commentdto = new CommentDTO();
-    DefaultTableModel tblModel;
-    int id_user;
-    int id_article;
+
     /**
      * Creates new form MainPage
      */
     public MainPage() {
         initComponents();
         setLocationRelativeTo(null);
-        initTable();
-        id_user = logindto.makeId();
+
     }
 
     /**
@@ -62,7 +47,7 @@ public class MainPage extends javax.swing.JFrame {
         MenuLine1 = new javax.swing.JPanel();
         SayWelcome = new javax.swing.JPanel();
         WelcomeLabel = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+
         LogoLabel = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         ExitPanel = new javax.swing.JPanel();
@@ -70,7 +55,7 @@ public class MainPage extends javax.swing.JFrame {
         LogoutPanel = new javax.swing.JPanel();
         LogoutLabel = new javax.swing.JLabel();
         ProfileLabel = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+
         MenuLine2 = new javax.swing.JPanel();
         DashboardPanel = new javax.swing.JPanel();
         DashboardLabel = new javax.swing.JLabel();
@@ -91,7 +76,51 @@ public class MainPage extends javax.swing.JFrame {
         Thumbnail1 = new javax.swing.JLabel();
         LabelPost1 = new javax.swing.JLabel();
         DashboardLayout = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+
+        PostD1 = new javax.swing.JPanel();
+        PostImage1 = new javax.swing.JLabel();
+        PostState1 = new javax.swing.JLabel();
+        PostTitle1 = new javax.swing.JLabel();
+        UploadDayPost1 = new javax.swing.JLabel();
+        EditBackground1 = new javax.swing.JPanel();
+        EditBtn1 = new javax.swing.JLabel();
+        DeleteBackground1 = new javax.swing.JPanel();
+        DeleteBtn1 = new javax.swing.JLabel();
+        PostD2 = new javax.swing.JPanel();
+        PostImage2 = new javax.swing.JLabel();
+        PostState2 = new javax.swing.JLabel();
+        PostTitle2 = new javax.swing.JLabel();
+        UploadDayPost2 = new javax.swing.JLabel();
+        DeleteBackground2 = new javax.swing.JPanel();
+        DeleteBtn2 = new javax.swing.JLabel();
+        EditBackground2 = new javax.swing.JPanel();
+        EditBtn2 = new javax.swing.JLabel();
+        PostD3 = new javax.swing.JPanel();
+        PostImage3 = new javax.swing.JLabel();
+        PostState3 = new javax.swing.JLabel();
+        PostTitle3 = new javax.swing.JLabel();
+        UploadDayPost3 = new javax.swing.JLabel();
+        EditBackground3 = new javax.swing.JPanel();
+        EditBtn3 = new javax.swing.JLabel();
+        DeleteBackground3 = new javax.swing.JPanel();
+        DeleteBtn3 = new javax.swing.JLabel();
+        PostD4 = new javax.swing.JPanel();
+        PostImage4 = new javax.swing.JLabel();
+        PostState4 = new javax.swing.JLabel();
+        PostTitle4 = new javax.swing.JLabel();
+        UploadDayPost4 = new javax.swing.JLabel();
+        EditBackground4 = new javax.swing.JPanel();
+        EditBtn4 = new javax.swing.JLabel();
+        DeleteBackground4 = new javax.swing.JPanel();
+        DeleteBtn4 = new javax.swing.JLabel();
+        DashBoardTitle = new javax.swing.JLabel();
+        TotalOfPostLabel = new javax.swing.JLabel();
+        PageNumber = new javax.swing.JLabel();
+        BackBtn = new javax.swing.JLabel();
+        NextBtn = new javax.swing.JLabel();
+        GolangAlert = new javax.swing.JLabel();
+        GLPicture = new javax.swing.JLabel();
+
         AboutUsLayout = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         NewPostLayout = new javax.swing.JPanel();
@@ -99,16 +128,19 @@ public class MainPage extends javax.swing.JFrame {
         SearchLayout = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         PageDetailLayout = new javax.swing.JPanel();
-        DetailPageTitle = new javax.swing.JLabel();
-        PageDetailImage = new javax.swing.JLabel();
+
         CommentPanel = new javax.swing.JPanel();
         ConfirmBtn = new com.k33ptoo.components.KButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         CommentTable = new javax.swing.JTable();
         InputComment = new javax.swing.JTextField();
         GoBack = new javax.swing.JLabel();
+
+        PageDetailTitle = new javax.swing.JLabel();
+        PageDetailImage = new javax.swing.JLabel();
         PageDetailContent = new javax.swing.JLabel();
         CommentBtn = new com.k33ptoo.components.KButton();
+        LikeBtn = new com.k33ptoo.components.KButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -124,11 +156,7 @@ public class MainPage extends javax.swing.JFrame {
         FramePanel.setkEndColor(new java.awt.Color(255, 255, 255));
         FramePanel.setkStartColor(new java.awt.Color(255, 255, 255));
         FramePanel.setPreferredSize(new java.awt.Dimension(1920, 1080));
-        FramePanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                FramePanelMouseClicked(evt);
-            }
-        });
+
         FramePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         MenuLine1.setBackground(new java.awt.Color(0, 0, 0));
@@ -142,16 +170,9 @@ public class MainPage extends javax.swing.JFrame {
         WelcomeLabel.setFont(new java.awt.Font("Segoe Script", 0, 20)); // NOI18N
         WelcomeLabel.setForeground(new java.awt.Color(255, 255, 255));
         WelcomeLabel.setText("Welcome");
-        SayWelcome.add(WelcomeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 250, 40));
 
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("X");
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
-            }
-        });
-        SayWelcome.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 20, -1));
+        SayWelcome.add(WelcomeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 200, 40));
+
 
         MenuLine1.add(SayWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 80));
 
@@ -231,9 +252,11 @@ public class MainPage extends javax.swing.JFrame {
                 LogoutLabelMouseExited(evt);
             }
         });
-        LogoutPanel.add(LogoutLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
 
-        MenuLine1.add(LogoutPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 0, 80, 80));
+        LogoutPanel.add(LogoutLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        MenuLine1.add(LogoutPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 0, 100, 80));
+
 
         ProfileLabel.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         ProfileLabel.setForeground(new java.awt.Color(51, 51, 51));
@@ -249,15 +272,9 @@ public class MainPage extends javax.swing.JFrame {
                 ProfileLabelMouseExited(evt);
             }
         });
-        MenuLine1.add(ProfileLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 10, -1, -1));
 
-        jButton1.setText("Logout");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-            }
-        });
-        MenuLine1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1090, 30, -1, -1));
+        MenuLine1.add(ProfileLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 20, -1, -1));
+
 
         FramePanel.add(MenuLine1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
         MenuLine1.getAccessibleContext().setAccessibleName("");
@@ -296,11 +313,14 @@ public class MainPage extends javax.swing.JFrame {
         });
         DashboardPanel.add(DashboardLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        MenuLine2.add(DashboardPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, 120, 40));
+
+        MenuLine2.add(DashboardPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 120, 40));
 
         SearchInput.setBackground(new java.awt.Color(235, 235, 235));
+        SearchInput.setForeground(new java.awt.Color(0, 0, 0));
         SearchInput.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 1));
-        MenuLine2.add(SearchInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 50, 280, 40));
+        MenuLine2.add(SearchInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(1270, 50, 210, 40));
+
 
         SearchBtn.setText("Search");
         SearchBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -317,7 +337,9 @@ public class MainPage extends javax.swing.JFrame {
                 SearchBtnActionPerformed(evt);
             }
         });
-        MenuLine2.add(SearchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 50, 110, 40));
+
+        MenuLine2.add(SearchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 50, 110, 40));
+
 
         NewPostPanel.setBackground(new java.awt.Color(255, 255, 255));
         NewPostPanel.setForeground(new java.awt.Color(255, 255, 255));
@@ -382,9 +404,11 @@ public class MainPage extends javax.swing.JFrame {
         });
         AboutUsPanel.add(AboutUsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        MenuLine2.add(AboutUsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 50, 100, 40));
 
-        FramePanel.add(MenuLine2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+        MenuLine2.add(AboutUsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 50, 100, 40));
+
+        FramePanel.add(MenuLine2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, -1, -1));
+
 
         CardLayoutPanel.setBackground(new java.awt.Color(255, 255, 255));
         CardLayoutPanel.setPreferredSize(new java.awt.Dimension(1920, 90));
@@ -403,56 +427,445 @@ public class MainPage extends javax.swing.JFrame {
         MainPostLabelPanel.add(TopicMainPost, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
 
         MainLabelPost.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
+
+        MainLabelPost.setForeground(new java.awt.Color(0, 0, 0));
         MainLabelPost.setText("<html> Picture about a snow mountain  very fantastic for everybody </html>");
         MainPostLabelPanel.add(MainLabelPost, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 350, 130));
 
         HomeLayout.add(MainPostLabelPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 370, 430, 210));
 
         MainThumbnail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/thumb2.png"))); // NOI18N
-        HomeLayout.add(MainThumbnail, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 600, 440));
+
+        HomeLayout.add(MainThumbnail, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 600, 440));
 
         LabelPost2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        LabelPost2.setForeground(new java.awt.Color(0, 0, 0));
+
         LabelPost2.setText("<html>Windows 11 have some improvement about the performence of some game in many platform  </html>");
         LabelPost2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 LabelPost2MouseClicked(evt);
             }
         });
-        HomeLayout.add(LabelPost2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 410, 560, 70));
+
+        HomeLayout.add(LabelPost2, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 410, 560, 70));
 
         Thumbnail2.setText("Image 2 here");
-        Thumbnail2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Thumbnail2MouseClicked(evt);
-            }
-        });
-        HomeLayout.add(Thumbnail2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 270, 710, 140));
+        HomeLayout.add(Thumbnail2, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 270, 710, 140));
 
         Thumbnail1.setText("Image 1 here");
-        Thumbnail1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Thumbnail1MouseClicked(evt);
-            }
-        });
-        HomeLayout.add(Thumbnail1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 40, 710, 140));
+        HomeLayout.add(Thumbnail1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 40, 710, 140));
 
         LabelPost1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        LabelPost1.setForeground(new java.awt.Color(0, 0, 0));
+
         LabelPost1.setText("<html>Sunrise Lake is now available for tourise who want to checkin </html>");
         LabelPost1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 LabelPost1MouseClicked(evt);
             }
         });
-        HomeLayout.add(LabelPost1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 180, 560, 70));
+
+        HomeLayout.add(LabelPost1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 180, 560, 70));
+
 
         CardLayoutPanel.add(HomeLayout, "card2");
 
         DashboardLayout.setBackground(new java.awt.Color(255, 255, 255));
         DashboardLayout.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel3.setText("DASHBOARD");
-        DashboardLayout.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 290, -1, -1));
+
+        PostD1.setBackground(new java.awt.Color(255, 255, 255));
+        PostD1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(220, 220, 220)));
+        PostD1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        PostImage1.setForeground(new java.awt.Color(0, 0, 0));
+        PostImage1.setText("Image1");
+        PostD1.add(PostImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 90));
+
+        PostState1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        PostState1.setForeground(new java.awt.Color(51, 153, 0));
+        PostState1.setText("State Upload Here");
+        PostD1.add(PostState1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 60, 130, 20));
+
+        PostTitle1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        PostTitle1.setForeground(new java.awt.Color(82, 82, 82));
+        PostTitle1.setText("<html> asdfsdfsdfasfsafasdfsadfsdfasdfasdfasdfasddsdsafdsasdfsdfsdfsadfsa dfsdfsdffasdfsdafsdafsadfasdffsadfasfafasfasfsdfasfdasdfadfsdfsdfasdfasdf </html>");
+        PostTitle1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PostTitle1MouseClicked(evt);
+            }
+        });
+        PostD1.add(PostTitle1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 440, 60));
+
+        UploadDayPost1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        UploadDayPost1.setForeground(new java.awt.Color(202, 62, 71));
+        UploadDayPost1.setText("Upload Day Insert Here");
+        PostD1.add(UploadDayPost1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, -1, 20));
+
+        EditBackground1.setBackground(new java.awt.Color(204, 204, 204));
+        EditBackground1.setForeground(new java.awt.Color(255, 255, 255));
+        EditBackground1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EditBackground1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                EditBackground1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                EditBackground1MouseExited(evt);
+            }
+        });
+        EditBackground1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        EditBtn1.setBackground(new java.awt.Color(255, 255, 255));
+        EditBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EditBtn1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                EditBtn1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                EditBtn1MouseExited(evt);
+            }
+        });
+        EditBackground1.add(EditBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        PostD1.add(EditBackground1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 50, 50));
+
+        DeleteBackground1.setBackground(new java.awt.Color(204, 204, 204));
+        DeleteBackground1.setForeground(new java.awt.Color(255, 255, 255));
+        DeleteBackground1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DeleteBackground1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                DeleteBackground1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                DeleteBackground1MouseExited(evt);
+            }
+        });
+        DeleteBackground1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        DeleteBtn1.setBackground(new java.awt.Color(255, 255, 255));
+        DeleteBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DeleteBtn1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                DeleteBtn1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                DeleteBtn1MouseExited(evt);
+            }
+        });
+        DeleteBackground1.add(DeleteBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        PostD1.add(DeleteBackground1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 20, 50, 50));
+
+        DashboardLayout.add(PostD1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 760, 90));
+
+        PostD2.setBackground(new java.awt.Color(255, 255, 255));
+        PostD2.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(220, 220, 220)));
+        PostD2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        PostImage2.setForeground(new java.awt.Color(0, 0, 0));
+        PostImage2.setText("Image2");
+        PostD2.add(PostImage2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 90));
+
+        PostState2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        PostState2.setForeground(new java.awt.Color(51, 153, 0));
+        PostState2.setText("State Upload Here");
+        PostD2.add(PostState2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 60, 130, 20));
+
+        PostTitle2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        PostTitle2.setForeground(new java.awt.Color(82, 82, 82));
+        PostTitle2.setText("<html> asdfsdfsdfasfsafasdfsadfsdfasdfasdfasdfasddsdsafdsasdfsdfsdfsadfsa dfsdfsdffasdfsdafsdafsadfasdffsadfasfafasfasfsdfasfdasdfadfsdfsdfasdfasdf </html>");
+        PostTitle2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PostTitle2MouseClicked(evt);
+            }
+        });
+        PostD2.add(PostTitle2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 440, 60));
+
+        UploadDayPost2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        UploadDayPost2.setForeground(new java.awt.Color(202, 62, 71));
+        UploadDayPost2.setText("Upload Day Insert Here");
+        PostD2.add(UploadDayPost2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, -1, 20));
+
+        DeleteBackground2.setBackground(new java.awt.Color(204, 204, 204));
+        DeleteBackground2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DeleteBackground2MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                DeleteBackground2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                DeleteBackground2MouseExited(evt);
+            }
+        });
+        DeleteBackground2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        DeleteBtn2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DeleteBtn2MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                DeleteBtn2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                DeleteBtn2MouseExited(evt);
+            }
+        });
+        DeleteBackground2.add(DeleteBtn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        PostD2.add(DeleteBackground2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 20, 50, 50));
+
+        EditBackground2.setBackground(new java.awt.Color(204, 204, 204));
+        EditBackground2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EditBackground2MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                EditBackground2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                EditBackground2MouseExited(evt);
+            }
+        });
+        EditBackground2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        EditBtn2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EditBtn2MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                EditBtn2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                EditBtn2MouseExited(evt);
+            }
+        });
+        EditBackground2.add(EditBtn2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        PostD2.add(EditBackground2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 50, 50));
+
+        DashboardLayout.add(PostD2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 270, 760, 90));
+
+        PostD3.setBackground(new java.awt.Color(255, 255, 255));
+        PostD3.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(220, 220, 220)));
+        PostD3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        PostImage3.setForeground(new java.awt.Color(0, 0, 0));
+        PostImage3.setText("Image3");
+        PostD3.add(PostImage3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 90));
+
+        PostState3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        PostState3.setForeground(new java.awt.Color(51, 153, 0));
+        PostState3.setText("State Upload Here");
+        PostD3.add(PostState3, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 60, 130, 20));
+
+        PostTitle3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        PostTitle3.setForeground(new java.awt.Color(82, 82, 82));
+        PostTitle3.setText("<html> asdfsdfsdfasfsafasdfsadfsdfasdfasdfasdfasddsdsafdsasdfsdfsdfsadfsa dfsdfsdffasdfsdafsdafsadfasdffsadfasfafasfasfsdfasfdasdfadfsdfsdfasdfasdf </html>");
+        PostTitle3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PostTitle3MouseClicked(evt);
+            }
+        });
+        PostD3.add(PostTitle3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 440, 60));
+
+        UploadDayPost3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        UploadDayPost3.setForeground(new java.awt.Color(202, 62, 71));
+        UploadDayPost3.setText("Upload Day Insert Here");
+        PostD3.add(UploadDayPost3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, -1, 20));
+
+        EditBackground3.setBackground(new java.awt.Color(204, 204, 204));
+        EditBackground3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EditBackground3MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                EditBackground3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                EditBackground3MouseExited(evt);
+            }
+        });
+        EditBackground3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        EditBtn3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EditBtn3MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                EditBtn3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                EditBtn3MouseExited(evt);
+            }
+        });
+        EditBackground3.add(EditBtn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        PostD3.add(EditBackground3, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 50, 50));
+
+        DeleteBackground3.setBackground(new java.awt.Color(204, 204, 204));
+        DeleteBackground3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DeleteBackground3MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                DeleteBackground3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                DeleteBackground3MouseExited(evt);
+            }
+        });
+        DeleteBackground3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        DeleteBtn3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DeleteBtn3MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                DeleteBtn3MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                DeleteBtn3MouseExited(evt);
+            }
+        });
+        DeleteBackground3.add(DeleteBtn3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        PostD3.add(DeleteBackground3, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 20, 50, 50));
+
+        DashboardLayout.add(PostD3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 380, 760, 90));
+
+        PostD4.setBackground(new java.awt.Color(255, 255, 255));
+        PostD4.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(220, 220, 220)));
+        PostD4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        PostImage4.setForeground(new java.awt.Color(0, 0, 0));
+        PostImage4.setText("Image4");
+        PostD4.add(PostImage4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 90));
+
+        PostState4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        PostState4.setForeground(new java.awt.Color(51, 153, 0));
+        PostState4.setText("State Upload Here");
+        PostD4.add(PostState4, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 60, 130, 20));
+
+        PostTitle4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        PostTitle4.setForeground(new java.awt.Color(82, 82, 82));
+        PostTitle4.setText("<html> asdfsdfsdfasfsafasdfsadfsdfasdfasdfasdfasddsdsafdsasdfsdfsdfsadfsa dfsdfsdffasdfsdafsdafsadfasdffsadfasfafasfasfsdfasfdasdfadfsdfsdfasdfasdf </html>");
+        PostTitle4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PostTitle4MouseClicked(evt);
+            }
+        });
+        PostD4.add(PostTitle4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 440, 60));
+
+        UploadDayPost4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        UploadDayPost4.setForeground(new java.awt.Color(202, 62, 71));
+        UploadDayPost4.setText("Upload Day Insert Here");
+        PostD4.add(UploadDayPost4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, -1, 20));
+
+        EditBackground4.setBackground(new java.awt.Color(204, 204, 204));
+        EditBackground4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EditBackground4MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                EditBackground4MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                EditBackground4MouseExited(evt);
+            }
+        });
+        EditBackground4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        EditBtn4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EditBtn4MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                EditBtn4MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                EditBtn4MouseExited(evt);
+            }
+        });
+        EditBackground4.add(EditBtn4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        PostD4.add(EditBackground4, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 20, 50, 50));
+
+        DeleteBackground4.setBackground(new java.awt.Color(204, 204, 204));
+        DeleteBackground4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DeleteBackground4MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                DeleteBackground4MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                DeleteBackground4MouseExited(evt);
+            }
+        });
+        DeleteBackground4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        DeleteBtn4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DeleteBtn4MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                DeleteBtn4MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                DeleteBtn4MouseExited(evt);
+            }
+        });
+        DeleteBackground4.add(DeleteBtn4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        PostD4.add(DeleteBackground4, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 20, 50, 50));
+
+        DashboardLayout.add(PostD4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 490, 760, 90));
+
+        DashBoardTitle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        DashBoardTitle.setForeground(new java.awt.Color(51, 51, 51));
+        DashBoardTitle.setText("USERNAME + DASHBOARD");
+        DashboardLayout.add(DashBoardTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
+
+        TotalOfPostLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        TotalOfPostLabel.setText("Total Post Insert Here");
+        DashboardLayout.add(TotalOfPostLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, -1, -1));
+
+        PageNumber.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        PageNumber.setText("0/0");
+        DashboardLayout.add(PageNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 600, -1, -1));
+
+        BackBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BackBtnMouseClicked(evt);
+            }
+        });
+        DashboardLayout.add(BackBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 80, 80));
+
+        NextBtn.setForeground(new java.awt.Color(255, 255, 255));
+        NextBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                NextBtnMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                NextBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                NextBtnMouseExited(evt);
+            }
+        });
+        DashboardLayout.add(NextBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1370, 200, -1, 80));
+        DashboardLayout.add(GolangAlert, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 30, 250, 200));
+        DashboardLayout.add(GLPicture, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 220, 390, 290));
 
         CardLayoutPanel.add(DashboardLayout, "card2");
 
@@ -460,6 +873,8 @@ public class MainPage extends javax.swing.JFrame {
         AboutUsLayout.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("We are a coder team with 4 people and we hope enjoy using our app ");
         AboutUsLayout.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, -1, 150));
 
@@ -469,6 +884,8 @@ public class MainPage extends javax.swing.JFrame {
         NewPostLayout.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("NEW POST");
         NewPostLayout.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 270, -1, -1));
 
@@ -478,6 +895,7 @@ public class MainPage extends javax.swing.JFrame {
         SearchLayout.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Search");
         SearchLayout.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 270, -1, -1));
 
@@ -486,16 +904,11 @@ public class MainPage extends javax.swing.JFrame {
         PageDetailLayout.setBackground(new java.awt.Color(255, 255, 255));
         PageDetailLayout.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        DetailPageTitle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        DetailPageTitle.setText("Insert Page Title Here");
-        PageDetailLayout.add(DetailPageTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, -1, -1));
-
-        PageDetailImage.setText("Image Here");
-        PageDetailImage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        PageDetailLayout.add(PageDetailImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 510, 460));
 
         CommentPanel.setBackground(new java.awt.Color(0, 0, 0));
         CommentPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        ConfirmBtn.setBackground(new java.awt.Color(255, 255, 255));
 
         ConfirmBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 5, 1));
         ConfirmBtn.setText("Confirm");
@@ -510,11 +923,6 @@ public class MainPage extends javax.swing.JFrame {
         ConfirmBtn.setkHoverStartColor(new java.awt.Color(204, 204, 204));
         ConfirmBtn.setkSelectedColor(new java.awt.Color(255, 255, 255));
         ConfirmBtn.setkStartColor(new java.awt.Color(255, 255, 255));
-        ConfirmBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ConfirmBtnMouseClicked(evt);
-            }
-        });
         ConfirmBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ConfirmBtnActionPerformed(evt);
@@ -598,13 +1006,23 @@ public class MainPage extends javax.swing.JFrame {
                 GoBackMouseExited(evt);
             }
         });
-        CommentPanel.add(GoBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, 30));
 
-        PageDetailLayout.add(CommentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 30, 490, 490));
+        CommentPanel.add(GoBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 40));
+
+        PageDetailLayout.add(CommentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 110, 490, 490));
+
+        PageDetailTitle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        PageDetailTitle.setForeground(new java.awt.Color(51, 51, 51));
+        PageDetailTitle.setText("Insert Page Title Here");
+        PageDetailLayout.add(PageDetailTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, 380, -1));
+
+        PageDetailImage.setText("Image Here");
+        PageDetailLayout.add(PageDetailImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 510, 490));
 
         PageDetailContent.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         PageDetailContent.setText("<html>Content Here</html> ");
-        PageDetailLayout.add(PageDetailContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 70, 810, 350));
+        PageDetailLayout.add(PageDetailContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 130, 810, 430));
+
 
         CommentBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 5, 1));
         CommentBtn.setText("Comment");
@@ -624,13 +1042,38 @@ public class MainPage extends javax.swing.JFrame {
                 CommentBtnActionPerformed(evt);
             }
         });
-        PageDetailLayout.add(CommentBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 490, 160, 40));
+
+        PageDetailLayout.add(CommentBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 570, 120, 40));
+
+        LikeBtn.setBackground(new java.awt.Color(0, 0, 0));
+        LikeBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 5, 1));
+        LikeBtn.setText("Like");
+        LikeBtn.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        LikeBtn.setkBackGroundColor(new java.awt.Color(0, 0, 0));
+        LikeBtn.setkBorderRadius(45);
+        LikeBtn.setkEndColor(new java.awt.Color(0, 0, 0));
+        LikeBtn.setkHoverColor(new java.awt.Color(204, 204, 204));
+        LikeBtn.setkHoverEndColor(new java.awt.Color(204, 204, 204));
+        LikeBtn.setkHoverForeGround(new java.awt.Color(0, 0, 0));
+        LikeBtn.setkHoverStartColor(new java.awt.Color(204, 204, 204));
+        LikeBtn.setkIndicatorColor(new java.awt.Color(0, 0, 0));
+        LikeBtn.setkSelectedColor(new java.awt.Color(0, 0, 0));
+        LikeBtn.setkStartColor(new java.awt.Color(0, 0, 0));
+        LikeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LikeBtnActionPerformed(evt);
+            }
+        });
+        PageDetailLayout.add(LikeBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 570, 100, 40));
+
 
         CardLayoutPanel.add(PageDetailLayout, "card2");
 
         FramePanel.add(CardLayoutPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, -1, 650));
 
-        getContentPane().add(FramePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 860));
+
+        getContentPane().add(FramePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 860));
+
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -787,11 +1230,12 @@ public class MainPage extends javax.swing.JFrame {
         try {
             setImagePage("/SunriseLake.png", Thumbnail1);
             setImagePage("/WindowsB.png", Thumbnail2);
-            getpicture();
+
+
         } catch (Exception e) {
         }
-        
-        setWelcomeLabel();
+
+        setWelcomeLabel("Tricky");
         CommentPanel.setVisible(false);
     }//GEN-LAST:event_formWindowOpened
 
@@ -801,11 +1245,12 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_ProfileLabelMouseClicked
 
     private void ProfileLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProfileLabelMouseEntered
-        
+
+
     }//GEN-LAST:event_ProfileLabelMouseEntered
 
     private void ProfileLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProfileLabelMouseExited
-        
+
     }//GEN-LAST:event_ProfileLabelMouseExited
 
     private void LogoLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoLabelMouseClicked
@@ -816,23 +1261,31 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_LogoLabelMouseClicked
 
     private void LabelPost1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelPost1MouseClicked
-        id_article = 10;
+
         CardLayoutPanel.removeAll();
         CardLayoutPanel.add(PageDetailLayout);
         CardLayoutPanel.repaint();
         CardLayoutPanel.revalidate();
-        indentIntoArticle(10);
-        commentdto.fillTable(tblModel, String.valueOf(id_article));
+
+        try {
+            fillToDetailPage("/SunriseLake.png", PageDetailImage, "");
+        } catch (IOException ex) {
+            Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_LabelPost1MouseClicked
 
     private void LabelPost2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelPost2MouseClicked
-        id_article = 3;
+
         CardLayoutPanel.removeAll();
         CardLayoutPanel.add(PageDetailLayout);
         CardLayoutPanel.repaint();
         CardLayoutPanel.revalidate();
-        indentIntoArticle(3);
-        commentdto.fillTable(tblModel, String.valueOf(id_article));
+
+        try {
+            fillToDetailPage("/WindowsB.png", PageDetailImage, "");
+        } catch (IOException ex) {
+            Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_LabelPost2MouseClicked
 
     private void CommentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CommentBtnActionPerformed
@@ -840,12 +1293,26 @@ public class MainPage extends javax.swing.JFrame {
 
     }//GEN-LAST:event_CommentBtnActionPerformed
 
+
+    private void LikeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LikeBtnActionPerformed
+
+        if (colorCount == 0) {
+
+            LikeBtn.setkStartColor(new Color(255, 51, 51));
+            colorCount++;
+        } else {
+            LikeBtn.setkStartColor(new Color(0, 0, 0));
+            colorCount--;
+        }
+
+    }//GEN-LAST:event_LikeBtnActionPerformed
+
     private void InputCommentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InputCommentActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_InputCommentActionPerformed
 
     private void ConfirmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmBtnActionPerformed
-        
+
     }//GEN-LAST:event_ConfirmBtnActionPerformed
 
     private void GoBackMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GoBackMouseEntered
@@ -860,38 +1327,247 @@ public class MainPage extends javax.swing.JFrame {
         CommentPanel.setVisible(false);
     }//GEN-LAST:event_GoBackMouseClicked
 
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_jLabel1MouseClicked
 
-    private void FramePanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FramePanelMouseClicked
+    private void NextBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NextBtnMouseClicked
         // TODO add your handling code here:
-        setWelcomeLabel();
-    }//GEN-LAST:event_FramePanelMouseClicked
+    }//GEN-LAST:event_NextBtnMouseClicked
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void NextBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NextBtnMouseEntered
+
+    }//GEN-LAST:event_NextBtnMouseEntered
+
+    private void NextBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NextBtnMouseExited
+
+    }//GEN-LAST:event_NextBtnMouseExited
+
+    private void DeleteBtn1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBtn1MouseEntered
+        DeleteBackground1.setBackground(new Color(51, 51, 51));
+    }//GEN-LAST:event_DeleteBtn1MouseEntered
+
+    private void DeleteBtn1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBtn1MouseExited
+        DeleteBackground1.setBackground(new Color(204, 204, 204));
+    }//GEN-LAST:event_DeleteBtn1MouseExited
+
+    private void DeleteBtn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBtn1MouseClicked
         // TODO add your handling code here:
-        logout();
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_DeleteBtn1MouseClicked
 
-    private void Thumbnail1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Thumbnail1MouseClicked
-        // TODO add your handling code here
-        indentIntoArticle(1);
-        id_article = 1;
-    }//GEN-LAST:event_Thumbnail1MouseClicked
+    private void EditBtn1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBtn1MouseEntered
+        EditBackground1.setBackground(new Color(51, 51, 51));
+    }//GEN-LAST:event_EditBtn1MouseEntered
 
-    private void Thumbnail2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Thumbnail2MouseClicked
+    private void EditBtn1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBtn1MouseExited
+        EditBackground1.setBackground(new Color(204, 204, 204));
+    }//GEN-LAST:event_EditBtn1MouseExited
+
+    private void EditBtn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBtn1MouseClicked
         // TODO add your handling code here:
-        indentIntoArticle(2);
-        id_article = 2;
-        setImagePage("/WindowsB.png", PageDetailImage);
-    }//GEN-LAST:event_Thumbnail2MouseClicked
+    }//GEN-LAST:event_EditBtn1MouseClicked
 
-    private void ConfirmBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ConfirmBtnMouseClicked
+    private void EditBackground1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBackground1MouseEntered
+        EditBackground1.setBackground(new Color(51, 51, 51));
+    }//GEN-LAST:event_EditBackground1MouseEntered
+
+    private void EditBackground1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBackground1MouseExited
+        EditBackground1.setBackground(new Color(204, 204, 204));
+    }//GEN-LAST:event_EditBackground1MouseExited
+
+    private void EditBackground1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBackground1MouseClicked
         // TODO add your handling code here:
-        doComment();
-    }//GEN-LAST:event_ConfirmBtnMouseClicked
+    }//GEN-LAST:event_EditBackground1MouseClicked
+
+    private void DeleteBackground1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBackground1MouseEntered
+        DeleteBackground1.setBackground(new Color(51, 51, 51));
+    }//GEN-LAST:event_DeleteBackground1MouseEntered
+
+    private void DeleteBackground1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBackground1MouseExited
+        DeleteBackground1.setBackground(new Color(204, 204, 204));
+    }//GEN-LAST:event_DeleteBackground1MouseExited
+
+    private void DeleteBackground1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBackground1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DeleteBackground1MouseClicked
+
+    private void DeleteBackground2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBackground2MouseEntered
+        DeleteBackground2.setBackground(new Color(51, 51, 51));
+    }//GEN-LAST:event_DeleteBackground2MouseEntered
+
+    private void DeleteBackground2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBackground2MouseExited
+        DeleteBackground2.setBackground(new Color(204, 204, 204));
+    }//GEN-LAST:event_DeleteBackground2MouseExited
+
+    private void DeleteBackground2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBackground2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DeleteBackground2MouseClicked
+
+    private void DeleteBtn2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBtn2MouseEntered
+        DeleteBackground2.setBackground(new Color(51, 51, 51));
+    }//GEN-LAST:event_DeleteBtn2MouseEntered
+
+    private void DeleteBtn2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBtn2MouseExited
+        DeleteBackground2.setBackground(new Color(204, 204, 204));
+    }//GEN-LAST:event_DeleteBtn2MouseExited
+
+    private void DeleteBtn2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBtn2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DeleteBtn2MouseClicked
+
+    private void EditBackground2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBackground2MouseEntered
+        EditBackground2.setBackground(new Color(51, 51, 51));
+    }//GEN-LAST:event_EditBackground2MouseEntered
+
+    private void EditBackground2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBackground2MouseExited
+        EditBackground2.setBackground(new Color(204, 204, 204));
+    }//GEN-LAST:event_EditBackground2MouseExited
+
+    private void EditBackground2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBackground2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EditBackground2MouseClicked
+
+    private void EditBtn2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBtn2MouseEntered
+        EditBackground2.setBackground(new Color(51, 51, 51));
+    }//GEN-LAST:event_EditBtn2MouseEntered
+
+    private void EditBtn2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBtn2MouseExited
+        EditBackground2.setBackground(new Color(204, 204, 204));
+    }//GEN-LAST:event_EditBtn2MouseExited
+
+    private void EditBtn2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBtn2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EditBtn2MouseClicked
+
+    private void EditBackground3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBackground3MouseEntered
+        EditBackground3.setBackground(new Color(51, 51, 51));
+    }//GEN-LAST:event_EditBackground3MouseEntered
+
+    private void EditBackground3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBackground3MouseExited
+        EditBackground3.setBackground(new Color(204, 204, 204));
+    }//GEN-LAST:event_EditBackground3MouseExited
+
+    private void EditBackground3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBackground3MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EditBackground3MouseClicked
+
+    private void EditBtn3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBtn3MouseEntered
+        EditBackground3.setBackground(new Color(51, 51, 51));
+    }//GEN-LAST:event_EditBtn3MouseEntered
+
+    private void EditBtn3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBtn3MouseExited
+        EditBackground3.setBackground(new Color(204, 204, 204));
+    }//GEN-LAST:event_EditBtn3MouseExited
+
+    private void EditBtn3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBtn3MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EditBtn3MouseClicked
+
+    private void DeleteBackground3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBackground3MouseEntered
+        DeleteBackground3.setBackground(new Color(51, 51, 51));
+    }//GEN-LAST:event_DeleteBackground3MouseEntered
+
+    private void DeleteBackground3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBackground3MouseExited
+        DeleteBackground3.setBackground(new Color(204, 204, 204));
+    }//GEN-LAST:event_DeleteBackground3MouseExited
+
+    private void DeleteBackground3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBackground3MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DeleteBackground3MouseClicked
+
+    private void DeleteBtn3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBtn3MouseEntered
+        DeleteBackground3.setBackground(new Color(51, 51, 51));
+    }//GEN-LAST:event_DeleteBtn3MouseEntered
+
+    private void DeleteBtn3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBtn3MouseExited
+        DeleteBackground3.setBackground(new Color(204, 204, 204));
+
+    }//GEN-LAST:event_DeleteBtn3MouseExited
+
+    private void DeleteBtn3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBtn3MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DeleteBtn3MouseClicked
+
+    private void EditBackground4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBackground4MouseEntered
+        EditBackground4.setBackground(new Color(51, 51, 51));
+    }//GEN-LAST:event_EditBackground4MouseEntered
+
+    private void EditBackground4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBackground4MouseExited
+
+        EditBackground4.setBackground(new Color(204, 204, 204));
+
+
+    }//GEN-LAST:event_EditBackground4MouseExited
+
+    private void EditBtn4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBtn4MouseEntered
+        EditBackground4.setBackground(new Color(51, 51, 51));
+    }//GEN-LAST:event_EditBtn4MouseEntered
+
+    private void EditBtn4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBtn4MouseExited
+        EditBackground4.setBackground(new Color(204, 204, 204));
+
+    }//GEN-LAST:event_EditBtn4MouseExited
+
+    private void EditBtn4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBtn4MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EditBtn4MouseClicked
+
+    private void DeleteBackground4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBackground4MouseEntered
+        DeleteBackground4.setBackground(new Color(51, 51, 51));
+    }//GEN-LAST:event_DeleteBackground4MouseEntered
+
+    private void DeleteBackground4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBackground4MouseExited
+        DeleteBackground4.setBackground(new Color(204, 204, 204));
+    }//GEN-LAST:event_DeleteBackground4MouseExited
+
+    private void DeleteBackground4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBackground4MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DeleteBackground4MouseClicked
+
+    private void DeleteBtn4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBtn4MouseEntered
+        DeleteBackground4.setBackground(new Color(51, 51, 51));
+    }//GEN-LAST:event_DeleteBtn4MouseEntered
+
+    private void DeleteBtn4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBtn4MouseExited
+        DeleteBackground4.setBackground(new Color(204, 204, 204));
+    }//GEN-LAST:event_DeleteBtn4MouseExited
+
+    private void EditBackground4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBackground4MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EditBackground4MouseClicked
+
+    private void DeleteBtn4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBtn4MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DeleteBtn4MouseClicked
+
+    private void BackBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackBtnMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BackBtnMouseClicked
+
+    private void PostTitle1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PostTitle1MouseClicked
+        CardLayoutPanel.removeAll();
+        CardLayoutPanel.add(PageDetailLayout);
+        CardLayoutPanel.repaint();
+        CardLayoutPanel.revalidate();
+    }//GEN-LAST:event_PostTitle1MouseClicked
+
+    private void PostTitle2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PostTitle2MouseClicked
+        CardLayoutPanel.removeAll();
+        CardLayoutPanel.add(PageDetailLayout);
+        CardLayoutPanel.repaint();
+        CardLayoutPanel.revalidate();
+    }//GEN-LAST:event_PostTitle2MouseClicked
+
+    private void PostTitle3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PostTitle3MouseClicked
+        CardLayoutPanel.removeAll();
+        CardLayoutPanel.add(PageDetailLayout);
+        CardLayoutPanel.repaint();
+        CardLayoutPanel.revalidate();
+    }//GEN-LAST:event_PostTitle3MouseClicked
+
+    private void PostTitle4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PostTitle4MouseClicked
+        CardLayoutPanel.removeAll();
+        CardLayoutPanel.add(PageDetailLayout);
+        CardLayoutPanel.repaint();
+        CardLayoutPanel.revalidate();
+    }//GEN-LAST:event_PostTitle4MouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -932,6 +1608,55 @@ public class MainPage extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
 
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -939,37 +1664,40 @@ public class MainPage extends javax.swing.JFrame {
             }
         });
     }
-    
+
+
     int colorCount = 0;
-    
 
 // code upgrading    
-    public void getpicture() throws IOException {
-        try {
-            
-            File file = new File("E:\\FPT Polytechnic\\DuAn1\\Ritocon_Blog\\src\\main\\resources\\WindowsB.png");
-            Image image = ImageIO.read(file);
-            Thumbnail2.setText("");
-            int height = Thumbnail2.getHeight();
-            int width = Thumbnail2.getWidth();
-            Thumbnail2.setIcon(new ImageIcon(image.getScaledInstance(width, height, 0)));
-
+//    public void getpicture() throws IOException {
+//        try {
+//            URL url = getClass().getResource("/WindowsB.png");
+//            File file = new File(url.getPath());
+//            //File file = new File("C:\\Users\\ASUS\\Downloads\\ma.png");
+//            Image image = ImageIO.read(file);
+//            Thumbnail2.setText("");
+//            int height = Thumbnail2.getHeight();
+//            int width = Thumbnail2.getWidth();
+//            Thumbnail2.setIcon(new ImageIcon(image.getScaledInstance(width, height, 0)));
+//
 //           String imagePath = file.getAbsolutePath();
-        } catch (Exception e) {
-            e.getStackTrace();
-        }
+//        } catch (Exception e) {
+//            e.getStackTrace();
+//        }
+//
+//    }
+    public void fillToDetailPage(String imagePath, JLabel imageJLabel, String pageContent) throws IOException {
+        setImagePage(imagePath, imageJLabel);
+
+        PageDetailContent.setText("");
 
     }
-    
-    public void fillToDetailPage(String imagePath, JLabel imageJLabel, String pageContent){
-        setImagePage(imagePath, imageJLabel);
-        PageDetailContent.setText("");
-        
-    }
-    
-    public void setImagePage(String imagePath, JLabel imageLabel) {
+
+    public void setImagePage(String imagePath, JLabel imageLabel) throws IOException {
         try {
-            File file = new File("E:\\FPT Polytechnic\\DuAn1\\Ritocon_Blog\\src\\main\\resources\\WindowsB.png");
+
+            URL url = getClass().getResource(imagePath); // them anh trang detail vao day
+            File file = new File(url.getPath());
             Image image = ImageIO.read(file);
             imageLabel.setText("");
             int height = imageLabel.getHeight();
@@ -986,59 +1714,55 @@ public class MainPage extends javax.swing.JFrame {
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
     }
 
-    public void setWelcomeLabel() {
-        String stringWelcome = "Welcome " + logindto.changeUsername();
+
+    public void setWelcomeLabel(String username) {
+        String stringWelcome = "Welcome " + username;
         WelcomeLabel.setText(stringWelcome);
-        
     }
-
-    public void logout() {
-        logindto.logout();
-        close();
-        LoginPage login = new LoginPage();
-        login.setVisible(true);
-    }
-    
-    public void indentIntoArticle(int i){
-        articledto.showDetail(DetailPageTitle, PageDetailContent, PageDetailImage, i);      
-    }
-    
-    public void initTable(){
-        String[] columnContent = new String[]{"user", "comment"};
-
-        tblModel = new DefaultTableModel();
-        tblModel.setColumnIdentifiers(columnContent);
-        CommentTable.setModel(tblModel);
-    }
-    
-    public void doComment(){
-        Comment comm = new Comment(id_user, id_article, InputComment.getText());
-        commentdto.doComment(comm);
-        commentdto.fillTable(tblModel, String.valueOf(id_article));
-        InputComment.setText("");
-    }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AboutUsLabel;
     private javax.swing.JPanel AboutUsLayout;
     private javax.swing.JPanel AboutUsPanel;
+
+    private javax.swing.JLabel BackBtn;
     private javax.swing.JPanel CardLayoutPanel;
     private com.k33ptoo.components.KButton CommentBtn;
     private javax.swing.JPanel CommentPanel;
     private javax.swing.JTable CommentTable;
     private com.k33ptoo.components.KButton ConfirmBtn;
+
+    private javax.swing.JLabel DashBoardTitle;
     private javax.swing.JLabel DashboardLabel;
     private javax.swing.JPanel DashboardLayout;
     private javax.swing.JPanel DashboardPanel;
-    private javax.swing.JLabel DetailPageTitle;
+    private javax.swing.JPanel DeleteBackground1;
+    private javax.swing.JPanel DeleteBackground2;
+    private javax.swing.JPanel DeleteBackground3;
+    private javax.swing.JPanel DeleteBackground4;
+    private javax.swing.JLabel DeleteBtn1;
+    private javax.swing.JLabel DeleteBtn2;
+    private javax.swing.JLabel DeleteBtn3;
+    private javax.swing.JLabel DeleteBtn4;
+    private javax.swing.JPanel EditBackground1;
+    private javax.swing.JPanel EditBackground2;
+    private javax.swing.JPanel EditBackground3;
+    private javax.swing.JPanel EditBackground4;
+    private javax.swing.JLabel EditBtn1;
+    private javax.swing.JLabel EditBtn2;
+    private javax.swing.JLabel EditBtn3;
+    private javax.swing.JLabel EditBtn4;
     private javax.swing.JLabel ExitLabel;
     private javax.swing.JPanel ExitPanel;
     private com.k33ptoo.components.KGradientPanel FramePanel;
+    private javax.swing.JLabel GLPicture;
     private javax.swing.JLabel GoBack;
+    private javax.swing.JLabel GolangAlert;
     private javax.swing.JPanel HomeLayout;
     private javax.swing.JTextField InputComment;
     private javax.swing.JLabel LabelPost1;
     private javax.swing.JLabel LabelPost2;
+
+    private com.k33ptoo.components.KButton LikeBtn;
     private javax.swing.JLabel LogoLabel;
     private javax.swing.JLabel LogoutLabel;
     private javax.swing.JPanel LogoutPanel;
@@ -1050,9 +1774,29 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel NewPostLabel;
     private javax.swing.JPanel NewPostLayout;
     private javax.swing.JPanel NewPostPanel;
+
+    private javax.swing.JLabel NextBtn;
     private javax.swing.JLabel PageDetailContent;
     private javax.swing.JLabel PageDetailImage;
     private javax.swing.JPanel PageDetailLayout;
+    private javax.swing.JLabel PageDetailTitle;
+    private javax.swing.JLabel PageNumber;
+    private javax.swing.JPanel PostD1;
+    private javax.swing.JPanel PostD2;
+    private javax.swing.JPanel PostD3;
+    private javax.swing.JPanel PostD4;
+    private javax.swing.JLabel PostImage1;
+    private javax.swing.JLabel PostImage2;
+    private javax.swing.JLabel PostImage3;
+    private javax.swing.JLabel PostImage4;
+    private javax.swing.JLabel PostState1;
+    private javax.swing.JLabel PostState2;
+    private javax.swing.JLabel PostState3;
+    private javax.swing.JLabel PostState4;
+    private javax.swing.JLabel PostTitle1;
+    private javax.swing.JLabel PostTitle2;
+    private javax.swing.JLabel PostTitle3;
+    private javax.swing.JLabel PostTitle4;
     private javax.swing.JLabel ProfileLabel;
     private javax.swing.JPanel SayWelcome;
     private com.k33ptoo.components.KButton SearchBtn;
@@ -1061,11 +1805,14 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel Thumbnail1;
     private javax.swing.JLabel Thumbnail2;
     private javax.swing.JLabel TopicMainPost;
+
+    private javax.swing.JLabel TotalOfPostLabel;
+    private javax.swing.JLabel UploadDayPost1;
+    private javax.swing.JLabel UploadDayPost2;
+    private javax.swing.JLabel UploadDayPost3;
+    private javax.swing.JLabel UploadDayPost4;
     private javax.swing.JLabel WelcomeLabel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
