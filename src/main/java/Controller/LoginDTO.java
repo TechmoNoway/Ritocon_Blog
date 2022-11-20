@@ -173,4 +173,19 @@ public class LoginDTO {
         }
         return "";
     }
+    
+    public int makeId(){
+        String sql = "select id_user from Currents";
+        
+        try {
+            rs = db.queryHaveParameter(sql, new String[]{});
+            if(rs.next()){
+                return Integer.parseInt(rs.getString("id_user"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginDTO.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
+        return 0;
+    }
 }

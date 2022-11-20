@@ -4,6 +4,8 @@
  */
 package View;
 
+import Controller.ArticleDTO;
+import Controller.CommentDTO;
 import Controller.LoginDTO;
 import View.UserProfilePage;
 import View.*;
@@ -14,11 +16,17 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.table.DefaultTableModel;
+import Model.Comment;
 
 /**
  *
@@ -26,12 +34,19 @@ import javax.swing.JLabel;
  */
 public class MainPage extends javax.swing.JFrame {
     LoginDTO logindto = new LoginDTO();
+    ArticleDTO articledto = new ArticleDTO();
+    CommentDTO commentdto = new CommentDTO();
+    DefaultTableModel tblModel;
+    int id_user;
+    int id_article;
     /**
      * Creates new form MainPage
      */
     public MainPage() {
         initComponents();
         setLocationRelativeTo(null);
+        initTable();
+        id_user = logindto.makeId();
     }
 
     /**
@@ -406,9 +421,19 @@ public class MainPage extends javax.swing.JFrame {
         HomeLayout.add(LabelPost2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 410, 560, 70));
 
         Thumbnail2.setText("Image 2 here");
+        Thumbnail2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Thumbnail2MouseClicked(evt);
+            }
+        });
         HomeLayout.add(Thumbnail2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 270, 710, 140));
 
         Thumbnail1.setText("Image 1 here");
+        Thumbnail1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Thumbnail1MouseClicked(evt);
+            }
+        });
         HomeLayout.add(Thumbnail1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 40, 710, 140));
 
         LabelPost1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -467,7 +492,7 @@ public class MainPage extends javax.swing.JFrame {
 
         PageDetailImage.setText("Image Here");
         PageDetailImage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        PageDetailLayout.add(PageDetailImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 510, 460));
+        PageDetailLayout.add(PageDetailImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 510, 460));
 
         CommentPanel.setBackground(new java.awt.Color(0, 0, 0));
         CommentPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -485,6 +510,11 @@ public class MainPage extends javax.swing.JFrame {
         ConfirmBtn.setkHoverStartColor(new java.awt.Color(204, 204, 204));
         ConfirmBtn.setkSelectedColor(new java.awt.Color(255, 255, 255));
         ConfirmBtn.setkStartColor(new java.awt.Color(255, 255, 255));
+        ConfirmBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ConfirmBtnMouseClicked(evt);
+            }
+        });
         ConfirmBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ConfirmBtnActionPerformed(evt);
@@ -570,11 +600,11 @@ public class MainPage extends javax.swing.JFrame {
         });
         CommentPanel.add(GoBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, 30));
 
-        PageDetailLayout.add(CommentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 110, 490, 490));
+        PageDetailLayout.add(CommentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 30, 490, 490));
 
         PageDetailContent.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         PageDetailContent.setText("<html>Content Here</html> ");
-        PageDetailLayout.add(PageDetailContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 130, 810, 430));
+        PageDetailLayout.add(PageDetailContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 70, 810, 350));
 
         CommentBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 5, 1));
         CommentBtn.setText("Comment");
@@ -594,7 +624,7 @@ public class MainPage extends javax.swing.JFrame {
                 CommentBtnActionPerformed(evt);
             }
         });
-        PageDetailLayout.add(CommentBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 570, 160, 40));
+        PageDetailLayout.add(CommentBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 490, 160, 40));
 
         CardLayoutPanel.add(PageDetailLayout, "card2");
 
@@ -757,6 +787,7 @@ public class MainPage extends javax.swing.JFrame {
         try {
             setImagePage("/SunriseLake.png", Thumbnail1);
             setImagePage("/WindowsB.png", Thumbnail2);
+            getpicture();
         } catch (Exception e) {
         }
         
@@ -785,27 +816,23 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_LogoLabelMouseClicked
 
     private void LabelPost1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelPost1MouseClicked
+        id_article = 10;
         CardLayoutPanel.removeAll();
         CardLayoutPanel.add(PageDetailLayout);
         CardLayoutPanel.repaint();
         CardLayoutPanel.revalidate();
-        try {
-            fillToDetailPage("/SunriseLake.png", PageDetailImage, "");
-        } catch (IOException ex) {
-            Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        indentIntoArticle(10);
+        commentdto.fillTable(tblModel, String.valueOf(id_article));
     }//GEN-LAST:event_LabelPost1MouseClicked
 
     private void LabelPost2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelPost2MouseClicked
+        id_article = 3;
         CardLayoutPanel.removeAll();
         CardLayoutPanel.add(PageDetailLayout);
         CardLayoutPanel.repaint();
         CardLayoutPanel.revalidate();
-        try {
-            fillToDetailPage("/WindowB.png", Thumbnail2, "");
-        } catch (IOException ex) {
-            Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        indentIntoArticle(3);
+        commentdto.fillTable(tblModel, String.valueOf(id_article));
     }//GEN-LAST:event_LabelPost2MouseClicked
 
     private void CommentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CommentBtnActionPerformed
@@ -847,6 +874,24 @@ public class MainPage extends javax.swing.JFrame {
         // TODO add your handling code here:
         logout();
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void Thumbnail1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Thumbnail1MouseClicked
+        // TODO add your handling code here
+        indentIntoArticle(1);
+        id_article = 1;
+    }//GEN-LAST:event_Thumbnail1MouseClicked
+
+    private void Thumbnail2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Thumbnail2MouseClicked
+        // TODO add your handling code here:
+        indentIntoArticle(2);
+        id_article = 2;
+        setImagePage("/WindowsB.png", PageDetailImage);
+    }//GEN-LAST:event_Thumbnail2MouseClicked
+
+    private void ConfirmBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ConfirmBtnMouseClicked
+        // TODO add your handling code here:
+        doComment();
+    }//GEN-LAST:event_ConfirmBtnMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -899,36 +944,32 @@ public class MainPage extends javax.swing.JFrame {
     
 
 // code upgrading    
-//    public void getpicture() throws IOException {
-//        try {
-//            URL url = getClass().getResource("/WindowsB.png");
-//            File file = new File(url.getPath());
-//            //File file = new File("C:\\Users\\ASUS\\Downloads\\ma.png");
-//            Image image = ImageIO.read(file);
-//            Thumbnail2.setText("");
-//            int height = Thumbnail2.getHeight();
-//            int width = Thumbnail2.getWidth();
-//            Thumbnail2.setIcon(new ImageIcon(image.getScaledInstance(width, height, 0)));
-//
+    public void getpicture() throws IOException {
+        try {
+            
+            File file = new File("E:\\FPT Polytechnic\\DuAn1\\Ritocon_Blog\\src\\main\\resources\\WindowsB.png");
+            Image image = ImageIO.read(file);
+            Thumbnail2.setText("");
+            int height = Thumbnail2.getHeight();
+            int width = Thumbnail2.getWidth();
+            Thumbnail2.setIcon(new ImageIcon(image.getScaledInstance(width, height, 0)));
+
 //           String imagePath = file.getAbsolutePath();
-//        } catch (Exception e) {
-//            e.getStackTrace();
-//        }
-//
-//    }
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+
+    }
     
-    public void fillToDetailPage(String imagePath, JLabel imageJLabel, String pageContent) throws IOException{
+    public void fillToDetailPage(String imagePath, JLabel imageJLabel, String pageContent){
         setImagePage(imagePath, imageJLabel);
         PageDetailContent.setText("");
         
     }
     
-    public void setImagePage(String imagePath, JLabel imageLabel) throws IOException {
+    public void setImagePage(String imagePath, JLabel imageLabel) {
         try {
-            
-            URL url = getClass().getResource(imagePath); // them anh trang detail vao day
-            File file = new File(url.getPath());
-
+            File file = new File("E:\\FPT Polytechnic\\DuAn1\\Ritocon_Blog\\src\\main\\resources\\WindowsB.png");
             Image image = ImageIO.read(file);
             imageLabel.setText("");
             int height = imageLabel.getHeight();
@@ -948,6 +989,7 @@ public class MainPage extends javax.swing.JFrame {
     public void setWelcomeLabel() {
         String stringWelcome = "Welcome " + logindto.changeUsername();
         WelcomeLabel.setText(stringWelcome);
+        
     }
 
     public void logout() {
@@ -957,7 +999,24 @@ public class MainPage extends javax.swing.JFrame {
         login.setVisible(true);
     }
     
-   
+    public void indentIntoArticle(int i){
+        articledto.showDetail(DetailPageTitle, PageDetailContent, PageDetailImage, i);      
+    }
+    
+    public void initTable(){
+        String[] columnContent = new String[]{"user", "comment"};
+
+        tblModel = new DefaultTableModel();
+        tblModel.setColumnIdentifiers(columnContent);
+        CommentTable.setModel(tblModel);
+    }
+    
+    public void doComment(){
+        Comment comm = new Comment(id_user, id_article, InputComment.getText());
+        commentdto.doComment(comm);
+        commentdto.fillTable(tblModel, String.valueOf(id_article));
+        InputComment.setText("");
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AboutUsLabel;
