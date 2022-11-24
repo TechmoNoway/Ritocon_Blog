@@ -6,7 +6,6 @@ package View;
 
 
 
-
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -18,7 +17,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -119,10 +121,10 @@ public class MainPage extends javax.swing.JFrame {
         GLPicture = new javax.swing.JLabel();
         AboutUsLayout = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        NewPostLayout = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
         SearchLayout = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        Table = new javax.swing.JTable();
+        ResultSearchLabel = new javax.swing.JLabel();
         PageDetailLayout = new javax.swing.JPanel();
         CommentPanel = new javax.swing.JPanel();
         ConfirmBtn = new com.k33ptoo.components.KButton();
@@ -135,6 +137,22 @@ public class MainPage extends javax.swing.JFrame {
         PageDetailContent = new javax.swing.JLabel();
         CommentBtn = new com.k33ptoo.components.KButton();
         LikeBtn = new com.k33ptoo.components.KButton();
+        NewPostLayout = new javax.swing.JPanel();
+        CreatePostTitle = new javax.swing.JLabel();
+        InputImageTitle = new javax.swing.JLabel();
+        ChooseImageBtn = new javax.swing.JTextField();
+        LabelTitleInput = new javax.swing.JLabel();
+        InputPostTitle = new javax.swing.JTextField();
+        DescriptionTitle = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        InputPostDescription = new javax.swing.JTextArea();
+        Line1 = new javax.swing.JLabel();
+        YourChoseImage = new javax.swing.JLabel();
+        ClearPostBtn = new com.k33ptoo.components.KButton();
+        UpPostBtn = new com.k33ptoo.components.KButton();
+        EmptyPostDesWarning = new javax.swing.JLabel();
+        EmptyPostTitleWarning = new javax.swing.JLabel();
+        EmptyPostImgWarning = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -305,8 +323,14 @@ public class MainPage extends javax.swing.JFrame {
         SearchInput.setBackground(new java.awt.Color(235, 235, 235));
         SearchInput.setForeground(new java.awt.Color(0, 0, 0));
         SearchInput.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 1));
+        SearchInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchInputActionPerformed(evt);
+            }
+        });
         MenuLine2.add(SearchInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(1270, 50, 210, 40));
 
+        SearchBtn.setBorder(null);
         SearchBtn.setText("Search");
         SearchBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         SearchBtn.setkBackGroundColor(new java.awt.Color(51, 51, 51));
@@ -492,6 +516,7 @@ public class MainPage extends javax.swing.JFrame {
         EditBackground1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         EditBtn1.setBackground(new java.awt.Color(255, 255, 255));
+        EditBtn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_support_50px.png"))); // NOI18N
         EditBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 EditBtn1MouseClicked(evt);
@@ -523,6 +548,7 @@ public class MainPage extends javax.swing.JFrame {
         DeleteBackground1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         DeleteBtn1.setBackground(new java.awt.Color(255, 255, 255));
+        DeleteBtn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_Delete_50px_1.png"))); // NOI18N
         DeleteBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 DeleteBtn1MouseClicked(evt);
@@ -582,6 +608,7 @@ public class MainPage extends javax.swing.JFrame {
         });
         DeleteBackground2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        DeleteBtn2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_Delete_50px_1.png"))); // NOI18N
         DeleteBtn2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 DeleteBtn2MouseClicked(evt);
@@ -611,6 +638,7 @@ public class MainPage extends javax.swing.JFrame {
         });
         EditBackground2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        EditBtn2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_support_50px.png"))); // NOI18N
         EditBtn2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 EditBtn2MouseClicked(evt);
@@ -670,6 +698,7 @@ public class MainPage extends javax.swing.JFrame {
         });
         EditBackground3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        EditBtn3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_support_50px.png"))); // NOI18N
         EditBtn3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 EditBtn3MouseClicked(evt);
@@ -699,6 +728,7 @@ public class MainPage extends javax.swing.JFrame {
         });
         DeleteBackground3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        DeleteBtn3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_Delete_50px_1.png"))); // NOI18N
         DeleteBtn3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 DeleteBtn3MouseClicked(evt);
@@ -758,6 +788,7 @@ public class MainPage extends javax.swing.JFrame {
         });
         EditBackground4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        EditBtn4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_support_50px.png"))); // NOI18N
         EditBtn4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 EditBtn4MouseClicked(evt);
@@ -787,6 +818,7 @@ public class MainPage extends javax.swing.JFrame {
         });
         DeleteBackground4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        DeleteBtn4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_Delete_50px_1.png"))); // NOI18N
         DeleteBtn4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 DeleteBtn4MouseClicked(evt);
@@ -817,6 +849,7 @@ public class MainPage extends javax.swing.JFrame {
         PageNumber.setText("0/0");
         DashboardLayout.add(PageNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 600, -1, -1));
 
+        BackBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PrevPage.png"))); // NOI18N
         BackBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BackBtnMouseClicked(evt);
@@ -825,6 +858,7 @@ public class MainPage extends javax.swing.JFrame {
         DashboardLayout.add(BackBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 80, 80));
 
         NextBtn.setForeground(new java.awt.Color(255, 255, 255));
+        NextBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NextPage.png"))); // NOI18N
         NextBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 NextBtnMouseClicked(evt);
@@ -837,7 +871,11 @@ public class MainPage extends javax.swing.JFrame {
             }
         });
         DashboardLayout.add(NextBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1370, 200, -1, 80));
+
+        GolangAlert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CuteAlert.png"))); // NOI18N
         DashboardLayout.add(GolangAlert, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 30, 250, 200));
+
+        GLPicture.setIcon(new javax.swing.ImageIcon(getClass().getResource("/golang.png"))); // NOI18N
         DashboardLayout.add(GLPicture, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 220, 390, 290));
 
         CardLayoutPanel.add(DashboardLayout, "card2");
@@ -852,23 +890,60 @@ public class MainPage extends javax.swing.JFrame {
 
         CardLayoutPanel.add(AboutUsLayout, "card2");
 
-        NewPostLayout.setBackground(new java.awt.Color(255, 255, 255));
-        NewPostLayout.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("NEW POST");
-        NewPostLayout.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 270, -1, -1));
-
-        CardLayoutPanel.add(NewPostLayout, "card2");
-
         SearchLayout.setBackground(new java.awt.Color(255, 255, 255));
         SearchLayout.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel6.setText("Search");
-        SearchLayout.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 270, -1, -1));
+        Table.setBackground(new java.awt.Color(255, 255, 255));
+        Table.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Table.setForeground(new java.awt.Color(0, 0, 0));
+        Table.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "POSTCODE", "POSTTITLE", "POSTAUTHOR", "UPLOADDAY"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        Table.setToolTipText("");
+        Table.setFocusable(false);
+        Table.setGridColor(new java.awt.Color(255, 255, 255));
+        Table.setRowHeight(30);
+        Table.setSelectionForeground(new java.awt.Color(0, 0, 0));
+        Table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TableMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(Table);
+
+        SearchLayout.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 1120, 480));
+
+        ResultSearchLabel.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        ResultSearchLabel.setForeground(new java.awt.Color(51, 51, 51));
+        ResultSearchLabel.setText("Result for 'Search'");
+        SearchLayout.add(ResultSearchLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, -1, -1));
 
         CardLayoutPanel.add(SearchLayout, "card2");
 
@@ -1034,6 +1109,123 @@ public class MainPage extends javax.swing.JFrame {
 
         CardLayoutPanel.add(PageDetailLayout, "card2");
 
+        NewPostLayout.setBackground(new java.awt.Color(255, 255, 255));
+        NewPostLayout.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        CreatePostTitle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        CreatePostTitle.setForeground(new java.awt.Color(51, 51, 51));
+        CreatePostTitle.setText("Create Post");
+        CreatePostTitle.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(51, 51, 51)));
+        NewPostLayout.add(CreatePostTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, 440, -1));
+
+        InputImageTitle.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
+        InputImageTitle.setForeground(new java.awt.Color(0, 0, 0));
+        InputImageTitle.setText("IMG");
+        NewPostLayout.add(InputImageTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 230, 50, -1));
+
+        ChooseImageBtn.setEditable(false);
+        ChooseImageBtn.setBackground(new java.awt.Color(255, 255, 255));
+        ChooseImageBtn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        ChooseImageBtn.setForeground(new java.awt.Color(204, 204, 204));
+        ChooseImageBtn.setText("    UPLOAD IMG");
+        ChooseImageBtn.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(204, 204, 204)));
+        ChooseImageBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ChooseImageBtnMouseClicked(evt);
+            }
+        });
+        NewPostLayout.add(ChooseImageBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 250, 380, 50));
+
+        LabelTitleInput.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
+        LabelTitleInput.setForeground(new java.awt.Color(0, 0, 0));
+        LabelTitleInput.setText("Title");
+        NewPostLayout.add(LabelTitleInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 50, -1));
+
+        InputPostTitle.setBackground(new java.awt.Color(255, 255, 255));
+        InputPostTitle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        InputPostTitle.setForeground(new java.awt.Color(0, 0, 0));
+        InputPostTitle.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(204, 204, 204)));
+        InputPostTitle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                InputPostTitleActionPerformed(evt);
+            }
+        });
+        NewPostLayout.add(InputPostTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 380, 50));
+
+        DescriptionTitle.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
+        DescriptionTitle.setForeground(new java.awt.Color(0, 0, 0));
+        DescriptionTitle.setText("Description");
+        NewPostLayout.add(DescriptionTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 120, 110, -1));
+
+        jScrollPane3.setBorder(null);
+
+        InputPostDescription.setBackground(new java.awt.Color(255, 255, 255));
+        InputPostDescription.setColumns(20);
+        InputPostDescription.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        InputPostDescription.setForeground(new java.awt.Color(0, 0, 0));
+        InputPostDescription.setRows(5);
+        InputPostDescription.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(204, 204, 204)));
+        jScrollPane3.setViewportView(InputPostDescription);
+
+        NewPostLayout.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 140, 660, 340));
+
+        Line1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        NewPostLayout.add(Line1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 490, 400, 20));
+
+        YourChoseImage.setText("Your Image ");
+        NewPostLayout.add(YourChoseImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 320, 380, 170));
+
+        ClearPostBtn.setBorder(null);
+        ClearPostBtn.setText("ClearPost");
+        ClearPostBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        ClearPostBtn.setkBackGroundColor(new java.awt.Color(0, 204, 204));
+        ClearPostBtn.setkEndColor(new java.awt.Color(0, 204, 204));
+        ClearPostBtn.setkHoverEndColor(new java.awt.Color(0, 255, 255));
+        ClearPostBtn.setkHoverForeGround(new java.awt.Color(255, 255, 255));
+        ClearPostBtn.setkHoverStartColor(new java.awt.Color(0, 204, 204));
+        ClearPostBtn.setkSelectedColor(new java.awt.Color(0, 204, 204));
+        ClearPostBtn.setkStartColor(new java.awt.Color(0, 204, 204));
+        ClearPostBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ClearPostBtnActionPerformed(evt);
+            }
+        });
+        NewPostLayout.add(ClearPostBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 530, 130, -1));
+
+        UpPostBtn.setBorder(null);
+        UpPostBtn.setText("UpPost");
+        UpPostBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        UpPostBtn.setkBackGroundColor(new java.awt.Color(255, 0, 0));
+        UpPostBtn.setkEndColor(new java.awt.Color(255, 0, 0));
+        UpPostBtn.setkHoverEndColor(new java.awt.Color(255, 153, 153));
+        UpPostBtn.setkHoverForeGround(new java.awt.Color(255, 255, 255));
+        UpPostBtn.setkHoverStartColor(new java.awt.Color(255, 0, 0));
+        UpPostBtn.setkSelectedColor(new java.awt.Color(255, 0, 0));
+        UpPostBtn.setkStartColor(new java.awt.Color(255, 0, 0));
+        UpPostBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpPostBtnActionPerformed(evt);
+            }
+        });
+        NewPostLayout.add(UpPostBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 530, 130, -1));
+
+        EmptyPostDesWarning.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        EmptyPostDesWarning.setForeground(new java.awt.Color(255, 0, 0));
+        EmptyPostDesWarning.setText("Please insert your post description!");
+        NewPostLayout.add(EmptyPostDesWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 480, 240, 20));
+
+        EmptyPostTitleWarning.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        EmptyPostTitleWarning.setForeground(new java.awt.Color(255, 0, 0));
+        EmptyPostTitleWarning.setText("Please insert your post title!");
+        NewPostLayout.add(EmptyPostTitleWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 190, 200, 20));
+
+        EmptyPostImgWarning.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        EmptyPostImgWarning.setForeground(new java.awt.Color(255, 0, 0));
+        EmptyPostImgWarning.setText("Please choose your post image!");
+        NewPostLayout.add(EmptyPostImgWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, 210, 20));
+
+        CardLayoutPanel.add(NewPostLayout, "card2");
+
         FramePanel.add(CardLayoutPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, -1, 650));
 
         getContentPane().add(FramePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 860));
@@ -1042,10 +1234,7 @@ public class MainPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void SearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBtnActionPerformed
-        CardLayoutPanel.removeAll();
-        CardLayoutPanel.add(SearchLayout);
-        CardLayoutPanel.repaint();
-        CardLayoutPanel.revalidate();
+        changePage(CardLayoutPanel, SearchLayout);
     }//GEN-LAST:event_SearchBtnActionPerformed
 
     private void NewPostPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewPostPanelMouseEntered
@@ -1057,10 +1246,11 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_NewPostPanelMouseExited
 
     private void NewPostPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewPostPanelMouseClicked
-        CardLayoutPanel.removeAll();
-        CardLayoutPanel.add(NewPostLayout);
-        CardLayoutPanel.repaint();
-        CardLayoutPanel.revalidate();
+        changePage(CardLayoutPanel, NewPostLayout);
+        InputPostDescription.setLineWrap(true);
+        InputPostDescription.setWrapStyleWord(true);
+        
+        
     }//GEN-LAST:event_NewPostPanelMouseClicked
 
     private void NewPostLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewPostLabelMouseEntered
@@ -1072,10 +1262,11 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_NewPostLabelMouseExited
 
     private void NewPostLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewPostLabelMouseClicked
-        CardLayoutPanel.removeAll();
-        CardLayoutPanel.add(NewPostLayout);
-        CardLayoutPanel.repaint();
-        CardLayoutPanel.revalidate();
+        changePage(CardLayoutPanel, NewPostLayout);
+        InputPostDescription.setLineWrap(true);
+        InputPostDescription.setWrapStyleWord(true);
+        
+        
     }//GEN-LAST:event_NewPostLabelMouseClicked
 
     private void DashboardPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DashboardPanelMouseEntered
@@ -1087,10 +1278,27 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_DashboardPanelMouseExited
 
     private void DashboardPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DashboardPanelMouseClicked
-        CardLayoutPanel.removeAll();
-        CardLayoutPanel.add(DashboardLayout);
-        CardLayoutPanel.repaint();
-        CardLayoutPanel.revalidate();
+        changePage(CardLayoutPanel, DashboardLayout);
+        if (PostState1.getText().equals("Pending")) {
+            PostState1.setForeground(new Color(51,153,0));
+        }else{
+            PostState1.setForeground(new Color(255, 0, 0));
+        }
+        if (PostState2.getText().equals("Pending")) {
+            PostState2.setForeground(new Color(51,153,0));
+        }else{
+            PostState2.setForeground(new Color(255, 0, 0));
+        }
+        if (PostState3.getText().equals("Pending")) {
+            PostState3.setForeground(new Color(51,153,0));
+        }else{
+            PostState3.setForeground(new Color(255, 0, 0));
+        }
+        if (PostState4.getText().equals("Pending")) {
+            PostState4.setForeground(new Color(51,153,0));
+        }else{
+            PostState4.setForeground(new Color(255, 0, 0));
+        }
     }//GEN-LAST:event_DashboardPanelMouseClicked
 
     private void DashboardLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DashboardLabelMouseEntered
@@ -1102,10 +1310,29 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_DashboardLabelMouseExited
 
     private void DashboardLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DashboardLabelMouseClicked
-        CardLayoutPanel.removeAll();
-        CardLayoutPanel.add(DashboardLayout);
-        CardLayoutPanel.repaint();
-        CardLayoutPanel.revalidate();
+        changePage(CardLayoutPanel, DashboardLayout);
+        if (PostState1.getText().equals("Pending")) {
+            PostState1.setForeground(new Color(51,153,0));
+        }else{
+            PostState1.setForeground(new Color(255, 0, 0));
+        }
+        if (PostState2.getText().equals("Pending")) {
+            PostState2.setForeground(new Color(51,153,0));
+        }else{
+            PostState2.setForeground(new Color(255, 0, 0));
+        }
+        if (PostState3.getText().equals("Pending")) {
+            PostState3.setForeground(new Color(51,153,0));
+        }else{
+            PostState3.setForeground(new Color(255, 0, 0));
+        }
+        if (PostState4.getText().equals("Pending")) {
+            PostState4.setForeground(new Color(51,153,0));
+        }else{
+            PostState4.setForeground(new Color(255, 0, 0));
+        }
+        
+        
     }//GEN-LAST:event_DashboardLabelMouseClicked
 
     private void AboutUsPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AboutUsPanelMouseEntered
@@ -1117,10 +1344,8 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_AboutUsPanelMouseExited
 
     private void AboutUsPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AboutUsPanelMouseClicked
-        CardLayoutPanel.removeAll();
-        CardLayoutPanel.add(AboutUsLayout);
-        CardLayoutPanel.repaint();
-        CardLayoutPanel.revalidate();
+        changePage(CardLayoutPanel, AboutUsLayout);
+        
     }//GEN-LAST:event_AboutUsPanelMouseClicked
 
     private void AboutUsLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AboutUsLabelMouseEntered
@@ -1131,10 +1356,7 @@ public class MainPage extends javax.swing.JFrame {
         AboutUsPanel.setBackground(new Color(255, 255, 255));    }//GEN-LAST:event_AboutUsLabelMouseExited
 
     private void AboutUsLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AboutUsLabelMouseClicked
-        CardLayoutPanel.removeAll();
-        CardLayoutPanel.add(AboutUsLayout);
-        CardLayoutPanel.repaint();
-        CardLayoutPanel.revalidate();
+        changePage(CardLayoutPanel, AboutUsLayout);
     }//GEN-LAST:event_AboutUsLabelMouseClicked
 
     private void LogoutPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoutPanelMouseEntered
@@ -1195,10 +1417,17 @@ public class MainPage extends javax.swing.JFrame {
             setImagePage("/WindowsB.png", Thumbnail2);
 
         } catch (Exception e) {
+            e.getStackTrace();
         }
+
+        dtm = (DefaultTableModel) Table.getModel();
 
         setWelcomeLabel("Tricky");
         CommentPanel.setVisible(false);
+        
+        EmptyPostTitleWarning.setVisible(false);
+        EmptyPostDesWarning.setVisible(false);
+        EmptyPostImgWarning.setVisible(false);
     }//GEN-LAST:event_formWindowOpened
 
     private void ProfileLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProfileLabelMouseClicked
@@ -1215,17 +1444,11 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_ProfileLabelMouseExited
 
     private void LogoLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoLabelMouseClicked
-        CardLayoutPanel.removeAll();
-        CardLayoutPanel.add(HomeLayout);
-        CardLayoutPanel.repaint();
-        CardLayoutPanel.revalidate();
+        changePage(CardLayoutPanel, HomeLayout);
     }//GEN-LAST:event_LogoLabelMouseClicked
 
     private void LabelPost1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelPost1MouseClicked
-        CardLayoutPanel.removeAll();
-        CardLayoutPanel.add(PageDetailLayout);
-        CardLayoutPanel.repaint();
-        CardLayoutPanel.revalidate();
+        changePage(CardLayoutPanel, PageDetailLayout);
         try {
             fillToDetailPage("/SunriseLake.png", PageDetailImage, "");
         } catch (IOException ex) {
@@ -1234,10 +1457,7 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_LabelPost1MouseClicked
 
     private void LabelPost2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelPost2MouseClicked
-        CardLayoutPanel.removeAll();
-        CardLayoutPanel.add(PageDetailLayout);
-        CardLayoutPanel.repaint();
-        CardLayoutPanel.revalidate();
+        changePage(CardLayoutPanel, PageDetailLayout);
         try {
             fillToDetailPage("/WindowsB.png", PageDetailImage, "");
         } catch (IOException ex) {
@@ -1316,7 +1536,7 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_EditBtn1MouseExited
 
     private void EditBtn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBtn1MouseClicked
-        // TODO add your handling code here:
+        changePage(CardLayoutPanel, NewPostLayout);
     }//GEN-LAST:event_EditBtn1MouseClicked
 
     private void EditBackground1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBackground1MouseEntered
@@ -1328,7 +1548,7 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_EditBackground1MouseExited
 
     private void EditBackground1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBackground1MouseClicked
-        // TODO add your handling code here:
+        changePage(CardLayoutPanel, NewPostLayout);
     }//GEN-LAST:event_EditBackground1MouseClicked
 
     private void DeleteBackground1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBackground1MouseEntered
@@ -1376,7 +1596,7 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_EditBackground2MouseExited
 
     private void EditBackground2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBackground2MouseClicked
-        // TODO add your handling code here:
+        changePage(CardLayoutPanel, NewPostLayout);
     }//GEN-LAST:event_EditBackground2MouseClicked
 
     private void EditBtn2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBtn2MouseEntered
@@ -1388,7 +1608,7 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_EditBtn2MouseExited
 
     private void EditBtn2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBtn2MouseClicked
-        // TODO add your handling code here:
+        changePage(CardLayoutPanel, NewPostLayout);
     }//GEN-LAST:event_EditBtn2MouseClicked
 
     private void EditBackground3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBackground3MouseEntered
@@ -1400,7 +1620,7 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_EditBackground3MouseExited
 
     private void EditBackground3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBackground3MouseClicked
-        // TODO add your handling code here:
+        changePage(CardLayoutPanel, NewPostLayout);
     }//GEN-LAST:event_EditBackground3MouseClicked
 
     private void EditBtn3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBtn3MouseEntered
@@ -1412,7 +1632,7 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_EditBtn3MouseExited
 
     private void EditBtn3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBtn3MouseClicked
-        // TODO add your handling code here:
+        changePage(CardLayoutPanel, NewPostLayout);
     }//GEN-LAST:event_EditBtn3MouseClicked
 
     private void DeleteBackground3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBackground3MouseEntered
@@ -1424,7 +1644,7 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_DeleteBackground3MouseExited
 
     private void DeleteBackground3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBackground3MouseClicked
-        // TODO add your handling code here:
+        changePage(CardLayoutPanel, NewPostLayout);
     }//GEN-LAST:event_DeleteBackground3MouseClicked
 
     private void DeleteBtn3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBtn3MouseEntered
@@ -1461,7 +1681,7 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_EditBtn4MouseExited
 
     private void EditBtn4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBtn4MouseClicked
-        // TODO add your handling code here:
+        changePage(CardLayoutPanel, NewPostLayout);
     }//GEN-LAST:event_EditBtn4MouseClicked
 
     private void DeleteBackground4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBackground4MouseEntered
@@ -1497,121 +1717,65 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_BackBtnMouseClicked
 
     private void PostTitle1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PostTitle1MouseClicked
-        CardLayoutPanel.removeAll();
-        CardLayoutPanel.add(PageDetailLayout);
-        CardLayoutPanel.repaint();
-        CardLayoutPanel.revalidate();
+        changePage(CardLayoutPanel, PageDetailLayout);
     }//GEN-LAST:event_PostTitle1MouseClicked
 
     private void PostTitle2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PostTitle2MouseClicked
-        CardLayoutPanel.removeAll();
-        CardLayoutPanel.add(PageDetailLayout);
-        CardLayoutPanel.repaint();
-        CardLayoutPanel.revalidate();
+        changePage(CardLayoutPanel, PageDetailLayout);
     }//GEN-LAST:event_PostTitle2MouseClicked
 
     private void PostTitle3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PostTitle3MouseClicked
-        CardLayoutPanel.removeAll();
-        CardLayoutPanel.add(PageDetailLayout);
-        CardLayoutPanel.repaint();
-        CardLayoutPanel.revalidate();
+        changePage(CardLayoutPanel, PageDetailLayout);
     }//GEN-LAST:event_PostTitle3MouseClicked
 
     private void PostTitle4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PostTitle4MouseClicked
-        CardLayoutPanel.removeAll();
-        CardLayoutPanel.add(PageDetailLayout);
-        CardLayoutPanel.repaint();
-        CardLayoutPanel.revalidate();
+        changePage(CardLayoutPanel, PageDetailLayout);
     }//GEN-LAST:event_PostTitle4MouseClicked
 
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void TableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableMouseClicked
+        if (evt.getClickCount() == 2) {
+            changePage(CardLayoutPanel, PageDetailLayout);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
+        //dua thong tin len trang detail
+    }//GEN-LAST:event_TableMouseClicked
+
+    private void InputPostTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InputPostTitleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_InputPostTitleActionPerformed
+
+    private void SearchInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SearchInputActionPerformed
+
+    private void ChooseImageBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ChooseImageBtnMouseClicked
+        ChooseImage();
+    }//GEN-LAST:event_ChooseImageBtnMouseClicked
+
+    private void UpPostBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpPostBtnActionPerformed
+        if (InputPostTitle.getText().equals("")) {
+            EmptyPostTitleWarning.setVisible(true);
+        }else{
+            EmptyPostTitleWarning.setVisible(false);  
+        }
+        if (InputPostDescription.getText().equals("")) {
+            EmptyPostDesWarning.setVisible(true);
+        }else{
+            EmptyPostDesWarning.setVisible(false);
+        }
+        if (imagePath.equals("")) {
+            EmptyPostImgWarning.setVisible(true);
+        }else{
+            EmptyPostImgWarning.setVisible(false);
+        }
+        
+    }//GEN-LAST:event_UpPostBtnActionPerformed
+
+    private void ClearPostBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearPostBtnActionPerformed
+        clearCreatePostPage();
+    }//GEN-LAST:event_ClearPostBtnActionPerformed
+
+    public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainPage().setVisible(true);
@@ -1620,28 +1784,11 @@ public class MainPage extends javax.swing.JFrame {
     }
 
     int colorCount = 0;
+    DefaultTableModel dtm;
+    String imagePath = ""; //duong dan cua hinh duoc chon
 
-// code upgrading    
-//    public void getpicture() throws IOException {
-//        try {
-//            URL url = getClass().getResource("/WindowsB.png");
-//            File file = new File(url.getPath());
-//            //File file = new File("C:\\Users\\ASUS\\Downloads\\ma.png");
-//            Image image = ImageIO.read(file);
-//            Thumbnail2.setText("");
-//            int height = Thumbnail2.getHeight();
-//            int width = Thumbnail2.getWidth();
-//            Thumbnail2.setIcon(new ImageIcon(image.getScaledInstance(width, height, 0)));
-//
-//           String imagePath = file.getAbsolutePath();
-//        } catch (Exception e) {
-//            e.getStackTrace();
-//        }
-//
-//    }
     public void fillToDetailPage(String imagePath, JLabel imageJLabel, String pageContent) throws IOException {
         setImagePage(imagePath, imageJLabel);
-
         PageDetailContent.setText("");
 
     }
@@ -1662,7 +1809,7 @@ public class MainPage extends javax.swing.JFrame {
         }
 
     }
-    
+
     public void close() {
         WindowEvent closeWindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
@@ -1673,17 +1820,60 @@ public class MainPage extends javax.swing.JFrame {
         WelcomeLabel.setText(stringWelcome);
     }
 
+    //Method chon anh
+    public void ChooseImage() {
+        try {
+            JFileChooser jfc = new JFileChooser();
+            jfc.showOpenDialog(null);
+            File file = jfc.getSelectedFile();
+            Image image = ImageIO.read(file);
+            YourChoseImage.setText("");
+            int height = YourChoseImage.getHeight();
+            int width = YourChoseImage.getWidth();
+            YourChoseImage.setIcon(new ImageIcon(image.getScaledInstance(width, height, 0)));
+            String path = file.getAbsolutePath();
+            if (!path.isEmpty()) {
+                imagePath = path;
 
+            }
+            System.out.println(imagePath);
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+    }
+
+    //method chuyen trang
+    public void changePage(JPanel layoutPanel, JPanel pagePanel) {
+        layoutPanel.removeAll();
+        layoutPanel.add(pagePanel);
+        layoutPanel.repaint();
+        layoutPanel.revalidate();
+    }
+
+    //clear thong tin khi chuyen trang
+    public void clearCreatePostPage(){
+        InputPostTitle.setText("");
+        InputPostDescription.setText("");
+        imagePath = "";
+        YourChoseImage.setIcon(null);
+        EmptyPostTitleWarning.setVisible(false);
+        EmptyPostDesWarning.setVisible(false);
+        EmptyPostImgWarning.setVisible(false);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AboutUsLabel;
     private javax.swing.JPanel AboutUsLayout;
     private javax.swing.JPanel AboutUsPanel;
     private javax.swing.JLabel BackBtn;
     private javax.swing.JPanel CardLayoutPanel;
+    private javax.swing.JTextField ChooseImageBtn;
+    private com.k33ptoo.components.KButton ClearPostBtn;
     private com.k33ptoo.components.KButton CommentBtn;
     private javax.swing.JPanel CommentPanel;
     private javax.swing.JTable CommentTable;
     private com.k33ptoo.components.KButton ConfirmBtn;
+    private javax.swing.JLabel CreatePostTitle;
     private javax.swing.JLabel DashBoardTitle;
     private javax.swing.JLabel DashboardLabel;
     private javax.swing.JPanel DashboardLayout;
@@ -1696,6 +1886,7 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel DeleteBtn2;
     private javax.swing.JLabel DeleteBtn3;
     private javax.swing.JLabel DeleteBtn4;
+    private javax.swing.JLabel DescriptionTitle;
     private javax.swing.JPanel EditBackground1;
     private javax.swing.JPanel EditBackground2;
     private javax.swing.JPanel EditBackground3;
@@ -1704,6 +1895,9 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel EditBtn2;
     private javax.swing.JLabel EditBtn3;
     private javax.swing.JLabel EditBtn4;
+    private javax.swing.JLabel EmptyPostDesWarning;
+    private javax.swing.JLabel EmptyPostImgWarning;
+    private javax.swing.JLabel EmptyPostTitleWarning;
     private javax.swing.JLabel ExitLabel;
     private javax.swing.JPanel ExitPanel;
     private com.k33ptoo.components.KGradientPanel FramePanel;
@@ -1712,9 +1906,14 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel GolangAlert;
     private javax.swing.JPanel HomeLayout;
     private javax.swing.JTextField InputComment;
+    private javax.swing.JLabel InputImageTitle;
+    private javax.swing.JTextArea InputPostDescription;
+    private javax.swing.JTextField InputPostTitle;
     private javax.swing.JLabel LabelPost1;
     private javax.swing.JLabel LabelPost2;
+    private javax.swing.JLabel LabelTitleInput;
     private com.k33ptoo.components.KButton LikeBtn;
+    private javax.swing.JLabel Line1;
     private javax.swing.JLabel LogoLabel;
     private javax.swing.JLabel LogoutLabel;
     private javax.swing.JPanel LogoutPanel;
@@ -1749,23 +1948,27 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel PostTitle3;
     private javax.swing.JLabel PostTitle4;
     private javax.swing.JLabel ProfileLabel;
+    private javax.swing.JLabel ResultSearchLabel;
     private javax.swing.JPanel SayWelcome;
     private com.k33ptoo.components.KButton SearchBtn;
     private javax.swing.JTextField SearchInput;
     private javax.swing.JPanel SearchLayout;
+    private javax.swing.JTable Table;
     private javax.swing.JLabel Thumbnail1;
     private javax.swing.JLabel Thumbnail2;
     private javax.swing.JLabel TopicMainPost;
     private javax.swing.JLabel TotalOfPostLabel;
+    private com.k33ptoo.components.KButton UpPostBtn;
     private javax.swing.JLabel UploadDayPost1;
     private javax.swing.JLabel UploadDayPost2;
     private javax.swing.JLabel UploadDayPost3;
     private javax.swing.JLabel UploadDayPost4;
     private javax.swing.JLabel WelcomeLabel;
+    private javax.swing.JLabel YourChoseImage;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }
