@@ -49,7 +49,7 @@ public class MainPage extends javax.swing.JFrame {
     }
     
     public void initComp(){
-        initTable();
+       
     }
 
     /**
@@ -1475,7 +1475,7 @@ public class MainPage extends javax.swing.JFrame {
 
         dtm = (DefaultTableModel) Table.getModel();
 
-        setWelcomeLabel("Tricky");
+        setWelcomeLabel();
 
         CommentPanel.setVisible(false);
         
