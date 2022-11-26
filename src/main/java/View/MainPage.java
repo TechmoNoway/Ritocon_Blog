@@ -5,6 +5,7 @@
 package View;
 
 
+import Controller.LoginDTO;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -17,6 +18,11 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import Controller.*;
+import Model.*;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 
 /**
@@ -24,14 +30,23 @@ import javax.swing.JLabel;
  * @author ASUS
  */
 public class MainPage extends javax.swing.JFrame {
-
+    LoginDTO logindto = new LoginDTO();
+    ArticleDTO articledto = new ArticleDTO();
+    CommentDTO commentdto = new CommentDTO();
+    DefaultTableModel tblModel;
+    int id_article =0;
+    int page = 1;
     /**
      * Creates new form MainPage
      */
     public MainPage() {
         initComponents();
         setLocationRelativeTo(null);
-
+        initComp();
+    }
+    
+    public void initComp(){
+        initTable();
     }
 
     /**
@@ -43,19 +58,18 @@ public class MainPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jOptionPane1 = new javax.swing.JOptionPane();
         FramePanel = new com.k33ptoo.components.KGradientPanel();
         MenuLine1 = new javax.swing.JPanel();
         SayWelcome = new javax.swing.JPanel();
         WelcomeLabel = new javax.swing.JLabel();
-
         LogoLabel = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         ExitPanel = new javax.swing.JPanel();
-        ExitLabel = new javax.swing.JLabel();
         LogoutPanel = new javax.swing.JPanel();
-        LogoutLabel = new javax.swing.JLabel();
         ProfileLabel = new javax.swing.JLabel();
-
+        LogoutLabel = new javax.swing.JLabel();
+        ExitLabel = new javax.swing.JLabel();
         MenuLine2 = new javax.swing.JPanel();
         DashboardPanel = new javax.swing.JPanel();
         DashboardLabel = new javax.swing.JLabel();
@@ -76,7 +90,6 @@ public class MainPage extends javax.swing.JFrame {
         Thumbnail1 = new javax.swing.JLabel();
         LabelPost1 = new javax.swing.JLabel();
         DashboardLayout = new javax.swing.JPanel();
-
         PostD1 = new javax.swing.JPanel();
         PostImage1 = new javax.swing.JLabel();
         PostState1 = new javax.swing.JLabel();
@@ -120,7 +133,8 @@ public class MainPage extends javax.swing.JFrame {
         NextBtn = new javax.swing.JLabel();
         GolangAlert = new javax.swing.JLabel();
         GLPicture = new javax.swing.JLabel();
-
+        jButton4 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         AboutUsLayout = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         NewPostLayout = new javax.swing.JPanel();
@@ -128,19 +142,18 @@ public class MainPage extends javax.swing.JFrame {
         SearchLayout = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         PageDetailLayout = new javax.swing.JPanel();
-
         CommentPanel = new javax.swing.JPanel();
         ConfirmBtn = new com.k33ptoo.components.KButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         CommentTable = new javax.swing.JTable();
         InputComment = new javax.swing.JTextField();
         GoBack = new javax.swing.JLabel();
-
         PageDetailTitle = new javax.swing.JLabel();
         PageDetailImage = new javax.swing.JLabel();
         PageDetailContent = new javax.swing.JLabel();
         CommentBtn = new com.k33ptoo.components.KButton();
         LikeBtn = new com.k33ptoo.components.KButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -156,7 +169,6 @@ public class MainPage extends javax.swing.JFrame {
         FramePanel.setkEndColor(new java.awt.Color(255, 255, 255));
         FramePanel.setkStartColor(new java.awt.Color(255, 255, 255));
         FramePanel.setPreferredSize(new java.awt.Dimension(1920, 1080));
-
         FramePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         MenuLine1.setBackground(new java.awt.Color(0, 0, 0));
@@ -170,9 +182,7 @@ public class MainPage extends javax.swing.JFrame {
         WelcomeLabel.setFont(new java.awt.Font("Segoe Script", 0, 20)); // NOI18N
         WelcomeLabel.setForeground(new java.awt.Color(255, 255, 255));
         WelcomeLabel.setText("Welcome");
-
         SayWelcome.add(WelcomeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 200, 40));
-
 
         MenuLine1.add(SayWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 80));
 
@@ -184,13 +194,13 @@ public class MainPage extends javax.swing.JFrame {
                 LogoLabelMouseClicked(evt);
             }
         });
-        MenuLine1.add(LogoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 20, -1, -1));
+        MenuLine1.add(LogoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 30, -1, -1));
 
         jSeparator1.setForeground(new java.awt.Color(102, 102, 102));
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jSeparator1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 3, 0, 0, new java.awt.Color(102, 102, 102)));
         jSeparator1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
-        MenuLine1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1430, 10, 10, 60));
+        MenuLine1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1230, 10, 10, 60));
 
         ExitPanel.setBackground(new java.awt.Color(0, 0, 0));
         ExitPanel.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -205,23 +215,6 @@ public class MainPage extends javax.swing.JFrame {
             }
         });
         ExitPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        ExitLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        ExitLabel.setForeground(new java.awt.Color(255, 255, 255));
-        ExitLabel.setText("Exit");
-        ExitLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ExitLabelMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                ExitLabelMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                ExitLabelMouseExited(evt);
-            }
-        });
-        ExitPanel.add(ExitLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
-
         MenuLine1.add(ExitPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1450, 0, 80, 80));
 
         LogoutPanel.setBackground(new java.awt.Color(0, 0, 0));
@@ -237,26 +230,7 @@ public class MainPage extends javax.swing.JFrame {
             }
         });
         LogoutPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        LogoutLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        LogoutLabel.setForeground(new java.awt.Color(255, 255, 255));
-        LogoutLabel.setText("Logout");
-        LogoutLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                LogoutLabelMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                LogoutLabelMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                LogoutLabelMouseExited(evt);
-            }
-        });
-
-        LogoutPanel.add(LogoutLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
-
         MenuLine1.add(LogoutPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 0, 100, 80));
-
 
         ProfileLabel.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         ProfileLabel.setForeground(new java.awt.Color(51, 51, 51));
@@ -272,9 +246,39 @@ public class MainPage extends javax.swing.JFrame {
                 ProfileLabelMouseExited(evt);
             }
         });
+        MenuLine1.add(ProfileLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 20, -1, -1));
 
-        MenuLine1.add(ProfileLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 20, -1, -1));
+        LogoutLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        LogoutLabel.setForeground(new java.awt.Color(255, 255, 255));
+        LogoutLabel.setText("Logout");
+        LogoutLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LogoutLabelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                LogoutLabelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                LogoutLabelMouseExited(evt);
+            }
+        });
+        MenuLine1.add(LogoutLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 30, -1, -1));
 
+        ExitLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        ExitLabel.setForeground(new java.awt.Color(255, 255, 255));
+        ExitLabel.setText("Exit");
+        ExitLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ExitLabelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ExitLabelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ExitLabelMouseExited(evt);
+            }
+        });
+        MenuLine1.add(ExitLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1250, 30, -1, -1));
 
         FramePanel.add(MenuLine1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
         MenuLine1.getAccessibleContext().setAccessibleName("");
@@ -313,14 +317,12 @@ public class MainPage extends javax.swing.JFrame {
         });
         DashboardPanel.add(DashboardLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-
         MenuLine2.add(DashboardPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 120, 40));
 
         SearchInput.setBackground(new java.awt.Color(235, 235, 235));
         SearchInput.setForeground(new java.awt.Color(0, 0, 0));
         SearchInput.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 1));
-        MenuLine2.add(SearchInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(1270, 50, 210, 40));
-
+        MenuLine2.add(SearchInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 40, 210, 40));
 
         SearchBtn.setText("Search");
         SearchBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -337,9 +339,7 @@ public class MainPage extends javax.swing.JFrame {
                 SearchBtnActionPerformed(evt);
             }
         });
-
-        MenuLine2.add(SearchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 50, 110, 40));
-
+        MenuLine2.add(SearchBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 40, 110, 40));
 
         NewPostPanel.setBackground(new java.awt.Color(255, 255, 255));
         NewPostPanel.setForeground(new java.awt.Color(255, 255, 255));
@@ -404,11 +404,9 @@ public class MainPage extends javax.swing.JFrame {
         });
         AboutUsPanel.add(AboutUsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-
         MenuLine2.add(AboutUsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 50, 100, 40));
 
         FramePanel.add(MenuLine2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, -1, -1));
-
 
         CardLayoutPanel.setBackground(new java.awt.Color(255, 255, 255));
         CardLayoutPanel.setPreferredSize(new java.awt.Dimension(1920, 90));
@@ -427,7 +425,6 @@ public class MainPage extends javax.swing.JFrame {
         MainPostLabelPanel.add(TopicMainPost, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
 
         MainLabelPost.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
-
         MainLabelPost.setForeground(new java.awt.Color(0, 0, 0));
         MainLabelPost.setText("<html> Picture about a snow mountain  very fantastic for everybody </html>");
         MainPostLabelPanel.add(MainLabelPost, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 350, 130));
@@ -435,19 +432,16 @@ public class MainPage extends javax.swing.JFrame {
         HomeLayout.add(MainPostLabelPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 370, 430, 210));
 
         MainThumbnail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/thumb2.png"))); // NOI18N
-
-        HomeLayout.add(MainThumbnail, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 600, 440));
+        HomeLayout.add(MainThumbnail, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 600, 440));
 
         LabelPost2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         LabelPost2.setForeground(new java.awt.Color(0, 0, 0));
-
         LabelPost2.setText("<html>Windows 11 have some improvement about the performence of some game in many platform  </html>");
         LabelPost2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 LabelPost2MouseClicked(evt);
             }
         });
-
         HomeLayout.add(LabelPost2, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 410, 560, 70));
 
         Thumbnail2.setText("Image 2 here");
@@ -458,22 +452,18 @@ public class MainPage extends javax.swing.JFrame {
 
         LabelPost1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         LabelPost1.setForeground(new java.awt.Color(0, 0, 0));
-
         LabelPost1.setText("<html>Sunrise Lake is now available for tourise who want to checkin </html>");
         LabelPost1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 LabelPost1MouseClicked(evt);
             }
         });
-
         HomeLayout.add(LabelPost1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 180, 560, 70));
-
 
         CardLayoutPanel.add(HomeLayout, "card2");
 
         DashboardLayout.setBackground(new java.awt.Color(255, 255, 255));
         DashboardLayout.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
 
         PostD1.setBackground(new java.awt.Color(255, 255, 255));
         PostD1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(220, 220, 220)));
@@ -834,7 +824,7 @@ public class MainPage extends javax.swing.JFrame {
         DashBoardTitle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         DashBoardTitle.setForeground(new java.awt.Color(51, 51, 51));
         DashBoardTitle.setText("USERNAME + DASHBOARD");
-        DashboardLayout.add(DashBoardTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, -1, -1));
+        DashboardLayout.add(DashBoardTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 30, 600, -1));
 
         TotalOfPostLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         TotalOfPostLabel.setText("Total Post Insert Here");
@@ -867,13 +857,28 @@ public class MainPage extends javax.swing.JFrame {
         DashboardLayout.add(GolangAlert, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 30, 250, 200));
         DashboardLayout.add(GLPicture, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 220, 390, 290));
 
+        jButton4.setText("Prev");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        DashboardLayout.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, -1, -1));
+
+        jButton6.setText("Next");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        DashboardLayout.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, -1, -1));
+
         CardLayoutPanel.add(DashboardLayout, "card2");
 
         AboutUsLayout.setBackground(new java.awt.Color(255, 255, 255));
         AboutUsLayout.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("We are a coder team with 4 people and we hope enjoy using our app ");
         AboutUsLayout.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, -1, 150));
@@ -884,7 +889,6 @@ public class MainPage extends javax.swing.JFrame {
         NewPostLayout.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("NEW POST");
         NewPostLayout.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 270, -1, -1));
@@ -904,12 +908,10 @@ public class MainPage extends javax.swing.JFrame {
         PageDetailLayout.setBackground(new java.awt.Color(255, 255, 255));
         PageDetailLayout.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-
         CommentPanel.setBackground(new java.awt.Color(0, 0, 0));
         CommentPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         ConfirmBtn.setBackground(new java.awt.Color(255, 255, 255));
-
         ConfirmBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 5, 1));
         ConfirmBtn.setText("Confirm");
         ConfirmBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -923,6 +925,11 @@ public class MainPage extends javax.swing.JFrame {
         ConfirmBtn.setkHoverStartColor(new java.awt.Color(204, 204, 204));
         ConfirmBtn.setkSelectedColor(new java.awt.Color(255, 255, 255));
         ConfirmBtn.setkStartColor(new java.awt.Color(255, 255, 255));
+        ConfirmBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ConfirmBtnMouseClicked(evt);
+            }
+        });
         ConfirmBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ConfirmBtnActionPerformed(evt);
@@ -1006,23 +1013,21 @@ public class MainPage extends javax.swing.JFrame {
                 GoBackMouseExited(evt);
             }
         });
-
         CommentPanel.add(GoBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 40));
 
-        PageDetailLayout.add(CommentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 110, 490, 490));
+        PageDetailLayout.add(CommentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 40, 490, 490));
 
         PageDetailTitle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         PageDetailTitle.setForeground(new java.awt.Color(51, 51, 51));
         PageDetailTitle.setText("Insert Page Title Here");
-        PageDetailLayout.add(PageDetailTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, 380, -1));
+        PageDetailLayout.add(PageDetailTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 380, -1));
 
         PageDetailImage.setText("Image Here");
-        PageDetailLayout.add(PageDetailImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 510, 490));
+        PageDetailLayout.add(PageDetailImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 500, 490));
 
         PageDetailContent.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         PageDetailContent.setText("<html>Content Here</html> ");
-        PageDetailLayout.add(PageDetailContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 130, 810, 430));
-
+        PageDetailLayout.add(PageDetailContent, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 70, 810, 350));
 
         CommentBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 5, 1));
         CommentBtn.setText("Comment");
@@ -1042,7 +1047,6 @@ public class MainPage extends javax.swing.JFrame {
                 CommentBtnActionPerformed(evt);
             }
         });
-
         PageDetailLayout.add(CommentBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 570, 120, 40));
 
         LikeBtn.setBackground(new java.awt.Color(0, 0, 0));
@@ -1066,14 +1070,19 @@ public class MainPage extends javax.swing.JFrame {
         });
         PageDetailLayout.add(LikeBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 570, 100, 40));
 
+        jButton1.setText("Comment");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        PageDetailLayout.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 420, -1, -1));
 
         CardLayoutPanel.add(PageDetailLayout, "card2");
 
         FramePanel.add(CardLayoutPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, -1, 650));
 
-
         getContentPane().add(FramePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 860));
-
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1143,6 +1152,8 @@ public class MainPage extends javax.swing.JFrame {
         CardLayoutPanel.add(DashboardLayout);
         CardLayoutPanel.repaint();
         CardLayoutPanel.revalidate();
+        articledto.getSingle(page);
+        fillToDashBoard();
     }//GEN-LAST:event_DashboardLabelMouseClicked
 
     private void AboutUsPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AboutUsPanelMouseEntered
@@ -1228,14 +1239,14 @@ public class MainPage extends javax.swing.JFrame {
 //Form Window Open
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
-            setImagePage("/SunriseLake.png", Thumbnail1);
-            setImagePage("/WindowsB.png", Thumbnail2);
+            articledto.setImagePage("/SunriseLake.png", Thumbnail1);
+            articledto.setImagePage("/WindowsB.png", Thumbnail2);
 
 
         } catch (Exception e) {
         }
 
-        setWelcomeLabel("Tricky");
+        setWelcomeLabel();
         CommentPanel.setVisible(false);
     }//GEN-LAST:event_formWindowOpened
 
@@ -1269,6 +1280,9 @@ public class MainPage extends javax.swing.JFrame {
 
         try {
             fillToDetailPage("/SunriseLake.png", PageDetailImage, "");
+            indentIntoArticle(10);
+            id_article = 11;
+            commentdto.fillTable(tblModel, String.valueOf(id_article));
         } catch (IOException ex) {
             Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1283,6 +1297,9 @@ public class MainPage extends javax.swing.JFrame {
 
         try {
             fillToDetailPage("/WindowsB.png", PageDetailImage, "");
+            indentIntoArticle(11);
+            id_article = 11;
+            commentdto.fillTable(tblModel, String.valueOf(id_article));
         } catch (IOException ex) {
             Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1385,7 +1402,8 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_DeleteBackground1MouseExited
 
     private void DeleteBackground1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBackground1MouseClicked
-        // TODO add your handling code here:
+        // TODO add your handling code here:string
+        deleteArticle(0);
     }//GEN-LAST:event_DeleteBackground1MouseClicked
 
     private void DeleteBackground2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBackground2MouseEntered
@@ -1398,6 +1416,7 @@ public class MainPage extends javax.swing.JFrame {
 
     private void DeleteBackground2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBackground2MouseClicked
         // TODO add your handling code here:
+        deleteArticle(1);
     }//GEN-LAST:event_DeleteBackground2MouseClicked
 
     private void DeleteBtn2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBtn2MouseEntered
@@ -1470,6 +1489,7 @@ public class MainPage extends javax.swing.JFrame {
 
     private void DeleteBackground3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBackground3MouseClicked
         // TODO add your handling code here:
+        deleteArticle(2);
     }//GEN-LAST:event_DeleteBackground3MouseClicked
 
     private void DeleteBtn3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBtn3MouseEntered
@@ -1519,6 +1539,7 @@ public class MainPage extends javax.swing.JFrame {
 
     private void DeleteBackground4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBackground4MouseClicked
         // TODO add your handling code here:
+        deleteArticle(3);
     }//GEN-LAST:event_DeleteBackground4MouseClicked
 
     private void DeleteBtn4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBtn4MouseEntered
@@ -1568,6 +1589,29 @@ public class MainPage extends javax.swing.JFrame {
         CardLayoutPanel.repaint();
         CardLayoutPanel.revalidate();
     }//GEN-LAST:event_PostTitle4MouseClicked
+
+    private void ConfirmBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ConfirmBtnMouseClicked
+        // TODO add your handling code here:
+        doComment();
+    }//GEN-LAST:event_ConfirmBtnMouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        CommentPanel.setVisible(true);
+        
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        articledto.nextDashBoard(page);
+        fillToDashBoard();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        articledto.prevDashBoard(page);
+        fillToDashBoard();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -1667,47 +1711,28 @@ public class MainPage extends javax.swing.JFrame {
 
 
     int colorCount = 0;
+    public void fillToDetailPage(String imagePath, JLabel imageJLabel, String pageContent) throws IOException {
+        articledto.setImagePage(imagePath, imageJLabel);
 
-// code upgrading    
-//    public void getpicture() throws IOException {
-//        try {
-//            URL url = getClass().getResource("/WindowsB.png");
-//            File file = new File(url.getPath());
-//            //File file = new File("C:\\Users\\ASUS\\Downloads\\ma.png");
-//            Image image = ImageIO.read(file);
-//            Thumbnail2.setText("");
-//            int height = Thumbnail2.getHeight();
-//            int width = Thumbnail2.getWidth();
-//            Thumbnail2.setIcon(new ImageIcon(image.getScaledInstance(width, height, 0)));
+        PageDetailContent.setText("");
+
+    }
 //
-//           String imagePath = file.getAbsolutePath();
+//    public void setImagePage(String imagePath, JLabel imageLabel) throws IOException {
+//        try {
+//
+//            URL url = getClass().getResource(imagePath); // them anh trang detail vao day
+//            File file = new File(url.getPath());
+//            Image image = ImageIO.read(file);
+//            imageLabel.setText("");
+//            int height = imageLabel.getHeight();
+//            int width = imageLabel.getWidth();
+//            imageLabel.setIcon(new ImageIcon(image.getScaledInstance(width, height, 0)));
 //        } catch (Exception e) {
 //            e.getStackTrace();
 //        }
 //
 //    }
-    public void fillToDetailPage(String imagePath, JLabel imageJLabel, String pageContent) throws IOException {
-        setImagePage(imagePath, imageJLabel);
-
-        PageDetailContent.setText("");
-
-    }
-
-    public void setImagePage(String imagePath, JLabel imageLabel) throws IOException {
-        try {
-
-            URL url = getClass().getResource(imagePath); // them anh trang detail vao day
-            File file = new File(url.getPath());
-            Image image = ImageIO.read(file);
-            imageLabel.setText("");
-            int height = imageLabel.getHeight();
-            int width = imageLabel.getWidth();
-            imageLabel.setIcon(new ImageIcon(image.getScaledInstance(width, height, 0)));
-        } catch (Exception e) {
-            e.getStackTrace();
-        }
-
-    }
 
     public void close() {
         WindowEvent closeWindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
@@ -1715,22 +1740,65 @@ public class MainPage extends javax.swing.JFrame {
     }
 
 
-    public void setWelcomeLabel(String username) {
-        String stringWelcome = "Welcome " + username;
+ public void setWelcomeLabel() {
+        String stringWelcome = "Welcome " + logindto.changeUsername();
         WelcomeLabel.setText(stringWelcome);
+        
     }
+
+public void indentIntoArticle(int i){
+    articledto.showDetail(PageDetailTitle, PageDetailContent, PageDetailImage, i);      
+}
+
+public void initTable(){
+    String[] columnContent = new String[]{"user", "comment"};
+
+    tblModel = new DefaultTableModel();
+    tblModel.setColumnIdentifiers(columnContent);
+    CommentTable.setModel(tblModel);
+}
+
+public void doComment(){
+    Comment comm = new Comment(logindto.makeId(), id_article, InputComment.getText());
+    commentdto.doComment(comm);
+    commentdto.fillTable(tblModel, String.valueOf(id_article));
+    InputComment.setText("");
+}
+
+public void fillToDashBoard(){
+    System.out.println(""+page);
+    articledto.fillEachArticle(PostImage1, PostTitle1, UploadDayPost1, PostState1, 0);
+    articledto.fillEachArticle(PostImage2, PostTitle2, UploadDayPost2, PostState2, 1);
+    articledto.fillEachArticle(PostImage3, PostTitle3, UploadDayPost3, PostState3, 2);
+    articledto.fillEachArticle(PostImage4, PostTitle4, UploadDayPost4, PostState4, 3);
+}
+
+public void deleteArticle(int id){
+    if(articledto.checkState(id)){
+        int input = jOptionPane1.showConfirmDialog(null, 
+                "Do you want to proceed?", "Select an Option...",JOptionPane.YES_NO_CANCEL_OPTION);
+    
+        if(input==0){
+            articledto.delete_article(id);
+        }
+    }
+    else {
+        jOptionPane1.showMessageDialog(this, "You must be admin");
+    }
+}
+
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AboutUsLabel;
     private javax.swing.JPanel AboutUsLayout;
     private javax.swing.JPanel AboutUsPanel;
-
     private javax.swing.JLabel BackBtn;
     private javax.swing.JPanel CardLayoutPanel;
     private com.k33ptoo.components.KButton CommentBtn;
     private javax.swing.JPanel CommentPanel;
     private javax.swing.JTable CommentTable;
     private com.k33ptoo.components.KButton ConfirmBtn;
-
     private javax.swing.JLabel DashBoardTitle;
     private javax.swing.JLabel DashboardLabel;
     private javax.swing.JPanel DashboardLayout;
@@ -1761,7 +1829,6 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JTextField InputComment;
     private javax.swing.JLabel LabelPost1;
     private javax.swing.JLabel LabelPost2;
-
     private com.k33ptoo.components.KButton LikeBtn;
     private javax.swing.JLabel LogoLabel;
     private javax.swing.JLabel LogoutLabel;
@@ -1774,7 +1841,6 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel NewPostLabel;
     private javax.swing.JPanel NewPostLayout;
     private javax.swing.JPanel NewPostPanel;
-
     private javax.swing.JLabel NextBtn;
     private javax.swing.JLabel PageDetailContent;
     private javax.swing.JLabel PageDetailImage;
@@ -1805,16 +1871,19 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel Thumbnail1;
     private javax.swing.JLabel Thumbnail2;
     private javax.swing.JLabel TopicMainPost;
-
     private javax.swing.JLabel TotalOfPostLabel;
     private javax.swing.JLabel UploadDayPost1;
     private javax.swing.JLabel UploadDayPost2;
     private javax.swing.JLabel UploadDayPost3;
     private javax.swing.JLabel UploadDayPost4;
     private javax.swing.JLabel WelcomeLabel;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
