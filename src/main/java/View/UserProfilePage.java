@@ -101,6 +101,8 @@ public class UserProfilePage extends javax.swing.JFrame {
         MainPanel.add(TitleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, -1, -1));
 
 
+        ExitButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_Close_20px_1.png"))); // NOI18N
+
         ExitButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 ExitButtonMouseClicked(evt);
@@ -280,6 +282,7 @@ public class UserProfilePage extends javax.swing.JFrame {
         MainPanel.add(NamePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 550, 70));
 
 
+
         ThumnailLabel.setText("jLabel1");
         MainPanel.add(ThumnailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 620, 130));
 
@@ -381,6 +384,8 @@ public class UserProfilePage extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(UserProfilePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

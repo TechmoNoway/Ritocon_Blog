@@ -93,6 +93,7 @@ public class LoginPage extends javax.swing.JFrame {
         jLabel2.setText("password");
         kGradientPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 350, -1, -1));
 
+        ToSignUpBtn.setBorder(null);
         ToSignUpBtn.setText("Sign Up");
         ToSignUpBtn.setkBorderRadius(50);
         ToSignUpBtn.setkEndColor(new java.awt.Color(0, 204, 204));
@@ -105,8 +106,11 @@ public class LoginPage extends javax.swing.JFrame {
                 ToSignUpBtnActionPerformed(evt);
             }
         });
-        kGradientPanel1.add(ToSignUpBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 450, 150, -1));
 
+        kGradientPanel1.add(ToSignUpBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 450, 150, -1));
+
+
+        SignInBtn.setBorder(null);
         SignInBtn.setText("Sign In");
         SignInBtn.setkBorderRadius(50);
         SignInBtn.setkEndColor(new java.awt.Color(0, 204, 204));
@@ -120,12 +124,16 @@ public class LoginPage extends javax.swing.JFrame {
                 SignInBtnActionPerformed(evt);
             }
         });
-        kGradientPanel1.add(SignInBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 450, 150, -1));
+
+        kGradientPanel1.add(SignInBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 450, 150, -1));
+
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(204, 204, 204));
         jLabel3.setText("or");
-        kGradientPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 460, -1, -1));
+
+        kGradientPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 460, -1, -1));
+
 
         ExitBtn.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         ExitBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -147,11 +155,13 @@ public class LoginPage extends javax.swing.JFrame {
 
         PasswordError.setForeground(new java.awt.Color(255, 0, 0));
         PasswordError.setText("Please insert your password!");
-        kGradientPanel1.add(PasswordError, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 420, 150, -1));
+
+        kGradientPanel1.add(PasswordError, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 420, 170, -1));
 
         UsernameError.setForeground(new java.awt.Color(255, 0, 0));
         UsernameError.setText("Please insert your user name! ");
-        kGradientPanel1.add(UsernameError, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 310, 160, -1));
+        kGradientPanel1.add(UsernameError, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 310, 180, -1));
+
 
         getContentPane().add(kGradientPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 980, 620));
 
@@ -183,6 +193,13 @@ public class LoginPage extends javax.swing.JFrame {
             UsernameError.setVisible(true);
         } else {
             UsernameError.setVisible(false);
+        }
+        
+        if (InputPassword.getText().equals("")) {
+            PasswordError.setVisible(true);
+        } else {
+            PasswordError.setVisible(false);
+
         }
         
         if (InputPassword.getText().equals("")) {
@@ -223,6 +240,7 @@ public class LoginPage extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(LoginPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */

@@ -133,6 +133,12 @@
         </Component>
         <Component class="javax.swing.JLabel" name="ExitButton">
 
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/icons8_Close_20px_1.png"/>
+            </Property>
+          </Properties>
+
           <Events>
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ExitButtonMouseClicked"/>
             <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ExitButtonMouseEntered"/>
@@ -463,6 +469,9 @@
         </Container>
         <Component class="javax.swing.JLabel" name="ThumnailLabel">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/SunriseLake.png"/>
+            </Property>
 
             <Property name="text" type="java.lang.String" value="jLabel1"/>
           </Properties>

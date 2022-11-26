@@ -8,7 +8,7 @@ import Controller.LoginDTO;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
-import Model.User;
+
 
 /**
  *
@@ -53,7 +53,9 @@ public class SignUpPage extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(950, 650));
+
+        setPreferredSize(new java.awt.Dimension(1000, 700));
+
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -62,7 +64,7 @@ public class SignUpPage extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         kGradientPanel1.setkBorderRadius(0);
-        kGradientPanel1.setkEndColor(new java.awt.Color(51, 51, 51));
+        kGradientPanel1.setkEndColor(new java.awt.Color(0, 0, 0));
         kGradientPanel1.setkStartColor(new java.awt.Color(51, 51, 51));
         kGradientPanel1.setPreferredSize(new java.awt.Dimension(950, 650));
         kGradientPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -86,6 +88,7 @@ public class SignUpPage extends javax.swing.JFrame {
         Thumnail.setPreferredSize(new java.awt.Dimension(950, 48));
         kGradientPanel1.add(Thumnail, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 340, 700));
 
+        SubmitBtn.setBorder(null);
         SubmitBtn.setForeground(new java.awt.Color(0, 0, 0));
         SubmitBtn.setText("SUBMIT");
         SubmitBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -95,11 +98,79 @@ public class SignUpPage extends javax.swing.JFrame {
                 SubmitBtnActionPerformed(evt);
             }
         });
-        kGradientPanel1.add(SubmitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 560, 170, 50));
+
+        kGradientPanel1.add(SubmitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 600, 170, 50));
+
+        AvatarPanel.setBackground(new java.awt.Color(51, 51, 51));
+        AvatarPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(255, 255, 255)));
+
+        ChooseAvatar.setEditable(false);
+        ChooseAvatar.setBackground(new java.awt.Color(0, 0, 0));
+        ChooseAvatar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ChooseAvatar.setForeground(new java.awt.Color(153, 153, 153));
+        ChooseAvatar.setText("Choose your avatar");
+        ChooseAvatar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 25, 1, 1));
+        ChooseAvatar.setCaretColor(new java.awt.Color(51, 51, 51));
+        ChooseAvatar.setDisabledTextColor(new java.awt.Color(153, 153, 153));
+        ChooseAvatar.setOpaque(true);
+        ChooseAvatar.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                ChooseAvatarFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                ChooseAvatarFocusLost(evt);
+            }
+        });
+        ChooseAvatar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChooseAvatarActionPerformed(evt);
+            }
+        });
+
+        ChooseAvatarBtn.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 1, 0, 0, new java.awt.Color(255, 255, 255)));
+        ChooseAvatarBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_upload_35px_1.png"))); // NOI18N
+        ChooseAvatarBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        ChooseAvatarBtn.setIconTextGap(0);
+        ChooseAvatarBtn.setkBackGroundColor(new java.awt.Color(51, 51, 51));
+        ChooseAvatarBtn.setkBorderRadius(0);
+        ChooseAvatarBtn.setkEndColor(new java.awt.Color(204, 204, 204));
+        ChooseAvatarBtn.setkForeGround(new java.awt.Color(51, 51, 51));
+        ChooseAvatarBtn.setkHoverColor(new java.awt.Color(51, 0, 51));
+        ChooseAvatarBtn.setkHoverEndColor(new java.awt.Color(51, 0, 51));
+        ChooseAvatarBtn.setkHoverForeGround(new java.awt.Color(51, 51, 51));
+        ChooseAvatarBtn.setkHoverStartColor(new java.awt.Color(51, 51, 51));
+        ChooseAvatarBtn.setkSelectedColor(new java.awt.Color(51, 51, 51));
+        ChooseAvatarBtn.setkStartColor(new java.awt.Color(51, 51, 51));
+        ChooseAvatarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChooseAvatarBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout AvatarPanelLayout = new javax.swing.GroupLayout(AvatarPanel);
+        AvatarPanel.setLayout(AvatarPanelLayout);
+        AvatarPanelLayout.setHorizontalGroup(
+            AvatarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AvatarPanelLayout.createSequentialGroup()
+                .addComponent(ChooseAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ChooseAvatarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        AvatarPanelLayout.setVerticalGroup(
+            AvatarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(ChooseAvatar)
+            .addGroup(AvatarPanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(ChooseAvatarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        kGradientPanel1.add(AvatarPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 520, 450, 60));
+
 
         NamePanel.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
 
-        InputName.setBackground(new java.awt.Color(51, 51, 51));
+        InputName.setBackground(new java.awt.Color(0, 0, 0));
         InputName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         InputName.setForeground(new java.awt.Color(153, 153, 153));
         InputName.setText("Enter your name");
@@ -137,7 +208,7 @@ public class SignUpPage extends javax.swing.JFrame {
 
         PasswordPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
 
-        InputPassword.setBackground(new java.awt.Color(51, 51, 51));
+        InputPassword.setBackground(new java.awt.Color(0, 0, 0));
         InputPassword.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         InputPassword.setForeground(new java.awt.Color(153, 153, 153));
         InputPassword.setText("Enter password");
@@ -175,7 +246,7 @@ public class SignUpPage extends javax.swing.JFrame {
 
         PhoneNumberPanel.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
 
-        InputPhoneNumber.setBackground(new java.awt.Color(51, 51, 51));
+        InputPhoneNumber.setBackground(new java.awt.Color(0, 0, 0));
         InputPhoneNumber.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         InputPhoneNumber.setForeground(new java.awt.Color(153, 153, 153));
         InputPhoneNumber.setText("Enter phone number");
@@ -209,7 +280,7 @@ public class SignUpPage extends javax.swing.JFrame {
 
         UsernamePanel.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
 
-        InputUsername.setBackground(new java.awt.Color(51, 51, 51));
+        InputUsername.setBackground(new java.awt.Color(0, 0, 0));
         InputUsername.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         InputUsername.setForeground(new java.awt.Color(153, 153, 153));
         InputUsername.setText("Enter username");
@@ -280,6 +351,20 @@ public class SignUpPage extends javax.swing.JFrame {
         });
         kGradientPanel1.add(ExitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 40, 20, 30));
 
+        FirstLineError.setForeground(new java.awt.Color(255, 0, 0));
+        FirstLineError.setText("Please Insert Enough Information !");
+        kGradientPanel1.add(FirstLineError, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 180, 200, -1));
+
+        ExitBtn.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        ExitBtn.setForeground(new java.awt.Color(255, 255, 255));
+        ExitBtn.setText("X");
+        ExitBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ExitBtnMouseClicked(evt);
+            }
+        });
+        kGradientPanel1.add(ExitBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 40, 20, 30));
+
         getContentPane().add(kGradientPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, -30, 1040, 760));
 
         pack();
@@ -306,9 +391,25 @@ public class SignUpPage extends javax.swing.JFrame {
         } else {
             FirstLineError.setVisible(false);
         }
-        
-        this.register(InputUsername.getText(), InputName.getText(), InputPhoneNumber.getText(), InputPassword.getText(), "User");
+
     }//GEN-LAST:event_SubmitBtnActionPerformed
+
+    private void ChooseAvatarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ChooseAvatarFocusGained
+
+    }//GEN-LAST:event_ChooseAvatarFocusGained
+
+    private void ChooseAvatarFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ChooseAvatarFocusLost
+
+    }//GEN-LAST:event_ChooseAvatarFocusLost
+
+    private void ChooseAvatarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChooseAvatarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ChooseAvatarActionPerformed
+
+    private void ChooseAvatarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChooseAvatarBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ChooseAvatarBtnActionPerformed
+
 
     private void InputNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_InputNameFocusGained
         if (InputName.getText().equals("Enter your name")) {
@@ -433,6 +534,10 @@ public class SignUpPage extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
 
+        //</editor-fold>
+        //</editor-fold>
+
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -447,6 +552,10 @@ public class SignUpPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel AvatarPanel;
+    private javax.swing.JTextField ChooseAvatar;
+    private com.k33ptoo.components.KButton ChooseAvatarBtn;
+
     private javax.swing.JLabel ExitBtn;
     private javax.swing.JLabel FirstLineError;
     private javax.swing.JLabel GoBackLogin;
