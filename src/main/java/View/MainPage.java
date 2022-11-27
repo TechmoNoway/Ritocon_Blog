@@ -13,6 +13,7 @@ import Controller.LoginDTO;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
@@ -23,9 +24,11 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import Model.*;
 
 
 /**
@@ -49,7 +52,7 @@ public class MainPage extends javax.swing.JFrame {
     }
     
     public void initComp(){
-       
+//        initTable();
     }
 
     /**
@@ -136,8 +139,6 @@ public class MainPage extends javax.swing.JFrame {
         NextBtn = new javax.swing.JLabel();
         GolangAlert = new javax.swing.JLabel();
         GLPicture = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
         AboutUsLayout = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         SearchLayout = new javax.swing.JPanel();
@@ -156,7 +157,7 @@ public class MainPage extends javax.swing.JFrame {
         PageDetailContent = new javax.swing.JLabel();
         CommentBtn = new com.k33ptoo.components.KButton();
         LikeBtn = new com.k33ptoo.components.KButton();
-
+        jButton1 = new javax.swing.JButton();
         NewPostLayout = new javax.swing.JPanel();
         CreatePostTitle = new javax.swing.JLabel();
         InputImageTitle = new javax.swing.JLabel();
@@ -173,7 +174,6 @@ public class MainPage extends javax.swing.JFrame {
         EmptyPostDesWarning = new javax.swing.JLabel();
         EmptyPostTitleWarning = new javax.swing.JLabel();
         EmptyPostImgWarning = new javax.swing.JLabel();
-
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -342,14 +342,12 @@ public class MainPage extends javax.swing.JFrame {
         SearchInput.setBackground(new java.awt.Color(235, 235, 235));
         SearchInput.setForeground(new java.awt.Color(0, 0, 0));
         SearchInput.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 1));
-
         SearchInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SearchInputActionPerformed(evt);
             }
         });
-        MenuLine2.add(SearchInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(1270, 50, 210, 40));
-
+        MenuLine2.add(SearchInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 40, 210, 40));
 
         SearchBtn.setBorder(null);
         SearchBtn.setText("Search");
@@ -537,7 +535,6 @@ public class MainPage extends javax.swing.JFrame {
         EditBackground1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         EditBtn1.setBackground(new java.awt.Color(255, 255, 255));
-        EditBtn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_support_50px.png"))); // NOI18N
         EditBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 EditBtn1MouseClicked(evt);
@@ -569,7 +566,6 @@ public class MainPage extends javax.swing.JFrame {
         DeleteBackground1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         DeleteBtn1.setBackground(new java.awt.Color(255, 255, 255));
-        DeleteBtn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_Delete_50px_1.png"))); // NOI18N
         DeleteBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 DeleteBtn1MouseClicked(evt);
@@ -629,7 +625,6 @@ public class MainPage extends javax.swing.JFrame {
         });
         DeleteBackground2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        DeleteBtn2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_Delete_50px_1.png"))); // NOI18N
         DeleteBtn2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 DeleteBtn2MouseClicked(evt);
@@ -659,7 +654,6 @@ public class MainPage extends javax.swing.JFrame {
         });
         EditBackground2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        EditBtn2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_support_50px.png"))); // NOI18N
         EditBtn2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 EditBtn2MouseClicked(evt);
@@ -719,7 +713,6 @@ public class MainPage extends javax.swing.JFrame {
         });
         EditBackground3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        EditBtn3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_support_50px.png"))); // NOI18N
         EditBtn3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 EditBtn3MouseClicked(evt);
@@ -749,7 +742,6 @@ public class MainPage extends javax.swing.JFrame {
         });
         DeleteBackground3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        DeleteBtn3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_Delete_50px_1.png"))); // NOI18N
         DeleteBtn3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 DeleteBtn3MouseClicked(evt);
@@ -809,7 +801,6 @@ public class MainPage extends javax.swing.JFrame {
         });
         EditBackground4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        EditBtn4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_support_50px.png"))); // NOI18N
         EditBtn4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 EditBtn4MouseClicked(evt);
@@ -839,7 +830,6 @@ public class MainPage extends javax.swing.JFrame {
         });
         DeleteBackground4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        DeleteBtn4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_Delete_50px_1.png"))); // NOI18N
         DeleteBtn4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 DeleteBtn4MouseClicked(evt);
@@ -870,7 +860,6 @@ public class MainPage extends javax.swing.JFrame {
         PageNumber.setText("0/0");
         DashboardLayout.add(PageNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 600, -1, -1));
 
-        BackBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PrevPage.png"))); // NOI18N
         BackBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BackBtnMouseClicked(evt);
@@ -879,7 +868,6 @@ public class MainPage extends javax.swing.JFrame {
         DashboardLayout.add(BackBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 80, 80));
 
         NextBtn.setForeground(new java.awt.Color(255, 255, 255));
-        NextBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/NextPage.png"))); // NOI18N
         NextBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 NextBtnMouseClicked(evt);
@@ -892,28 +880,8 @@ public class MainPage extends javax.swing.JFrame {
             }
         });
         DashboardLayout.add(NextBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1370, 200, -1, 80));
-
-        GolangAlert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CuteAlert.png"))); // NOI18N
         DashboardLayout.add(GolangAlert, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 30, 250, 200));
-
-        GLPicture.setIcon(new javax.swing.ImageIcon(getClass().getResource("/golang.png"))); // NOI18N
         DashboardLayout.add(GLPicture, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 220, 390, 290));
-
-        jButton4.setText("Prev");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        DashboardLayout.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 330, -1, -1));
-
-        jButton6.setText("Next");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-        DashboardLayout.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, -1, -1));
 
         CardLayoutPanel.add(DashboardLayout, "card2");
 
@@ -1006,7 +974,6 @@ public class MainPage extends javax.swing.JFrame {
         ConfirmBtn.setkStartColor(new java.awt.Color(255, 255, 255));
         ConfirmBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ConfirmBtnMouseClicked(evt);
             }
         });
         ConfirmBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -1152,7 +1119,6 @@ public class MainPage extends javax.swing.JFrame {
         jButton1.setText("Comment");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
             }
         });
         PageDetailLayout.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 420, -1, -1));
@@ -1383,7 +1349,7 @@ public class MainPage extends javax.swing.JFrame {
             PostState4.setForeground(new Color(255, 0, 0));
         }
         
-        
+        fillToDashBoard();
 
     }//GEN-LAST:event_DashboardLabelMouseClicked
 
@@ -1508,7 +1474,6 @@ public class MainPage extends javax.swing.JFrame {
 
         try {
             fillToDetailPage("/SunriseLake.png", PageDetailImage, "");
-            indentIntoArticle(10);
             id_article = 11;
             commentdto.fillTable(tblModel, String.valueOf(id_article));
         } catch (IOException ex) {
@@ -1522,7 +1487,6 @@ public class MainPage extends javax.swing.JFrame {
 
         try {
             fillToDetailPage("/WindowsB.png", PageDetailImage, "");
-            indentIntoArticle(11);
             id_article = 11;
             commentdto.fillTable(tblModel, String.valueOf(id_article));
         } catch (IOException ex) {
@@ -1892,11 +1856,6 @@ public class MainPage extends javax.swing.JFrame {
     }
 
 
- public void setWelcomeLabel() {
-        String stringWelcome = "Welcome " + logindto.changeUsername();
-        WelcomeLabel.setText(stringWelcome);
-        
-    }
 
 
     //Method chon anh
@@ -1939,6 +1898,53 @@ public class MainPage extends javax.swing.JFrame {
         EmptyPostTitleWarning.setVisible(false);
         EmptyPostDesWarning.setVisible(false);
         EmptyPostImgWarning.setVisible(false);
+    }
+    
+    public void setWelcomeLabel() {
+        String stringWelcome = "Welcome " + logindto.changeUsername();
+        WelcomeLabel.setText(stringWelcome);
+        
+    }
+
+    public void indentIntoArticle(int i){
+        articledto.showDetail(PageDetailTitle, PageDetailContent, PageDetailImage, i);      
+    }
+
+    public void initTable(){
+        String[] columnContent = new String[]{"user", "comment"};
+
+        tblModel = new DefaultTableModel();
+        tblModel.setColumnIdentifiers(columnContent);
+        CommentTable.setModel(tblModel);
+    }
+
+    public void doComment(){
+        Comment comm = new Comment(logindto.makeId(), id_article, InputComment.getText());
+        commentdto.doComment(comm);
+        commentdto.fillTable(tblModel, String.valueOf(id_article));
+        InputComment.setText("");
+    }
+
+    public void fillToDashBoard(){
+        System.out.println(""+page);
+        articledto.fillEachArticle(PostImage1, PostTitle1, UploadDayPost1, PostState1, 0);
+        articledto.fillEachArticle(PostImage2, PostTitle2, UploadDayPost2, PostState2, 1);
+        articledto.fillEachArticle(PostImage3, PostTitle3, UploadDayPost3, PostState3, 2);
+        articledto.fillEachArticle(PostImage4, PostTitle4, UploadDayPost4, PostState4, 3);
+    }
+
+    public void deleteArticle(int id){
+        if(articledto.checkState(id)){
+            int input = jOptionPane1.showConfirmDialog(null, 
+                    "Do you want to proceed?", "Select an Option...",JOptionPane.YES_NO_CANCEL_OPTION);
+
+            if(input==0){
+                articledto.delete_article(id);
+            }
+        }
+        else {
+            jOptionPane1.showMessageDialog(this, "You must be admin");
+        }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -2044,10 +2050,10 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel UploadDayPost3;
     private javax.swing.JLabel UploadDayPost4;
     private javax.swing.JLabel WelcomeLabel;
-
     private javax.swing.JLabel YourChoseImage;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
-
+    private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
