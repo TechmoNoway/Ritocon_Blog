@@ -18,31 +18,46 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import Model.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author mphuc
  */
-public class ArticleDTO {
+public class ArticleDTO  {
     private final DatabaseDTO db = new DatabaseDTO();
     private Frame SignUpPage;
     private ResultSet rs;
     private ArrayList<Article> arr = new ArrayList<>();
     public ArrayList<Article> temp;
+    int page = 1;
+    CommentDTO commentdto = new CommentDTO();
+    int id_comment = 0;
 
     public ArticleDTO() {
         getAllArticle();
     }
     
-    public void showDetail(JLabel j1, JLabel j2, JLabel j3, int i){
-        String sql = "select * from Articles where id_article = " + i;
+    public void showDetail(JLabel j1, JLabel j2, JLabel j3, DefaultTableModel tblModel, int i){
+        int index = 0;
+        if(i > arr.size()){
+            index = arr.get(arr.size()-1).getId();
+        }
+        else {
+            index = arr.get(index).getId();
+        }
+        String sql = "select * from Articles where id_article = " + index;
         rs = db.queryHaveParameter(sql, new String[]{});
         try {
             if(rs.next()){
                j1.setText(rs.getString("title_article"));
                j2.setText(rs.getString("description_article"));
                setImagePage(rs.getString("image_article"), j3);
-               System.out.println(rs.getString("image_article"));
+               commentdto.fillTable(tblModel, String.valueOf(index));
+               id_comment = index;
             }
         } catch (SQLException ex) {
             Logger.getLogger(ArticleDTO.class.getName()).log(Level.SEVERE, null, ex);
@@ -51,7 +66,14 @@ public class ArticleDTO {
     
     public void setImagePage(String imagePath, JLabel imageLabel) {
         try {
-            File file = new File("E:\\FPT Polytechnic\\DuAn1\\Ritocon_Blog\\src\\main\\resources\\"+imagePath);
+            
+            File file = null;
+            if(imagePath.length() > 30){
+                file = new File(imagePath);
+            }
+            else {
+                file = new File("E:\\Github\\Ritocon_Blog\\src\\main\\resources\\"+imagePath);
+            }
             Image image = ImageIO.read(file);
             imageLabel.setText("");
             int height = imageLabel.getHeight();
@@ -84,27 +106,28 @@ public class ArticleDTO {
         }
     }
     
-    public ArrayList<Article> getSingle(int page) {
+    public void getSingle(int page) {
         try {
-            if(page > arr.size()/4 && page < arr.size()/4+2 || page < 0){
-                temp = new ArrayList<Article>(arr.subList((arr.size()/4)*4-1, arr.size()));
+            if(page == getLenDash()){
+                temp = new ArrayList<Article>(arr.subList(arr.size()-4, arr.size()));
             }
-            else if(page==1 || page > arr.size()/4+1) {
+            else if(page == 1) {
                 temp = new ArrayList<Article>(arr.subList(0,4));
             }
             else {
-                temp = new ArrayList<Article>(arr.subList(3*page,3*page+4));
+                temp = new ArrayList<Article>(arr.subList(3*page+1,3*page+3));
             }
-            return temp;
         } catch (Exception e) {
             System.out.println("This is not error. This is feature");
         }
-        return temp;
     }
     
-    public void delete_article(int id){
+    public void delete_article(int id, int page){
         String sql = "delete Articles where id_article = ?";
         db.queryHaveParameter(sql, new String[]{String.valueOf(temp.get(id).getId())});
+        arr.clear();
+        getAllArticle();
+        getSingle(page);
     }
     
     public void fillEachArticle(JLabel jb1, JLabel jb2, JLabel jb3, JLabel jb4, int index) {
@@ -124,22 +147,83 @@ public class ArticleDTO {
     }
     
     public int getLenDash(){
-        return temp.size()/4+1;
+        return arr.size()/4+1;
     }
     
-    public void nextDashBoard(int page){
+    public void nextDashBoard(JLabel jb){
         page += 1;
         if(page > getLenDash()){
             page = 1;
         }
+        jb.setText(page+"/"+getLenDash());
+        temp.clear();
         getSingle(page);
     }
     
-    public void prevDashBoard(int page){
+    public void prevDashBoard(JLabel jb){
         page -= 1;
         if(page<1){
             page = getLenDash();
         }
+        jb.setText(page+"/"+getLenDash());
+        temp.clear();
         getSingle(page);
+    }
+    
+    public int getIdOfDetal(int i){
+        int index = 0;
+        if(i > arr.size()){
+            index = arr.get(arr.size()-1).getId();
+        }
+        else {
+            index = arr.get(index).getId();
+        }
+        return index; 
+    }
+    
+    public int getIdComment() {
+        return id_comment;
+    }
+    
+    public void comment(JTextField InputComment ,DefaultTableModel tblModel, int id_user){
+        Comment comm = new Comment(id_user, id_comment, InputComment.getText());
+        commentdto.doComment(comm);
+        commentdto.fillTable(tblModel, String.valueOf(id_comment));
+        InputComment.setText("");
+    }
+    
+    public void updateArticle(String title, String image, String desc, int id){
+        String sql = "update Articles set title_article = ? "
+                + ", image_article = ? "
+                + ", description_article = ? "
+                + "where id_article = ?";
+        db.queryHaveParameter(sql, new String[]{title, image, desc, String.valueOf(id)});
+    }
+    
+    public void createNewPost(String title, String image, String desc, String author){
+        String sql = "insert into Articles values (?,?, CURRENT_TIMESTAMP,?,'pending',?)";
+        db.queryHaveParameter(sql, new String[]{title, desc , image, author});
+    }
+    
+    public void searchArticle(DefaultTableModel jt, String title){
+        String sql = "select * from dbo.SearchView where title_article like ?";
+        rs = db.queryHaveParameter(sql, new String[]{title+"%"});
+        jt.setRowCount(0);
+
+        try {
+            while(rs.next()){
+                jt.addRow(new Object[]{
+                    rs.getString("id_article"),
+                    rs.getString("title_article"),
+                    rs.getString("comments"),
+                    rs.getString("author"),
+                    rs.getString("date_article")
+                });
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CommentDTO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        jt.fireTableDataChanged();
     }
 }

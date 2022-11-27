@@ -175,7 +175,6 @@ public class LoginPage extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         UsernameError.setVisible(false);
         PasswordError.setVisible(false);
-       
     }//GEN-LAST:event_formWindowOpened
 
     private void InputPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InputPasswordActionPerformed

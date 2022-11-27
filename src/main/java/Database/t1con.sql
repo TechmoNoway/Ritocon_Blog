@@ -11,6 +11,15 @@ create table Users (
 	role_user varchar(10)
 )
 
+create table Currents(
+	id_user varchar(5),
+	name_user nvarchar(50),
+	fullname_user nvarchar(50),
+	phoneNumber_user varchar(20),
+	password_user varchar(20),
+	role_user varchar(10)
+)
+
 create table Articles(
 	id_article int identity(1,1),
 	title_article nvarchar(100),
@@ -42,6 +51,19 @@ on [dbo].[Users]
 for delete
 as 
 delete Articles where author_article like (select id_user from deleted)
+
+go
+create trigger [CurrentUpdate]
+on [dbo].[Currents]
+for update
+as
+begin
+	update Users set fullname_user = (select fullname_user from inserted), 
+						name_user = (select name_user from inserted),
+						password_user = (select password_user from inserted),
+						phoneNumber_user = (select phoneNumber_user from inserted)
+					where cast(id_user as nvarchar(5)) = (select id_user from inserted)
+end
 
 go 
 create trigger [ArticleInsert]
@@ -80,7 +102,7 @@ begin
 		delete Comments where id_article = (select id_article from deleted)
 	end
 end
-
+go
 create trigger [PostDelete] 
 on [dbo].[Articles]
 instead of delete 
@@ -92,8 +114,14 @@ begin
 	begin
 		Print 'You do not be deleted this article'
 	end
+	else
+	begin
+		delete Articles where id_article = (select id_article from deleted)
+	end
 end
 
+drop trigger [PostDelete]
+go
 create trigger [PostUpdate] 
 on [dbo].[Articles]
 instead of update
@@ -105,7 +133,13 @@ begin
 	begin
 		Print 'You do not be updated this article'
 	end
+	else 
+	begin
+		update
+	end
 end
+
+drop trigger [PostUpdate] 
 /*Fucntion*/
 /*Count amount of comment in a article*/
 go
@@ -127,7 +161,7 @@ begin
 	set @result = (select name_user from Users where id_user = @id_user)
 	return @result
 end
-
+go
 create function identify_role(@id int)
 returns varchar(10)
 as
@@ -141,14 +175,24 @@ end
 /*For article*/
 
 go
-create view [HomeView]
+create view [SearchView]
 as
-select title_article, 
-	SUBSTRING(description_article, 1, 30) as desc_article, 
+select id_article,
+	title_article, 
 	dbo.count_amount_comment(id_article) as comments,
 	dbo.extract_name_author(author_article) as author,
-	image_article
+	date_article
 from Articles
+
+drop view dbo.HomeView
+go
+create view [CommentView]
+as
+	select  a.id_article, a.id_comment, b.name_user, a.content
+	from Comments a
+	inner join Users b 
+	on a.id_user = b.id_user
+
 
 go
 create view [DetailView]
@@ -159,7 +203,7 @@ select title_article,
 	dbo.extract_name_author(author_article) as author,
 	image_article
 from Articles
-
+go
 create view [CommentDialog]
 as
 select dbo.extract_name_author(id_user) as username, content
@@ -167,6 +211,7 @@ from Comments
 
 /*Procedure*/
 /*For Author*/
+go
 create procedure select_state_article @state varchar(10), @id int
 as
 begin 
@@ -218,13 +263,13 @@ insert into Users values
 	(N'TuanDung', N'Nguyễn Tấn Dũng', '0972495038', '12345', 'user')
 
 insert into Articles values
-	(N'Hello May cung âfasfaf ', N'Cho Son Hello May cung âfasfaf Hello May cung âfasfafHello May cung âfasfaf', '2012-02-21T18:10:00', 'afafafaf', 'pending', 1),
-	(N'Hello May cung ssssssssssss', N'Cho Son Hello May cung âfasfaf Hello May cung âfasfafHello May cung âfasfaf', '2012-02-21T18:10:00', 'afafafaf', 'pending', 1),
-	(N'Hello May cung sssssssss', N'Cho Son Hello May cung âfasfaf Hello May cung âfasfafHello May cung âfasfaf', '2012-02-21T18:10:00', 'afafafaf', 'pending', 1),
-	(N'Hello May cung ssssssss', N'Cho Son Hello May cung âfasfaf Hello May cung âfasfafHello May cung âfasfaf', '2012-02-21T18:10:00', 'afafafaf', 'pending', 2),
-	(N'Hello May cungssssss', N'Cho Son Hello May cung âfasfaf Hello May cung âfasfafHello May cung âfasfaf', '2012-02-21T18:10:00', 'afafafaf', 'pending', 2),
-	(N'Hello May cung sâfafaf', N'Cho Son Hello May cung âfasfaf Hello May cung âfasfafHello May cung âfasfaf', '2012-02-21T18:10:00', 'afafafaf', 'pending', 3),
-	(N'Hello May cung âfafafaf', N'Cho Son Hello May cung âfasfaf Hello May cung âfasfafHello May cung âfasfaf', '2012-02-21T18:10:00', 'afafafaf', 'pending', 3)
+	(N'Điều gì xảy ra nếu bạn độc thân quá lâu? ', N'<html>Không chỉ bạn tôi, có nhiều người khác sau khi đã độc thân một thời gian, họ thường có xu hướng tận hưởng cuộc sống một mình, có phần né tránh các mối quan hệ tình cảm</html>', '2012-02-21T18:10:00', 'okbro.png', 'pending', 1),
+	(N'Hello May cung ssssssssssss', N'Cho Son Hello May cung âfasfaf Hello May cung âfasfafHello May cung âfasfaf', '2012-02-21T18:10:00', 'okbro.png', 'pending', 1),
+	(N'Hello May cung sssssssss', N'Cho Son Hello May cung âfasfaf Hello May cung âfasfafHello May cung âfasfaf', '2012-02-21T18:10:00', 'okbro.png', 'pending', 1),
+	(N'Hello May cung ssssssss', N'Cho Son Hello May cung âfasfaf Hello May cung âfasfafHello May cung âfasfaf', '2012-02-21T18:10:00', 'okbro.png', 'pending', 2),
+	(N'Hello May cungssssss', N'Cho Son Hello May cung âfasfaf Hello May cung âfasfafHello May cung âfasfaf', '2012-02-21T18:10:00', 'okbro.png', 'pending', 2),
+	(N'Hello May cung sâfafaf', N'Cho Son Hello May cung âfasfaf Hello May cung âfasfafHello May cung âfasfaf', '2012-02-21T18:10:00', 'okbro.png', 'pending', 3),
+	(N'Hello May cung âfafafaf', N'Cho Son Hello May cung âfasfaf Hello May cung âfasfafHello May cung âfasfaf', '2012-02-21T18:10:00', 'okbro.png', 'pending', 3)
 
 insert into Comments values
 	(1, 1, N'Đỉnh quá anh êy'),
@@ -250,8 +295,38 @@ exec dbo.select_state_article @state = 'done', @id = 1
 delete Articles where id_article = 5
 update Articles set title_article = N'Chó Phú' where id_article = 2
 
+
 /*Admin Role*/
 /*Display all of article need to censor*/
 exec dbo.select_state_article @state = 'pending', @id = 1
 /*Update state of article*/
-exec dbo.udpate_state @id = 1, @id_article = 3, @state = 'done'
+exec dbo.udpate_state @id = 1, @id_article = 10, @state = 'done'
+
+
+
+select * from Users where name_user like 'PhucKhoa' and password_user like '12345'
+delete Users where id_user = 14
+
+select * from Users
+
+select * from Articles
+
+select * from Currents
+
+select * from PostAuths
+
+select * from Comments
+
+delete Articles where id_article = 21
+delete Comments where id_article = 22
+delete Comments where id_article = 23
+delete Comments where id_article = 24
+select *
+from Articles
+where id_article = 8
+
+select * from [CommentView] where id_article = 3
+
+select * from [CommentView]
+
+select * from dbo.SearchView where title_article like 'fafa%'
