@@ -119,27 +119,6 @@ begin
 		delete Articles where id_article = (select id_article from deleted)
 	end
 end
-
-drop trigger [PostDelete]
-go
-create trigger [PostUpdate] 
-on [dbo].[Articles]
-instead of update
-as
-begin
-	declare @state varchar(10)
-	set @state = (select state_article from inserted)
-	if(@state like 'pending')
-	begin
-		Print 'You do not be updated this article'
-	end
-	else 
-	begin
-		update
-	end
-end
-
-drop trigger [PostUpdate] 
 /*Fucntion*/
 /*Count amount of comment in a article*/
 go
@@ -183,8 +162,7 @@ select id_article,
 	dbo.extract_name_author(author_article) as author,
 	date_article
 from Articles
-
-drop view dbo.HomeView
+where state_article = 'done'
 go
 create view [CommentView]
 as
@@ -300,8 +278,9 @@ update Articles set title_article = N'Chó Phú' where id_article = 2
 /*Display all of article need to censor*/
 exec dbo.select_state_article @state = 'pending', @id = 1
 /*Update state of article*/
-exec dbo.udpate_state @id = 1, @id_article = 10, @state = 'done'
+exec dbo.udpate_state @id = 1, @id_article =7  , @state = 'done'
 
+update Articles set description_article = concat('<html>', description_article, '</html>') where id_article = 5
 
 
 select * from Users where name_user like 'PhucKhoa' and password_user like '12345'
@@ -317,7 +296,7 @@ select * from PostAuths
 
 select * from Comments
 
-delete Articles where id_article = 21
+delete Articles where id_article = 6 
 delete Comments where id_article = 22
 delete Comments where id_article = 23
 delete Comments where id_article = 24
@@ -329,4 +308,4 @@ select * from [CommentView] where id_article = 3
 
 select * from [CommentView]
 
-select * from dbo.SearchView where title_article like 'fafa%'
+select * from dbo.SearchView

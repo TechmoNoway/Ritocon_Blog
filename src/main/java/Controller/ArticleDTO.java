@@ -64,6 +64,22 @@ public class ArticleDTO  {
         }
     }
     
+    public void showDetailSearch(JLabel j1, JLabel j2, JLabel j3, DefaultTableModel tblModel, int index){
+        String sql = "select * from Articles where id_article = " + index;
+        rs = db.queryHaveParameter(sql, new String[]{});
+        try {
+            if(rs.next()){
+               j1.setText(rs.getString("title_article"));
+               j2.setText(rs.getString("description_article"));
+               setImagePage(rs.getString("image_article"), j3);
+               commentdto.fillTable(tblModel, String.valueOf(index));
+               id_comment = index;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ArticleDTO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public void setImagePage(String imagePath, JLabel imageLabel) {
         try {
             
@@ -86,6 +102,7 @@ public class ArticleDTO  {
     }
     
     public void getAllArticle() {
+        arr.clear();
         String sql = "select * from Articles";
         rs = db.queryHaveParameter(sql, new String[]{});
         try {
@@ -202,7 +219,7 @@ public class ArticleDTO  {
     
     public void createNewPost(String title, String image, String desc, String author){
         String sql = "insert into Articles values (?,?, CURRENT_TIMESTAMP,?,'pending',?)";
-        db.queryHaveParameter(sql, new String[]{title, desc , image, author});
+        db.queryHaveParameter(sql, new String[]{title, "<html>"+desc+"</html>" , image, author});
     }
     
     public void searchArticle(DefaultTableModel jt, String title){

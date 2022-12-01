@@ -249,7 +249,7 @@ public class MainPage extends javax.swing.JFrame {
             }
         });
         LogoutPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        MenuLine1.add(LogoutPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 0, 100, 80));
+        MenuLine1.add(LogoutPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1380, 0, 40, 80));
 
         ProfileLabel.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         ProfileLabel.setForeground(new java.awt.Color(51, 51, 51));
@@ -1071,7 +1071,7 @@ public class MainPage extends javax.swing.JFrame {
         PageDetailTitle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         PageDetailTitle.setForeground(new java.awt.Color(51, 51, 51));
         PageDetailTitle.setText("Insert Page Title Here");
-        PageDetailLayout.add(PageDetailTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 380, -1));
+        PageDetailLayout.add(PageDetailTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 1390, -1));
 
         PageDetailImage.setText("Image Here");
         PageDetailLayout.add(PageDetailImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 500, 490));
@@ -1292,6 +1292,7 @@ public class MainPage extends javax.swing.JFrame {
         InputPostDescription.setLineWrap(true);
         InputPostDescription.setWrapStyleWord(true);
         CreatePostTitle.setText("Create Post");
+        clearCreatePostPage();
         
     }//GEN-LAST:event_NewPostLabelMouseClicked
 
@@ -1359,6 +1360,7 @@ public class MainPage extends javax.swing.JFrame {
             PostState4.setForeground(new Color(255, 0, 0));
         }
         articledto.getSingle(1);
+        articledto.getAllArticle();
         fillToDashBoard();
         PageNumber.setText(page+"/"+articledto.getLenDash());
     }//GEN-LAST:event_DashboardLabelMouseClicked
@@ -1396,6 +1398,7 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_LogoutPanelMouseExited
 
     private void LogoutPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoutPanelMouseClicked
+        logindto.logout();
         close();
         LoginPage form = new LoginPage();
         form.setVisible(true);
@@ -1785,7 +1788,7 @@ public class MainPage extends javax.swing.JFrame {
             changePage(CardLayoutPanel, PageDetailLayout);
             int a =  Integer.parseInt((String) Table.getModel().getValueAt(Table.getSelectedRow(), 0));
             System.out.println(""+a);
-            articledto.showDetail(PageDetailTitle, PageDetailContent, PageDetailImage, tblModel, a);
+            articledto.showDetailSearch(PageDetailTitle, PageDetailContent, PageDetailImage, tblModel, a);
         }
         //dua thong tin len trang detail
     }//GEN-LAST:event_TableMouseClicked
