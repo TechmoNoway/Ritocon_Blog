@@ -93,6 +93,11 @@ public class SignUpPage extends javax.swing.JFrame {
         SubmitBtn.setText("SUBMIT");
         SubmitBtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         SubmitBtn.setkBorderRadius(0);
+        SubmitBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SubmitBtnMouseClicked(evt);
+            }
+        });
         SubmitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SubmitBtnActionPerformed(evt);
@@ -421,6 +426,11 @@ public class SignUpPage extends javax.swing.JFrame {
     private void ExitBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitBtnMouseClicked
         System.exit(0);
     }//GEN-LAST:event_ExitBtnMouseClicked
+
+    private void SubmitBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SubmitBtnMouseClicked
+        // TODO add your handling code here:
+        register(InputUsername.getText(), InputName.getText(), InputPhoneNumber.getText(), InputPassword.getText(), "user");
+    }//GEN-LAST:event_SubmitBtnMouseClicked
 
     /**
      * @param args the command line arguments

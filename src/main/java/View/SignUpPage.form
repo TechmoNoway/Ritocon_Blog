@@ -131,6 +131,7 @@
             <Property name="kBorderRadius" type="int" value="0"/>
           </Properties>
           <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="SubmitBtnMouseClicked"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SubmitBtnActionPerformed"/>
           </Events>
           <Constraints>
