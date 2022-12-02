@@ -29,6 +29,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import Model.*;
+import java.util.ArrayList;
 
 
 /**
@@ -47,7 +48,8 @@ public class MainPage extends javax.swing.JFrame {
     public MainPage() {
         initComponents();
         setLocationRelativeTo(null);
-        initTable();
+        initObject();
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -80,6 +82,7 @@ public class MainPage extends javax.swing.JFrame {
         NewPostLabel = new javax.swing.JLabel();
         AboutUsPanel = new javax.swing.JPanel();
         AboutUsLabel = new javax.swing.JLabel();
+        BrowsePage = new javax.swing.JLabel();
         CardLayoutPanel = new javax.swing.JPanel();
         HomeLayout = new javax.swing.JPanel();
         MainPostLabelPanel = new javax.swing.JPanel();
@@ -136,6 +139,7 @@ public class MainPage extends javax.swing.JFrame {
         GLPicture = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         AboutUsLayout = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         SearchLayout = new javax.swing.JPanel();
@@ -188,6 +192,11 @@ public class MainPage extends javax.swing.JFrame {
         FramePanel.setkEndColor(new java.awt.Color(255, 255, 255));
         FramePanel.setkStartColor(new java.awt.Color(255, 255, 255));
         FramePanel.setPreferredSize(new java.awt.Dimension(1920, 1080));
+        FramePanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FramePanelMouseClicked(evt);
+            }
+        });
         FramePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         MenuLine1.setBackground(new java.awt.Color(0, 0, 0));
@@ -201,9 +210,9 @@ public class MainPage extends javax.swing.JFrame {
         WelcomeLabel.setFont(new java.awt.Font("Segoe Script", 0, 20)); // NOI18N
         WelcomeLabel.setForeground(new java.awt.Color(255, 255, 255));
         WelcomeLabel.setText("Welcome");
-        SayWelcome.add(WelcomeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 200, 40));
+        SayWelcome.add(WelcomeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 490, 40));
 
-        MenuLine1.add(SayWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 80));
+        MenuLine1.add(SayWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, 80));
 
         LogoLabel.setFont(new java.awt.Font("Lucida Calligraphy", 0, 40)); // NOI18N
         LogoLabel.setForeground(new java.awt.Color(255, 204, 204));
@@ -434,6 +443,15 @@ public class MainPage extends javax.swing.JFrame {
         AboutUsPanel.add(AboutUsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         MenuLine2.add(AboutUsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 50, 100, 40));
+
+        BrowsePage.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        BrowsePage.setText("Browse Articles");
+        BrowsePage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BrowsePageMouseClicked(evt);
+            }
+        });
+        MenuLine2.add(BrowsePage, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 60, 140, 30));
 
         FramePanel.add(MenuLine2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, -1, -1));
 
@@ -900,6 +918,10 @@ public class MainPage extends javax.swing.JFrame {
         });
         DashboardLayout.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, -1, -1));
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setText("Don't have any article");
+        DashboardLayout.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 360, 350, 50));
+
         CardLayoutPanel.add(DashboardLayout, "card2");
 
         AboutUsLayout.setBackground(new java.awt.Color(255, 255, 255));
@@ -1185,7 +1207,7 @@ public class MainPage extends javax.swing.JFrame {
         NewPostLayout.add(Line1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 490, 410, 20));
 
         YourChoseImage.setText("Your Image ");
-        NewPostLayout.add(YourChoseImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 320, 380, 170));
+        NewPostLayout.add(YourChoseImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 330, 380, 170));
 
         ClearPostBtn.setBorder(null);
         ClearPostBtn.setText("ClearPost");
@@ -1224,7 +1246,7 @@ public class MainPage extends javax.swing.JFrame {
                 UpPostBtnActionPerformed(evt);
             }
         });
-        NewPostLayout.add(UpPostBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 530, 130, -1));
+        NewPostLayout.add(UpPostBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 530, 130, -1));
 
         EmptyPostDesWarning.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         EmptyPostDesWarning.setForeground(new java.awt.Color(255, 0, 0));
@@ -1242,6 +1264,11 @@ public class MainPage extends javax.swing.JFrame {
         NewPostLayout.add(EmptyPostImgWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, 210, 20));
 
         Updatebtn.setText("UpdatePost");
+        Updatebtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                UpdatebtnMouseClicked(evt);
+            }
+        });
         Updatebtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UpdatebtnActionPerformed(evt);
@@ -1360,9 +1387,10 @@ public class MainPage extends javax.swing.JFrame {
             PostState4.setForeground(new Color(255, 0, 0));
         }
         articledto.getSingle(1);
-        articledto.getAllArticle();
+        articledto.getAllArticle(String.valueOf(logindto.makeId()));
         fillToDashBoard();
         PageNumber.setText(page+"/"+articledto.getLenDash());
+        disableField();
     }//GEN-LAST:event_DashboardLabelMouseClicked
 
     private void AboutUsPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AboutUsPanelMouseEntered
@@ -1767,19 +1795,19 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_BackBtnMouseClicked
 
     private void PostTitle1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PostTitle1MouseClicked
-        changePage(CardLayoutPanel, PageDetailLayout);
+        
     }//GEN-LAST:event_PostTitle1MouseClicked
 
     private void PostTitle2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PostTitle2MouseClicked
-        changePage(CardLayoutPanel, PageDetailLayout);
+       
     }//GEN-LAST:event_PostTitle2MouseClicked
 
     private void PostTitle3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PostTitle3MouseClicked
-        changePage(CardLayoutPanel, PageDetailLayout);
+        
     }//GEN-LAST:event_PostTitle3MouseClicked
 
     private void PostTitle4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PostTitle4MouseClicked
-        changePage(CardLayoutPanel, PageDetailLayout);
+        
     }//GEN-LAST:event_PostTitle4MouseClicked
 
 
@@ -1834,12 +1862,13 @@ public class MainPage extends javax.swing.JFrame {
 
     private void UpdatebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdatebtnActionPerformed
         // TODO add your handling code here:
-        clickUpdate(articledto.getIdComment());
+        clickUpdate(current_article);
     }//GEN-LAST:event_UpdatebtnActionPerformed
 
     private void UpPostBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UpPostBtnMouseClicked
         // TODO add your handling code here:
         createNewPost();
+        disableField();
     }//GEN-LAST:event_UpPostBtnMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -1863,6 +1892,21 @@ public class MainPage extends javax.swing.JFrame {
         initSearch();
     }//GEN-LAST:event_SearchBtnMouseClicked
 
+    private void BrowsePageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BrowsePageMouseClicked
+        // TODO add your handling code here:
+        enterBrowse();
+    }//GEN-LAST:event_BrowsePageMouseClicked
+
+    private void FramePanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FramePanelMouseClicked
+        // TODO add your handling code here:
+        setWelcomeLabel();
+    }//GEN-LAST:event_FramePanelMouseClicked
+
+    private void UpdatebtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UpdatebtnMouseClicked
+        // TODO add your handling code here:
+        clickUpdate(current_article);
+    }//GEN-LAST:event_UpdatebtnMouseClicked
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -1875,7 +1919,95 @@ public class MainPage extends javax.swing.JFrame {
     int colorCount = 0;
     DefaultTableModel dtm;
     String imagePath = ""; //duong dan cua hinh duoc chon
+    int current_article = 0;
+    int current_dash = 0;
 
+    public void initObject(){
+        initTable();
+        initValidation();
+    }
+    
+    public void initTable(){
+        String[] columnContent = new String[]{"user", "comment"};
+
+        tblModel = new DefaultTableModel(){
+      
+          @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        tblModel.setColumnIdentifiers(columnContent);
+        CommentTable.setModel(tblModel);
+        disableField();
+    }
+
+    public void disableField(){
+        String a = articledto.getAmountArticle(String.valueOf(logindto.makeId()));
+        System.out.println("ss: "+a);
+        if (a.equals("")||a.equals("1")){
+            PostD1.setVisible(false);
+            PostD2.setVisible(false);
+            PostD3.setVisible(false);
+            PostD4.setVisible(false);
+            jLabel1.setVisible(true);
+        }
+        if(a.equals("2")){
+            PostD1.setVisible(true);
+            PostD2.setVisible(false);
+            PostD3.setVisible(false);
+            PostD4.setVisible(false);
+            jLabel1.setVisible(false);
+            articledto.fillEachArticle(PostImage1, PostTitle1, UploadDayPost1, PostState1, 0);
+        }
+        else if(a.equals("3")){
+            PostD1.setVisible(true);
+            PostD2.setVisible(true);
+            PostD3.setVisible(false);
+            PostD4.setVisible(false);
+            jLabel1.setVisible(false);
+            articledto.fillEachArticle(PostImage1, PostTitle1, UploadDayPost1, PostState1, 0);
+            articledto.fillEachArticle(PostImage2, PostTitle2, UploadDayPost2, PostState2, 1);
+        }
+        else if(a.equals("4")){
+            PostD1.setVisible(true);
+            PostD2.setVisible(true);
+            PostD3.setVisible(true);
+            PostD4.setVisible(false);
+            jLabel1.setVisible(false);
+            articledto.fillEachArticle(PostImage1, PostTitle1, UploadDayPost1, PostState1, 0);
+            articledto.fillEachArticle(PostImage2, PostTitle2, UploadDayPost2, PostState2, 1);
+            articledto.fillEachArticle(PostImage3, PostTitle3, UploadDayPost3, PostState3, 2);
+        }
+        else {
+            jLabel1.setVisible(false);
+        }
+    }
+    
+    public void initValidation(){
+        if(logindto.checkRole().equals("user")){
+            BrowsePage.setVisible(false);
+        }
+    }
+    
+    public void initSearch(){
+        String[] columnContent = new String[]{"PostCode", "PostTittle", "Comments","PostAuthor", "UploadDay"};
+
+        tblSearch = new DefaultTableModel(){
+      
+          @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        tblSearch.setColumnIdentifiers(columnContent);
+        Table.setModel(tblSearch);
+        articledto.searchArticle(tblSearch , SearchInput.getText(), "done");
+        ResultSearchLabel.setText("Result for '"+SearchInput.getText()+"'");
+        SearchInput.setText("");    
+    }
+    
+    
     public void fillToDetailPage(String imagePath, JLabel imageJLabel, String pageContent) throws IOException {
         setImagePage(imagePath, imageJLabel);
         PageDetailContent.setText("");
@@ -1951,23 +2083,21 @@ public class MainPage extends javax.swing.JFrame {
     }
     
     public void setWelcomeLabel() {
-        String stringWelcome = "Welcome " + logindto.changeUsername();
+        String stringWelcome = "Welcome " + logindto.changeUsername()+"--" +logindto.checkRole();
+        String dashboard = logindto.changeUsername()+" + DASHBOARD";
         WelcomeLabel.setText(stringWelcome);
+        DashBoardTitle.setText(dashboard);
         
     }
 
     public void indentIntoArticle(int i){
-        articledto.showDetail(PageDetailTitle, PageDetailContent, PageDetailImage, tblModel, i);      
+        ArrayList<Article> top2 = articledto.Top2View();
+        PageDetailTitle.setText(top2.get(i).getTitle());
+        PageDetailContent.setText(top2.get(i).getDescription());
+        articledto.setImagePage(top2.get(i).getImage(), PageDetailImage);  
     }
 
-    public void initTable(){
-        String[] columnContent = new String[]{"user", "comment"};
-
-        tblModel = new DefaultTableModel();
-        tblModel.setColumnIdentifiers(columnContent);
-        CommentTable.setModel(tblModel);
-    }
-
+    
     public void doComment(){
         if(InputComment.getText().equals("")){
             jOptionPane1.showConfirmDialog(this, "Please enter your content!!!");
@@ -2007,12 +2137,14 @@ public class MainPage extends javax.swing.JFrame {
             CreatePostTitle.setText("Update Post");
             InputPostDescription.setLineWrap(true);
             InputPostDescription.setWrapStyleWord(true);
-            articledto.showDetail(PageDetailTitle, PageDetailContent, PageDetailImage, tblModel, id); 
-            InputPostTitle.setText(PageDetailTitle.getText());
-            InputPostDescription.setText(PageDetailContent.getText());
-            articledto.setImagePage(PageDetailImage.getText(), YourChoseImage);
+            ArrayList<Article> temp = articledto.returnTemp();
+            InputPostTitle.setText(temp.get(id).getTitle());
+            InputPostDescription.setText(temp.get(id).getDescription());
+            articledto.setImagePage(temp.get(id).getImage(), YourChoseImage);
             fillToDashBoard();
             changePage(CardLayoutPanel, NewPostLayout);
+            current_article = temp.get(id).getId();
+            current_dash = id;
         }
         else {
             jOptionPane1.showMessageDialog(this, "This article must be sesored!!!");
@@ -2020,35 +2152,52 @@ public class MainPage extends javax.swing.JFrame {
     }
     
     public void clickUpdate(int id){
-        articledto.updateArticle(InputPostTitle.getText(), YourChoseImage.getIcon().toString(), InputPostDescription.getText(), id);
-        changePage(CardLayoutPanel, DashboardLayout);
-        InputPostTitle.setText("");
-        YourChoseImage.setText("");
-        InputPostDescription.setText("");
+        ArrayList<Article> temp = articledto.returnTemp();
+        String image = "";
+        if(imagePath.equals("")){
+            image = temp.get(current_dash).getImage();
+        }
+        else {
+            image = imagePath;
+        }
+        if(checkUpCreFiled()){
+            articledto.updateArticle(InputPostTitle.getText(), image, InputPostDescription.getText(), id);
+            changePage(CardLayoutPanel, DashboardLayout);
+            fillToDashBoard();
+            InputPostTitle.setText("");
+            YourChoseImage.setText("");
+            InputPostDescription.setText("");
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "You must enter all field");
+        }
     }
     
     public void createNewPost(){
-        articledto.createNewPost(InputPostTitle.getText(), imagePath, InputPostDescription.getText(), String.valueOf(logindto.makeId()));
-        changePage(CardLayoutPanel, DashboardLayout);
-        InputPostTitle.setText("");
-        YourChoseImage.setText("");
-        InputPostDescription.setText("");
+        if(checkUpCreFiled()){
+            articledto.createNewPost(InputPostTitle.getText(), imagePath, InputPostDescription.getText(), String.valueOf(logindto.makeId()));
+            changePage(CardLayoutPanel, DashboardLayout);
+            InputPostTitle.setText("");
+            YourChoseImage.setText("");
+            InputPostDescription.setText("");
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "You must enter all field");
+        }
     }
     
+    public boolean checkUpCreFiled(){
+        if(InputPostTitle.getText().equals("<html></html>")||InputPostDescription.getText().equals("")){
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
     
-    public void initSearch(){
-        String[] columnContent = new String[]{"PostCode", "PostTittle", "Comments","PostAuthor", "UploadDay"};
-
-        tblSearch = new DefaultTableModel(){
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
-        tblSearch.setColumnIdentifiers(columnContent);
-        Table.setModel(tblSearch);
-        articledto.searchArticle(tblSearch , SearchInput.getText());
-        SearchInput.setText("");
+    public void enterBrowse(){
+        AdminPage ad = new AdminPage();
+        ad.setVisible(true);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -2056,6 +2205,7 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JPanel AboutUsLayout;
     private javax.swing.JPanel AboutUsPanel;
     private javax.swing.JLabel BackBtn;
+    private javax.swing.JLabel BrowsePage;
     private javax.swing.JPanel CardLayoutPanel;
     private javax.swing.JTextField ChooseImageBtn;
     private com.k33ptoo.components.KButton ClearPostBtn;
@@ -2159,6 +2309,7 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel YourChoseImage;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JScrollPane jScrollPane1;

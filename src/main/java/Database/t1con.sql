@@ -119,6 +119,12 @@ begin
 		delete Articles where id_article = (select id_article from deleted)
 	end
 end
+go
+create trigger [CreateUser]
+on [dbo].[Users]
+for insert
+as 
+	insert into Articles values (N'', N'', '2012-02-21T18:10:00', '', 'pending', (select id_user from inserted))
 /*Fucntion*/
 /*Count amount of comment in a article*/
 go
@@ -152,17 +158,6 @@ end
 
 /*Views*/
 /*For article*/
-
-go
-create view [SearchView]
-as
-select id_article,
-	title_article, 
-	dbo.count_amount_comment(id_article) as comments,
-	dbo.extract_name_author(author_article) as author,
-	date_article
-from Articles
-where state_article = 'done'
 go
 create view [CommentView]
 as
@@ -182,13 +177,45 @@ select title_article,
 	image_article
 from Articles
 go
-create view [CommentDialog]
-as
-select dbo.extract_name_author(id_user) as username, content
-from Comments
+
+
+create view [AuthorView] as (
+	select a.id_user, a.name_user,a.fullname_user, a.phoneNumber_user,
+		count(b.id_article) as amount_created_article
+	from Users a
+	left join Articles b on a.id_user = b.author_article
+	group by a.id_user, a.name_user, a.fullname_user, a.phoneNumber_user
+
+)
+
+
 
 /*Procedure*/
 /*For Author*/
+
+go
+create procedure article_view @state varchar(10), @title varchar(10), @author varchar(10)
+as 
+begin
+	with searchview as (
+		select id_article,
+			title_article, 
+			dbo.count_amount_comment(id_article) as comments,
+			dbo.extract_name_author(author_article) as author,
+			date_article
+		from Articles
+		where state_article = @state
+	),
+	view_sort as (
+		select a.*,	
+				rank() over(order by a.comments desc) as rank
+		from searchview a 
+	)
+	select * from view_sort where title_article like @title and author like @author
+end
+
+
+
 go
 create procedure select_state_article @state varchar(10), @id int
 as
@@ -276,7 +303,7 @@ update Articles set title_article = N'Chó Phú' where id_article = 2
 
 /*Admin Role*/
 /*Display all of article need to censor*/
-exec dbo.select_state_article @state = 'pending', @id = 1
+exec dbo.select_state_article @state = 'done', @id = 1
 /*Update state of article*/
 exec dbo.udpate_state @id = 1, @id_article =7  , @state = 'done'
 
@@ -309,3 +336,16 @@ select * from [CommentView] where id_article = 3
 select * from [CommentView]
 
 select * from dbo.SearchView
+
+
+select * 
+from Users where id_user != 1
+
+update Articles set state_article = 'done' where id_artivle = 7
+
+
+delete Users where id_user = 1
+
+select count(id_article) as amount from Articles group by author_article having author_article = 1
+
+select count(id_article) as amo from Articles group by author_article having author_article = 1

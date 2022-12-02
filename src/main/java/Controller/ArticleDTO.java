@@ -20,6 +20,7 @@ import javax.swing.JLabel;
 import Model.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -34,11 +35,13 @@ public class ArticleDTO  {
     private ArrayList<Article> arr = new ArrayList<>();
     public ArrayList<Article> temp;
     int page = 1;
+    LoginDTO logindto = new LoginDTO();
     CommentDTO commentdto = new CommentDTO();
     int id_comment = 0;
+    
 
     public ArticleDTO() {
-        getAllArticle();
+        getAllArticle(String.valueOf(logindto.makeId()));
     }
     
     public void showDetail(JLabel j1, JLabel j2, JLabel j3, DefaultTableModel tblModel, int i){
@@ -49,6 +52,18 @@ public class ArticleDTO  {
         else {
             index = arr.get(index).getId();
         }
+        privateAddDetail(j1, j2, j3, index);
+        commentdto.fillTable(tblModel, String.valueOf(index));
+        id_comment = index;
+    }
+    
+    public void showDetailSearch(JLabel j1, JLabel j2, JLabel j3, DefaultTableModel tblModel, int index){
+        privateAddDetail(j1, j2, j3, index);
+        commentdto.fillTable(tblModel, String.valueOf(index));
+        id_comment = index;
+    }
+    
+    public void privateAddDetail(JLabel j1, JLabel j2, JLabel j3, int index){
         String sql = "select * from Articles where id_article = " + index;
         rs = db.queryHaveParameter(sql, new String[]{});
         try {
@@ -56,15 +71,13 @@ public class ArticleDTO  {
                j1.setText(rs.getString("title_article"));
                j2.setText(rs.getString("description_article"));
                setImagePage(rs.getString("image_article"), j3);
-               commentdto.fillTable(tblModel, String.valueOf(index));
-               id_comment = index;
             }
         } catch (SQLException ex) {
             Logger.getLogger(ArticleDTO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public void showDetailSearch(JLabel j1, JLabel j2, JLabel j3, DefaultTableModel tblModel, int index){
+    public void privateAddDetail(JTextArea j1, JTextArea j2, JLabel j3, int index){
         String sql = "select * from Articles where id_article = " + index;
         rs = db.queryHaveParameter(sql, new String[]{});
         try {
@@ -72,13 +85,12 @@ public class ArticleDTO  {
                j1.setText(rs.getString("title_article"));
                j2.setText(rs.getString("description_article"));
                setImagePage(rs.getString("image_article"), j3);
-               commentdto.fillTable(tblModel, String.valueOf(index));
-               id_comment = index;
             }
         } catch (SQLException ex) {
             Logger.getLogger(ArticleDTO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
     
     public void setImagePage(String imagePath, JLabel imageLabel) {
         try {
@@ -101,10 +113,10 @@ public class ArticleDTO  {
 
     }
     
-    public void getAllArticle() {
+    public void getAllArticle(String id) {
         arr.clear();
-        String sql = "select * from Articles";
-        rs = db.queryHaveParameter(sql, new String[]{});
+        String sql = "select * from Articles where author_article = ?";
+        rs = db.queryHaveParameter(sql, new String[]{id});
         try {
             if(rs.next()){
                 while(rs.next()){
@@ -125,7 +137,10 @@ public class ArticleDTO  {
     
     public void getSingle(int page) {
         try {
-            if(page == getLenDash()){
+            if(arr.size()<4){
+                temp = new ArrayList<Article>(arr);
+            }
+            else if(page == getLenDash()){
                 temp = new ArrayList<Article>(arr.subList(arr.size()-4, arr.size()));
             }
             else if(page == 1) {
@@ -143,7 +158,7 @@ public class ArticleDTO  {
         String sql = "delete Articles where id_article = ?";
         db.queryHaveParameter(sql, new String[]{String.valueOf(temp.get(id).getId())});
         arr.clear();
-        getAllArticle();
+        String.valueOf(logindto.makeId());
         getSingle(page);
     }
     
@@ -210,11 +225,14 @@ public class ArticleDTO  {
     }
     
     public void updateArticle(String title, String image, String desc, int id){
-        String sql = "update Articles set title_article = ? "
+        String sql = "update Articles set "
+                + " title_article = ? "
                 + ", image_article = ? "
                 + ", description_article = ? "
                 + "where id_article = ?";
-        db.queryHaveParameter(sql, new String[]{title, image, desc, String.valueOf(id)});
+        String sql1 = "exec dbo.udpate_state ?, ? , ?";
+        db.queryHaveParameter(sql, new String[]{title, image, desc,String.valueOf(id)});
+        db.queryHaveParameter(sql1, new String[]{"1", String.valueOf(id), "pending"});
     }
     
     public void createNewPost(String title, String image, String desc, String author){
@@ -222,9 +240,9 @@ public class ArticleDTO  {
         db.queryHaveParameter(sql, new String[]{title, "<html>"+desc+"</html>" , image, author});
     }
     
-    public void searchArticle(DefaultTableModel jt, String title){
-        String sql = "select * from dbo.SearchView where title_article like ?";
-        rs = db.queryHaveParameter(sql, new String[]{title+"%"});
+    public void searchArticle(DefaultTableModel jt, String title, String state){
+        String sql = "exec dbo.article_view @state = ?, @title=?, @author = ?";
+        rs = db.queryHaveParameter(sql, new String[]{state,title+"%","%"});
         jt.setRowCount(0);
 
         try {
@@ -233,7 +251,7 @@ public class ArticleDTO  {
                     rs.getString("id_article"),
                     rs.getString("title_article"),
                     rs.getString("comments"),
-                    rs.getString("author"),
+                    rs.getString("author"), 
                     rs.getString("date_article")
                 });
             }
@@ -242,5 +260,93 @@ public class ArticleDTO  {
         }
 
         jt.fireTableDataChanged();
+    }
+    
+    public ArrayList<Article> Top2View(){
+        String sql = "select top 3 a.*, b.name_user as author from Articles a inner join Users b on a.author_article = b.id_user and state_article = ?";
+        rs = db.queryHaveParameter(sql, new String[]{"done"});
+        ArrayList<Article> top2 = new ArrayList<>();
+        try {
+ 
+            if(rs.next()){
+                while(rs.next()){
+                    Article at = new Article(rs.getInt("id_article"),  
+                                             rs.getString("title_article"),
+                                             rs.getString("description_article"),
+                                             rs.getString("date_article"),
+                                             rs.getString("image_article"),
+                                             rs.getString("state_article"),
+                                             rs.getString("author"));
+                    top2.add(at);
+                }
+                
+            }
+            System.out.println(""+top2);
+            return top2;
+        } catch (SQLException ex) {
+            Logger.getLogger(ArticleDTO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return top2;
+    }
+    
+    public void getArticlePending(String author, DefaultTableModel jt){
+        String sql = "exec dbo.article_view @state = ?, @title = ?, @author = ?";
+        rs = db.queryHaveParameter(sql, new String[]{"pending", "%", author+"%"});
+        
+        jt.setRowCount(0);
+
+        try {
+            while(rs.next()){
+                String auth = rs.getString("author");
+                System.out.println("Author: "+auth);
+                if(!String.valueOf(logindto.printAccount()[2]).equals(auth)){
+                    jt.addRow(new Object[]{
+                        rs.getString("id_article"),
+                        rs.getString("title_article"),
+                        rs.getString("comments"),
+                        rs.getString("author"), 
+                        rs.getString("date_article")
+                    });
+                }
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CommentDTO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        jt.fireTableDataChanged();
+    }
+    
+    public void browseArticle(String id_user, String id_article, String state){
+        String sql = "exec dbo.udpate_state @id = ?, @id_article =?  , @state = ?";
+        db.queryHaveParameter(sql, new String[]{id_user, id_article, state});
+    }
+    
+    public String getAmountArticle(String id){
+        String sql = "select count(id_article) as amount from Articles group by author_article having author_article = ?";
+        rs = db.queryHaveParameter(sql, new String[]{id});
+        try {
+            if(rs.next()){
+                return rs.getString("amount");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ArticleDTO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "";
+    }
+    
+    public void disableArticle(JLabel jb1, JLabel jb2, JLabel jb3, JLabel jb4){
+        jb1.setVisible(false);
+        jb2.setVisible(false);
+        jb3.setVisible(false);
+        jb4.setVisible(false);
+    }
+    
+    public int getAmount(){
+        return arr.size();
+    }
+    
+    public ArrayList<Article> returnTemp(){
+        return temp;
     }
 }

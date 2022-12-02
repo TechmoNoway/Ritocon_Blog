@@ -1,4 +1,4 @@
-E:\Github\Ritocon_Blog\src\main\java\View\Trash.java
+E:\Github\Ritocon_Blog\src\main\java\Test\JPanelRounded.java
 E:\Github\Ritocon_Blog\src\main\java\Model\Article.java
 E:\Github\Ritocon_Blog\src\main\java\Model\User.java
 E:\Github\Ritocon_Blog\src\main\java\Controller\DatabaseDTO.java
@@ -12,4 +12,6 @@ E:\Github\Ritocon_Blog\src\main\java\View\UserProfilePage.java
 E:\Github\Ritocon_Blog\src\main\java\JDBC\ConnectDTB.java
 E:\Github\Ritocon_Blog\src\main\java\View\LoginPage.java
 E:\Github\Ritocon_Blog\src\main\java\Controller\LoginDTO.java
+E:\Github\Ritocon_Blog\src\main\java\Model\Author.java
+E:\Github\Ritocon_Blog\src\main\java\View\AdminPage.java
 E:\Github\Ritocon_Blog\src\main\java\View\SignUpPage.java

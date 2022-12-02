@@ -13,12 +13,21 @@ import java.awt.geom.RoundRectangle2D;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import Controller.*;
+import Model.*;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author ASUS
  */
 public class AdminPage extends javax.swing.JFrame {
+    LoginDTO logindto = new LoginDTO();
+    ArticleDTO articledto = new ArticleDTO();
+    DefaultTableModel tblArticle;
+    DefaultTableModel tblUser;
+    int page = 1;
 
     /**
      * Creates new form UserProfilePage
@@ -27,6 +36,7 @@ public class AdminPage extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 20, 20));
+        initObject();
 
     }
 
@@ -50,9 +60,6 @@ public class AdminPage extends javax.swing.JFrame {
         AccountsPanel = new Test.JPanelRounded();
         AccountsTitleLabel = new javax.swing.JLabel();
         RightColorPanel2 = new Test.JPanelRounded();
-        LogoutPanel = new Test.JPanelRounded();
-        LogoutTitleLabel = new javax.swing.JLabel();
-        RightColorPanel4 = new Test.JPanelRounded();
         TopMenuPanel1 = new javax.swing.JPanel();
         HomeLinkPanel = new javax.swing.JPanel();
         HomeLinkLabel = new javax.swing.JLabel();
@@ -112,7 +119,6 @@ public class AdminPage extends javax.swing.JFrame {
         setAutoRequestFocus(false);
         setBackground(new java.awt.Color(0, 0, 0));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1260, 708));
         setSize(new java.awt.Dimension(0, 0));
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -241,7 +247,7 @@ public class AdminPage extends javax.swing.JFrame {
 
         PostsPanel.add(RightColorPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        LeftMenuPanel.add(PostsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 260, 90));
+        LeftMenuPanel.add(PostsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 260, 90));
 
         AccountsPanel.setBackground(new java.awt.Color(35, 35, 35));
         AccountsPanel.setRoundBottomLeft(30);
@@ -294,60 +300,7 @@ public class AdminPage extends javax.swing.JFrame {
 
         AccountsPanel.add(RightColorPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 20, 90));
 
-        LeftMenuPanel.add(AccountsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 260, 90));
-
-        LogoutPanel.setBackground(new java.awt.Color(35, 35, 35));
-        LogoutPanel.setRoundBottomLeft(30);
-        LogoutPanel.setRoundTopLeft(30);
-        LogoutPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                LogoutPanelMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                LogoutPanelMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                LogoutPanelMouseExited(evt);
-            }
-        });
-        LogoutPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        LogoutTitleLabel.setBackground(new java.awt.Color(255, 255, 255));
-        LogoutTitleLabel.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
-        LogoutTitleLabel.setForeground(new java.awt.Color(255, 255, 255));
-        LogoutTitleLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/exit.png"))); // NOI18N
-        LogoutTitleLabel.setText("  Logout");
-        LogoutTitleLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                LogoutTitleLabelMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                LogoutTitleLabelMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                LogoutTitleLabelMouseExited(evt);
-            }
-        });
-        LogoutPanel.add(LogoutTitleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 150, 30));
-
-        RightColorPanel4.setBackground(new java.awt.Color(204, 255, 204));
-        RightColorPanel4.setRoundBottomLeft(25);
-        RightColorPanel4.setRoundTopLeft(25);
-
-        javax.swing.GroupLayout RightColorPanel4Layout = new javax.swing.GroupLayout(RightColorPanel4);
-        RightColorPanel4.setLayout(RightColorPanel4Layout);
-        RightColorPanel4Layout.setHorizontalGroup(
-            RightColorPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
-        );
-        RightColorPanel4Layout.setVerticalGroup(
-            RightColorPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 90, Short.MAX_VALUE)
-        );
-
-        LogoutPanel.add(RightColorPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        LeftMenuPanel.add(LogoutPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 260, 90));
+        LeftMenuPanel.add(AccountsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 260, 90));
 
         MainPanel.add(LeftMenuPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 280, 670));
 
@@ -355,6 +308,11 @@ public class AdminPage extends javax.swing.JFrame {
         TopMenuPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         HomeLinkPanel.setBackground(new java.awt.Color(0, 0, 0));
+        HomeLinkPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                HomeLinkPanelMouseClicked(evt);
+            }
+        });
 
         HomeLinkLabel.setBackground(new java.awt.Color(255, 255, 255));
         HomeLinkLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -497,9 +455,7 @@ public class AdminPage extends javax.swing.JFrame {
         SearchBorderPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         SearchBorderPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        InputSearch.setBackground(new java.awt.Color(255, 255, 255));
         InputSearch.setFont(new java.awt.Font("Franklin Gothic Book", 0, 18)); // NOI18N
-        InputSearch.setForeground(new java.awt.Color(0, 0, 0));
         InputSearch.setText("Search content..");
         InputSearch.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 10, 1, 1));
         InputSearch.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -508,6 +464,11 @@ public class AdminPage extends javax.swing.JFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 InputSearchFocusLost(evt);
+            }
+        });
+        InputSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                InputSearchMouseClicked(evt);
             }
         });
         InputSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -697,6 +658,11 @@ public class AdminPage extends javax.swing.JFrame {
         Submit.setkHoverForeGround(new java.awt.Color(255, 255, 255));
         Submit.setkHoverStartColor(new java.awt.Color(102, 102, 102));
         Submit.setkStartColor(new java.awt.Color(51, 51, 51));
+        Submit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SubmitMouseClicked(evt);
+            }
+        });
         Submit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SubmitActionPerformed(evt);
@@ -710,7 +676,6 @@ public class AdminPage extends javax.swing.JFrame {
         PostContentScrollPane.setBorder(null);
 
         PostContent.setEditable(false);
-        PostContent.setBackground(new java.awt.Color(255, 255, 255));
         PostContent.setColumns(20);
         PostContent.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         PostContent.setForeground(new java.awt.Color(51, 51, 51));
@@ -724,7 +689,6 @@ public class AdminPage extends javax.swing.JFrame {
         PostTitleScrollPane.setBorder(null);
 
         PostTitle.setEditable(false);
-        PostTitle.setBackground(new java.awt.Color(255, 255, 255));
         PostTitle.setColumns(20);
         PostTitle.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         PostTitle.setForeground(new java.awt.Color(51, 51, 51));
@@ -760,6 +724,11 @@ public class AdminPage extends javax.swing.JFrame {
         AcceptBtn.setkHoverForeGround(new java.awt.Color(255, 255, 255));
         AcceptBtn.setkHoverStartColor(new java.awt.Color(102, 102, 102));
         AcceptBtn.setkStartColor(new java.awt.Color(51, 51, 51));
+        AcceptBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AcceptBtnMouseClicked(evt);
+            }
+        });
         AcceptBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AcceptBtnActionPerformed(evt);
@@ -767,9 +736,7 @@ public class AdminPage extends javax.swing.JFrame {
         });
         SmallPostPanel.add(AcceptBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 490, 120, 40));
 
-        PostTable.setBackground(new java.awt.Color(255, 255, 255));
         PostTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        PostTable.setForeground(new java.awt.Color(0, 0, 0));
         PostTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -823,6 +790,11 @@ public class AdminPage extends javax.swing.JFrame {
         DeleteButton.setkHoverForeGround(new java.awt.Color(255, 255, 255));
         DeleteButton.setkHoverStartColor(new java.awt.Color(102, 102, 102));
         DeleteButton.setkStartColor(new java.awt.Color(51, 51, 51));
+        DeleteButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DeleteButtonMouseClicked(evt);
+            }
+        });
         DeleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DeleteButtonActionPerformed(evt);
@@ -846,9 +818,7 @@ public class AdminPage extends javax.swing.JFrame {
         SmallAccountPanel.setRoundTopRight(15);
         SmallAccountPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        AccountTable.setBackground(new java.awt.Color(255, 255, 255));
         AccountTable.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        AccountTable.setForeground(new java.awt.Color(0, 0, 0));
         AccountTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -902,6 +872,11 @@ public class AdminPage extends javax.swing.JFrame {
         kButton1.setkHoverForeGround(new java.awt.Color(255, 255, 255));
         kButton1.setkHoverStartColor(new java.awt.Color(102, 102, 102));
         kButton1.setkStartColor(new java.awt.Color(51, 51, 51));
+        kButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                kButton1MouseClicked(evt);
+            }
+        });
         kButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 kButton1ActionPerformed(evt);
@@ -923,7 +898,6 @@ public class AdminPage extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         RightColorPanel2.setVisible(false);
         RightColorPanel3.setVisible(false);
-        RightColorPanel4.setVisible(false);
         RightColorPanel1.setVisible(true);
         OverviewPanel.setBackground(new Color(51, 51, 51));
         flexVisiblePanel1(RightColorPanel1);
@@ -976,6 +950,7 @@ public class AdminPage extends javax.swing.JFrame {
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         // TODO add your handling code here:
+        search();
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void HomeLinkLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeLinkLabelMouseEntered
@@ -1000,6 +975,9 @@ public class AdminPage extends javax.swing.JFrame {
 
     private void SettingLinkLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SettingLinkLabelMouseClicked
         // TODO add your handling code here:
+        close();
+        UserProfilePage pro = new UserProfilePage();
+        pro.setVisible(true);
     }//GEN-LAST:event_SettingLinkLabelMouseClicked
 
     private void CateLinkLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CateLinkLabelMouseEntered
@@ -1031,11 +1009,9 @@ public class AdminPage extends javax.swing.JFrame {
         RightColorPanel1.setVisible(true);
         RightColorPanel2.setVisible(false);
         RightColorPanel3.setVisible(false);
-        RightColorPanel4.setVisible(false);
         OverviewPanel.setBackground(new Color(51, 51, 51));
         AccountsPanel.setBackground(new Color(35, 35, 35));
         PostsPanel.setBackground(new Color(35, 35, 35));
-        LogoutPanel.setBackground(new Color(35, 35, 35));
         flexVisiblePanel1(RightColorPanel1);
         VisibleCount2 = 0;
         VisibleCount3 = 0;
@@ -1060,19 +1036,18 @@ public class AdminPage extends javax.swing.JFrame {
     }//GEN-LAST:event_OverviewPanelMouseExited
 
     private void OverviewPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OverviewPanelMouseClicked
+        page = 1;
         RightColorPanel1.setVisible(true);
         RightColorPanel2.setVisible(false);
         RightColorPanel3.setVisible(false);
-        RightColorPanel4.setVisible(false);
         OverviewPanel.setBackground(new Color(51, 51, 51));
         AccountsPanel.setBackground(new Color(35, 35, 35));
         PostsPanel.setBackground(new Color(35, 35, 35));
-        LogoutPanel.setBackground(new Color(35, 35, 35));
         flexVisiblePanel1(RightColorPanel1);
         VisibleCount2 = 0;
         VisibleCount3 = 0;
         VisibleCount4 = 0;
-
+        SearchBorderPanel.setVisible(false);
         changePage(CardLayoutSpace, OverviewLayoutPanel);
     }//GEN-LAST:event_OverviewPanelMouseClicked
 
@@ -1092,11 +1067,9 @@ public class AdminPage extends javax.swing.JFrame {
         RightColorPanel1.setVisible(false);
         RightColorPanel2.setVisible(true);
         RightColorPanel3.setVisible(false);
-        RightColorPanel4.setVisible(false);
         AccountsPanel.setBackground(new Color(51, 51, 51));
         OverviewPanel.setBackground(new Color(35, 35, 35));
         PostsPanel.setBackground(new Color(35, 35, 35));
-        LogoutPanel.setBackground(new Color(35, 35, 35));
         flexVisiblePanel2(RightColorPanel2);
         VisibleCount1 = 0;
         VisibleCount3 = 0;
@@ -1118,20 +1091,20 @@ public class AdminPage extends javax.swing.JFrame {
     }//GEN-LAST:event_AccountsPanelMouseExited
 
     private void AccountsPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AccountsPanelMouseClicked
+        page = 2;
         RightColorPanel1.setVisible(false);
         RightColorPanel2.setVisible(true);
         RightColorPanel3.setVisible(false);
-        RightColorPanel4.setVisible(false);
         AccountsPanel.setBackground(new Color(51, 51, 51));
         OverviewPanel.setBackground(new Color(35, 35, 35));
         PostsPanel.setBackground(new Color(35, 35, 35));
-        LogoutPanel.setBackground(new Color(35, 35, 35));
         flexVisiblePanel2(RightColorPanel2);
         VisibleCount1 = 0;
         VisibleCount3 = 0;
         VisibleCount4 = 0;
-
+        SearchBorderPanel.setVisible(true);
         changePage(CardLayoutSpace, AccountsLayoutPanel);
+        logindto.getAllAuthor(tblUser, "");
     }//GEN-LAST:event_AccountsPanelMouseClicked
 
     private void PostsTitleLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PostsTitleLabelMouseEntered
@@ -1150,11 +1123,9 @@ public class AdminPage extends javax.swing.JFrame {
         RightColorPanel1.setVisible(false);
         RightColorPanel2.setVisible(false);
         RightColorPanel3.setVisible(true);
-        RightColorPanel4.setVisible(false);
         AccountsPanel.setBackground(new Color(35, 35, 35));
         OverviewPanel.setBackground(new Color(35, 35, 35));
         PostsPanel.setBackground(new Color(51, 51, 51));
-        LogoutPanel.setBackground(new Color(35, 35, 35));
         flexVisiblePanel3(RightColorPanel3);
         VisibleCount1 = 0;
         VisibleCount2 = 0;
@@ -1176,89 +1147,29 @@ public class AdminPage extends javax.swing.JFrame {
     }//GEN-LAST:event_PostsPanelMouseExited
 
     private void PostsPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PostsPanelMouseClicked
+        page = 3;
         RightColorPanel1.setVisible(false);
         RightColorPanel2.setVisible(false);
         RightColorPanel3.setVisible(true);
-        RightColorPanel4.setVisible(false);
         AccountsPanel.setBackground(new Color(35, 35, 35));
         OverviewPanel.setBackground(new Color(35, 35, 35));
         PostsPanel.setBackground(new Color(51, 51, 51));
-        LogoutPanel.setBackground(new Color(35, 35, 35));
         flexVisiblePanel3(RightColorPanel3);
         VisibleCount1 = 0;
         VisibleCount2 = 0;
         VisibleCount4 = 0;
-
         changePage(CardLayoutSpace, PostsLayoutPanel);
+        SearchBorderPanel.setVisible(true);
+        articledto.getArticlePending("", tblArticle);
     }//GEN-LAST:event_PostsPanelMouseClicked
 
-    private void LogoutTitleLabelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoutTitleLabelMouseEntered
-        if (RightColorPanel4.isVisible() == false) {
-            LogoutPanel.setBackground(new Color(51, 51, 51));
-        }
-    }//GEN-LAST:event_LogoutTitleLabelMouseEntered
-
-    private void LogoutTitleLabelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoutTitleLabelMouseExited
-        if (RightColorPanel4.isVisible() == false) {
-            LogoutPanel.setBackground(new Color(35, 35, 35));
-        }
-    }//GEN-LAST:event_LogoutTitleLabelMouseExited
-
-    private void LogoutTitleLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoutTitleLabelMouseClicked
-        RightColorPanel1.setVisible(false);
-        RightColorPanel2.setVisible(false);
-        RightColorPanel3.setVisible(false);
-        RightColorPanel4.setVisible(true);
-        AccountsPanel.setBackground(new Color(35, 35, 35));
-        OverviewPanel.setBackground(new Color(35, 35, 35));
-        PostsPanel.setBackground(new Color(35, 35, 35));
-        LogoutPanel.setBackground(new Color(51, 51, 51));
-        flexVisiblePanel4(RightColorPanel4);
-        VisibleCount1 = 0;
-        VisibleCount2 = 0;
-        VisibleCount3 = 0;
-        close();
-        LoginPage form = new LoginPage();
-        form.setVisible(true);
-    }//GEN-LAST:event_LogoutTitleLabelMouseClicked
-
-    private void LogoutPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoutPanelMouseEntered
-        if (RightColorPanel4.isVisible() == false) {
-            LogoutPanel.setBackground(new Color(51, 51, 51));
-        }
-    }//GEN-LAST:event_LogoutPanelMouseEntered
-
-    private void LogoutPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoutPanelMouseExited
-        if (RightColorPanel4.isVisible() == false) {
-            LogoutPanel.setBackground(new Color(35, 35, 35));
-        }
-    }//GEN-LAST:event_LogoutPanelMouseExited
-
-    private void LogoutPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoutPanelMouseClicked
-        RightColorPanel1.setVisible(false);
-        RightColorPanel2.setVisible(false);
-        RightColorPanel3.setVisible(false);
-        RightColorPanel4.setVisible(true);
-        AccountsPanel.setBackground(new Color(35, 35, 35));
-        OverviewPanel.setBackground(new Color(35, 35, 35));
-        PostsPanel.setBackground(new Color(35, 35, 35));
-        LogoutPanel.setBackground(new Color(51, 51, 51));
-        flexVisiblePanel4(RightColorPanel4);
-        VisibleCount1 = 0;
-        VisibleCount2 = 0;
-        VisibleCount3 = 0;
-        close();
-        LoginPage form = new LoginPage();
-        form.setVisible(true);
-    }//GEN-LAST:event_LogoutPanelMouseClicked
-
     private void ExitBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitBtnMouseClicked
-        System.exit(0);
+        close();
     }//GEN-LAST:event_ExitBtnMouseClicked
 
     private void AccountTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AccountTableMouseClicked
         index = AccountTable.getSelectedRow();
-        
+        convertArticle();
         //dua thong tin len trang detail
     }//GEN-LAST:event_AccountTableMouseClicked
 
@@ -1278,8 +1189,10 @@ public class AdminPage extends javax.swing.JFrame {
         PostContent.setWrapStyleWord(true);
         PostTitle.setLineWrap(true);
         PostTitle.setWrapStyleWord(true);
-
-      
+        DefaultTableModel b = new DefaultTableModel();
+        String a =  (String) PostTable.getModel().getValueAt(PostTable.getSelectedRow(), 0);
+        System.out.println("wss: "+a);
+        articledto.privateAddDetail(PostTitle, PostContent, PostImage, Integer.parseInt(a));
     }//GEN-LAST:event_PostTableMouseClicked
 
     private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
@@ -1289,6 +1202,47 @@ public class AdminPage extends javax.swing.JFrame {
     private void SubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_SubmitActionPerformed
+
+    private void HomeLinkPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeLinkPanelMouseClicked
+        // TODO add your handling code here:\
+        close();
+    }//GEN-LAST:event_HomeLinkPanelMouseClicked
+
+    private void InputSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_InputSearchMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_InputSearchMouseClicked
+
+    private void AcceptBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AcceptBtnMouseClicked
+        // TODO add your handling code here:
+        browseArticle("done");
+    }//GEN-LAST:event_AcceptBtnMouseClicked
+
+    private void DeleteButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteButtonMouseClicked
+        // TODO add your handling code here:
+        browseArticle("fail");
+    }//GEN-LAST:event_DeleteButtonMouseClicked
+
+    private void kButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kButton1MouseClicked
+        // TODO add your handling code here:
+        deleteUser();
+    }//GEN-LAST:event_kButton1MouseClicked
+
+    private void SubmitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SubmitMouseClicked
+        // TODO add your handling code here:
+        page = 3;
+        RightColorPanel1.setVisible(false);
+        RightColorPanel2.setVisible(false);
+        RightColorPanel3.setVisible(true);
+        AccountsPanel.setBackground(new Color(35, 35, 35));
+        OverviewPanel.setBackground(new Color(35, 35, 35));
+        PostsPanel.setBackground(new Color(51, 51, 51));
+        flexVisiblePanel3(RightColorPanel3);
+        VisibleCount1 = 0;
+        VisibleCount2 = 0;
+        VisibleCount4 = 0;
+        changePage(CardLayoutSpace, PostsLayoutPanel);
+        browseArticle("done");
+    }//GEN-LAST:event_SubmitMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1344,6 +1298,47 @@ public class AdminPage extends javax.swing.JFrame {
     DefaultTableModel dtm1;
     DefaultTableModel dtm2;
     int index = 0;
+    
+    public void initObject(){
+        ArrayList<Article> at = articledto.Top2View();
+        articledto.setImagePage(at.get(0).getImage(), Top1PostImage);
+        articledto.setImagePage(at.get(1).getImage(), Top2PostImage);
+        Top1PostTitle.setText(at.get(0).getTitle());
+        Top2PostTitle.setText(at.get(1).getTitle());
+        AuthorUsername1.setText(at.get(0).getAuthor());
+        AuthorUsername2.setText(at.get(1).getAuthor());
+        SearchBorderPanel.setVisible(false);
+        PostsAmount.setText(String.valueOf(articledto.getAmount()));
+        UsersAmount.setText(String.valueOf(logindto.amount_user)+1);
+        initTable();
+    }
+    
+    public void initTable(){
+        String[] columnContent1 = new String[]{"ID", "UserName", "FullName", "Phone Number","Amount Articles"};
+
+        tblUser = new DefaultTableModel(){
+      
+          @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        tblUser.setColumnIdentifiers(columnContent1);
+        AccountTable.setModel(tblUser);
+        
+        String[] columnContent2 = new String[]{"PostCode", "PostTittle", "Comments","PostAuthor", "UploadDay"};
+
+        tblArticle = new DefaultTableModel(){
+      
+          @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        tblArticle.setColumnIdentifiers(columnContent2);
+        PostTable.setModel(tblArticle);
+        
+    }
 
     public void flexVisiblePanel1(JPanel panel) {
         if (VisibleCount1 == 0) {
@@ -1392,7 +1387,65 @@ public class AdminPage extends javax.swing.JFrame {
         layoutPanel.repaint();
         layoutPanel.revalidate();
     }
+    
+    public void search(){
+        if(page == 2){
+            logindto.getAllAuthor(tblUser, InputSearch.getText());
+        }
+        else if(page == 3){
+            articledto.searchArticle(tblArticle, InputSearch.getText(), "pending");
+        }
+        InputSearch.setText("");
+    }
+    
+    public void convertArticle(){
+        int a =  (int) AccountTable.getModel().getValueAt(AccountTable.getSelectedRow(), 4);
+        if(a < 1){
+            JOptionPane.showMessageDialog(this, "This user don't have any article");
+        }else {
+            String b = (String) AccountTable.getModel().getValueAt(AccountTable.getSelectedRow(), 1);
+            articledto.getArticlePending(b, tblArticle);
+            RightColorPanel1.setVisible(false);
+            RightColorPanel2.setVisible(false);
+            RightColorPanel3.setVisible(true);
+            AccountsPanel.setBackground(new Color(35, 35, 35));
+            OverviewPanel.setBackground(new Color(35, 35, 35));
+            PostsPanel.setBackground(new Color(51, 51, 51));
+            flexVisiblePanel3(RightColorPanel3);
+            VisibleCount1 = 0;
+            VisibleCount2 = 0;
+            VisibleCount4 = 0;
+            changePage(CardLayoutSpace, PostsLayoutPanel);
+        }
+        
+    }
+    
+    public void browseArticle(String state){
+        int input = JOptionPane.showConfirmDialog(null, 
+                    "Do you want to proceed?", "Select an Option...",JOptionPane.YES_NO_CANCEL_OPTION);
+        
+        if(input==0){
+            String a =  (String) PostTable.getModel().getValueAt(PostTable.getSelectedRow(), 0);
+            articledto.browseArticle(String.valueOf(logindto.makeId()), a, state);
+            articledto.getArticlePending("", tblArticle);
+        }
 
+    }
+
+    public void deleteUser(){
+        if(logindto.checkRole().equals("user")){
+            int input = JOptionPane.showConfirmDialog(null, 
+                    "Do you want to proceed?", "Select an Option...",JOptionPane.YES_NO_CANCEL_OPTION);
+            if(input==0){
+                String a =  (String) AccountTable.getModel().getValueAt(AccountTable.getSelectedRow(), 0);
+                logindto.deleteUser(a);
+                logindto.getAllAuthor(tblUser, "");
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "You unable to delete this user.");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.k33ptoo.components.KButton AcceptBtn;
@@ -1413,8 +1466,6 @@ public class AdminPage extends javax.swing.JFrame {
     private javax.swing.JPanel HomeLinkPanel;
     private javax.swing.JTextField InputSearch;
     private javax.swing.JPanel LeftMenuPanel;
-    private Test.JPanelRounded LogoutPanel;
-    private javax.swing.JLabel LogoutTitleLabel;
     private com.k33ptoo.components.KGradientPanel MainPanel;
     private javax.swing.JPanel OverviewLayoutPanel;
     private Test.JPanelRounded OverviewPanel;
@@ -1437,7 +1488,6 @@ public class AdminPage extends javax.swing.JFrame {
     private Test.JPanelRounded RightColorPanel1;
     private Test.JPanelRounded RightColorPanel2;
     private Test.JPanelRounded RightColorPanel3;
-    private Test.JPanelRounded RightColorPanel4;
     private javax.swing.JPanel SearchBorderPanel;
     private javax.swing.JLabel SettingLinkLabel;
     private javax.swing.JPanel SettingLinkPanel;
