@@ -306,3 +306,5 @@ update Articles set title_article = N'Chó Phú' where id_article = 2
 exec dbo.select_state_article @state = 'done', @id = 1
 /*Update state of article*/
 exec dbo.udpate_state @id = 1, @id_article =7  , @state = 'done'
+
+select * from Users

@@ -552,6 +552,7 @@ public class MainPage extends javax.swing.JFrame {
         EditBackground1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         EditBtn1.setBackground(new java.awt.Color(255, 255, 255));
+        EditBtn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_support_50px.png"))); // NOI18N
         EditBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 EditBtn1MouseClicked(evt);
@@ -583,6 +584,7 @@ public class MainPage extends javax.swing.JFrame {
         DeleteBackground1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         DeleteBtn1.setBackground(new java.awt.Color(255, 255, 255));
+        DeleteBtn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_Delete_50px_1.png"))); // NOI18N
         DeleteBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 DeleteBtn1MouseClicked(evt);
@@ -641,6 +643,7 @@ public class MainPage extends javax.swing.JFrame {
         });
         DeleteBackground2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        DeleteBtn2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_Delete_50px_1.png"))); // NOI18N
         DeleteBtn2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 DeleteBtn2MouseClicked(evt);
@@ -670,6 +673,7 @@ public class MainPage extends javax.swing.JFrame {
         });
         EditBackground2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        EditBtn2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_support_50px.png"))); // NOI18N
         EditBtn2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 EditBtn2MouseClicked(evt);
@@ -728,6 +732,7 @@ public class MainPage extends javax.swing.JFrame {
         });
         EditBackground3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        EditBtn3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_support_50px.png"))); // NOI18N
         EditBtn3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 EditBtn3MouseClicked(evt);
@@ -757,6 +762,7 @@ public class MainPage extends javax.swing.JFrame {
         });
         DeleteBackground3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        DeleteBtn3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_Delete_50px_1.png"))); // NOI18N
         DeleteBtn3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 DeleteBtn3MouseClicked(evt);
@@ -815,6 +821,7 @@ public class MainPage extends javax.swing.JFrame {
         });
         EditBackground4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        EditBtn4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_support_50px.png"))); // NOI18N
         EditBtn4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 EditBtn4MouseClicked(evt);
@@ -844,6 +851,7 @@ public class MainPage extends javax.swing.JFrame {
         });
         DeleteBackground4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        DeleteBtn4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_Delete_50px_1.png"))); // NOI18N
         DeleteBtn4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 DeleteBtn4MouseClicked(evt);
@@ -894,7 +902,11 @@ public class MainPage extends javax.swing.JFrame {
             }
         });
         DashboardLayout.add(NextBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1370, 200, -1, 80));
+
+        GolangAlert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CuteAlert.png"))); // NOI18N
         DashboardLayout.add(GolangAlert, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 30, 250, 200));
+
+        GLPicture.setIcon(new javax.swing.ImageIcon(getClass().getResource("/golang.png"))); // NOI18N
         DashboardLayout.add(GLPicture, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 220, 390, 290));
 
         jButton1.setText("Next");
