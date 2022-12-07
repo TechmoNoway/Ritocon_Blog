@@ -9,6 +9,12 @@ package View;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.awt.geom.RoundRectangle2D;
+import Model.*;
+import Controller.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -16,6 +22,7 @@ import java.awt.geom.RoundRectangle2D;
  * @author ASUS
  */
 public class UserProfilePage extends javax.swing.JFrame {
+    LoginDTO logindto = new LoginDTO();
 
     /**
      * Creates new form UserProfilePage
@@ -24,6 +31,7 @@ public class UserProfilePage extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 20, 20));
+        initObject();
 
     }
 
@@ -400,6 +408,37 @@ public class UserProfilePage extends javax.swing.JFrame {
     public void close() {
         WindowEvent closeWindow = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(closeWindow);
+    }
+    
+    
+    public void initObject(){
+        String[] arr = logindto.printAccount();
+        InputName.setText(arr[0]);
+        PNumberTF.setText(arr[1]);
+        InputUsername.setText(arr[2]);
+        InputPassword.setText(arr[3]);
+        changeInformation();
+    }
+    
+    public void changeInformation(){
+        SaveBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (InputName.getText().equals("")||PNumberTF.getText().equals("")||InputUsername.getText().equals("")||InputPassword.getText().equals("")){
+                    JOptionPane.showMessageDialog(rootPane, "You must fill out all fields");
+                }
+                else {
+                    int input = JOptionPane.showConfirmDialog(null, 
+                        "Do you want to proceed?", "Select an Option...",JOptionPane.YES_NO_CANCEL_OPTION);
+                    if(input==0){
+                        logindto.changeInformation(new String[]{InputName.getText(), PNumberTF.getText(), InputUsername.getText(),InputPassword.getText()});
+                        initObject();
+                    }
+                }
+                
+                
+            }
+        });
     }
     
 

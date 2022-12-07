@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import Model.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,8 +20,16 @@ import javax.swing.JOptionPane;
  */
 public class LoginDTO {
     private final DatabaseDTO db = new DatabaseDTO();
+    DefaultTableModel a = new DefaultTableModel();
     private Frame SignUpPage;
     private ResultSet rs;
+    public int amount_user = 0;
+
+    public LoginDTO() {
+        getAllAuthor(a, "");
+    }
+    
+    
     
     public boolean register(User user){
         String sql_insert = "insert into Users values (?, ?, ? , ?, ?)";
@@ -187,5 +197,47 @@ public class LoginDTO {
             return 0;
         }
         return 0;
+    }
+    
+    public String checkRole(){
+        String sql = "select * from Currents";
+        
+        rs = db.queryHaveParameter(sql, new String[]{});
+        try {
+            if(rs.next()){
+                return rs.getString("role_user");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LoginDTO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "";
+    }
+    
+    public void getAllAuthor(DefaultTableModel jt, String name){
+        String sql = "select * from dbo.AuthorView where id_user != ? and name_user like ?";
+        rs = db.queryHaveParameter(sql, new String[]{String.valueOf(makeId()),name+"%"});
+        jt.setRowCount(0);
+
+        try {
+            while(rs.next()){
+                jt.addRow(new Object[]{
+                    rs.getString("id_user"),
+                    rs.getString("name_user"),
+                    rs.getString("fullname_user"),
+                    rs.getString("phoneNumber_user"),
+                    rs.getInt("amount_created_article")
+                });
+                amount_user++;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CommentDTO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        jt.fireTableDataChanged();
+    }
+    
+    public void deleteUser(String id){
+        String sql = "delete Users where id_user = ?";
+        db.queryHaveParameter(sql, new String[]{id});
     }
 }

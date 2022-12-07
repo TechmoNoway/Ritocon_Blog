@@ -5,7 +5,8 @@ import Controller.LoginDTO;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
-import javax.swing.JOptionPane;
+import java.util.ArrayList;
+
 
 
 
@@ -48,7 +49,6 @@ public class LoginPage extends javax.swing.JFrame {
         setAutoRequestFocus(false);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(950, 600));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -106,9 +106,7 @@ public class LoginPage extends javax.swing.JFrame {
                 ToSignUpBtnActionPerformed(evt);
             }
         });
-
         kGradientPanel1.add(ToSignUpBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 450, 150, -1));
-
 
         SignInBtn.setBorder(null);
         SignInBtn.setText("Sign In");
@@ -119,21 +117,22 @@ public class LoginPage extends javax.swing.JFrame {
         SignInBtn.setkHoverForeGround(new java.awt.Color(255, 204, 255));
         SignInBtn.setkHoverStartColor(new java.awt.Color(0, 204, 204));
         SignInBtn.setkStartColor(new java.awt.Color(255, 255, 255));
+        SignInBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SignInBtnMouseClicked(evt);
+            }
+        });
         SignInBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SignInBtnActionPerformed(evt);
             }
         });
-
         kGradientPanel1.add(SignInBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 450, 150, -1));
-
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(204, 204, 204));
         jLabel3.setText("or");
-
         kGradientPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 460, -1, -1));
-
 
         ExitBtn.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         ExitBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -149,19 +148,15 @@ public class LoginPage extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 204, 204));
         jLabel5.setText("RitoCon");
         kGradientPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 40, 220, 60));
-
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_male_user_96px_1.png"))); // NOI18N
         kGradientPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 140, 90, 80));
 
         PasswordError.setForeground(new java.awt.Color(255, 0, 0));
         PasswordError.setText("Please insert your password!");
-
         kGradientPanel1.add(PasswordError, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 420, 170, -1));
 
         UsernameError.setForeground(new java.awt.Color(255, 0, 0));
         UsernameError.setText("Please insert your user name! ");
         kGradientPanel1.add(UsernameError, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 310, 180, -1));
-
 
         getContentPane().add(kGradientPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, -10, 980, 620));
 
@@ -175,7 +170,6 @@ public class LoginPage extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         UsernameError.setVisible(false);
         PasswordError.setVisible(false);
-       
     }//GEN-LAST:event_formWindowOpened
 
     private void InputPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InputPasswordActionPerformed
@@ -214,6 +208,10 @@ public class LoginPage extends javax.swing.JFrame {
     private void ExitBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ExitBtnMouseClicked
         System.exit(0);
     }//GEN-LAST:event_ExitBtnMouseClicked
+
+    private void SignInBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SignInBtnMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SignInBtnMouseClicked
 
     /**
      * @param args the command line arguments

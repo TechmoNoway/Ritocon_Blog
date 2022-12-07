@@ -34,5 +34,10 @@
             <artifactId>mssql-jdbc</artifactId>
             <version>9.4.0.jre11</version>
         </dependency>
+<!--        <dependency>
+            <groupId>com.mycompany</groupId>
+            <artifactId>ritoblog</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>-->
     </dependencies>
 </project>

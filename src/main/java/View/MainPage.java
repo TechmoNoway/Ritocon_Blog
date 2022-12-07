@@ -29,6 +29,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import Model.*;
+import java.util.ArrayList;
 
 
 /**
@@ -38,9 +39,8 @@ import Model.*;
 public class MainPage extends javax.swing.JFrame {
     LoginDTO logindto = new LoginDTO();
     ArticleDTO articledto = new ArticleDTO();
-    CommentDTO commentdto = new CommentDTO();
     DefaultTableModel tblModel;
-    int id_article =0;
+    DefaultTableModel tblSearch;
     int page = 1;
     /**
      * Creates new form MainPage
@@ -48,13 +48,9 @@ public class MainPage extends javax.swing.JFrame {
     public MainPage() {
         initComponents();
         setLocationRelativeTo(null);
-        initComp();
+        initObject();
+        
     }
-    
-    public void initComp(){
-//        initTable();
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -65,6 +61,7 @@ public class MainPage extends javax.swing.JFrame {
     private void initComponents() {
 
         jOptionPane1 = new javax.swing.JOptionPane();
+        UpdateBtn = new javax.swing.JButton();
         FramePanel = new com.k33ptoo.components.KGradientPanel();
         MenuLine1 = new javax.swing.JPanel();
         SayWelcome = new javax.swing.JPanel();
@@ -85,6 +82,7 @@ public class MainPage extends javax.swing.JFrame {
         NewPostLabel = new javax.swing.JLabel();
         AboutUsPanel = new javax.swing.JPanel();
         AboutUsLabel = new javax.swing.JLabel();
+        BrowsePage = new javax.swing.JLabel();
         CardLayoutPanel = new javax.swing.JPanel();
         HomeLayout = new javax.swing.JPanel();
         MainPostLabelPanel = new javax.swing.JPanel();
@@ -139,6 +137,9 @@ public class MainPage extends javax.swing.JFrame {
         NextBtn = new javax.swing.JLabel();
         GolangAlert = new javax.swing.JLabel();
         GLPicture = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         AboutUsLayout = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         SearchLayout = new javax.swing.JPanel();
@@ -157,7 +158,6 @@ public class MainPage extends javax.swing.JFrame {
         PageDetailContent = new javax.swing.JLabel();
         CommentBtn = new com.k33ptoo.components.KButton();
         LikeBtn = new com.k33ptoo.components.KButton();
-        jButton1 = new javax.swing.JButton();
         NewPostLayout = new javax.swing.JPanel();
         CreatePostTitle = new javax.swing.JLabel();
         InputImageTitle = new javax.swing.JLabel();
@@ -174,6 +174,9 @@ public class MainPage extends javax.swing.JFrame {
         EmptyPostDesWarning = new javax.swing.JLabel();
         EmptyPostTitleWarning = new javax.swing.JLabel();
         EmptyPostImgWarning = new javax.swing.JLabel();
+        Updatebtn = new javax.swing.JButton();
+
+        UpdateBtn.setText("Update");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -189,6 +192,11 @@ public class MainPage extends javax.swing.JFrame {
         FramePanel.setkEndColor(new java.awt.Color(255, 255, 255));
         FramePanel.setkStartColor(new java.awt.Color(255, 255, 255));
         FramePanel.setPreferredSize(new java.awt.Dimension(1920, 1080));
+        FramePanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FramePanelMouseClicked(evt);
+            }
+        });
         FramePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         MenuLine1.setBackground(new java.awt.Color(0, 0, 0));
@@ -202,9 +210,9 @@ public class MainPage extends javax.swing.JFrame {
         WelcomeLabel.setFont(new java.awt.Font("Segoe Script", 0, 20)); // NOI18N
         WelcomeLabel.setForeground(new java.awt.Color(255, 255, 255));
         WelcomeLabel.setText("Welcome");
-        SayWelcome.add(WelcomeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 200, 40));
+        SayWelcome.add(WelcomeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 490, 40));
 
-        MenuLine1.add(SayWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 280, 80));
+        MenuLine1.add(SayWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 570, 80));
 
         LogoLabel.setFont(new java.awt.Font("Lucida Calligraphy", 0, 40)); // NOI18N
         LogoLabel.setForeground(new java.awt.Color(255, 204, 204));
@@ -250,7 +258,7 @@ public class MainPage extends javax.swing.JFrame {
             }
         });
         LogoutPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        MenuLine1.add(LogoutPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 0, 100, 80));
+        MenuLine1.add(LogoutPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1380, 0, 40, 80));
 
         ProfileLabel.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         ProfileLabel.setForeground(new java.awt.Color(51, 51, 51));
@@ -340,7 +348,6 @@ public class MainPage extends javax.swing.JFrame {
         MenuLine2.add(DashboardPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 120, 40));
 
         SearchInput.setBackground(new java.awt.Color(235, 235, 235));
-        SearchInput.setForeground(new java.awt.Color(0, 0, 0));
         SearchInput.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 20, 1, 1));
         SearchInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -360,6 +367,11 @@ public class MainPage extends javax.swing.JFrame {
         SearchBtn.setkHoverStartColor(new java.awt.Color(102, 102, 102));
         SearchBtn.setkSelectedColor(new java.awt.Color(102, 102, 102));
         SearchBtn.setkStartColor(new java.awt.Color(51, 51, 51));
+        SearchBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SearchBtnMouseClicked(evt);
+            }
+        });
         SearchBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SearchBtnActionPerformed(evt);
@@ -432,6 +444,15 @@ public class MainPage extends javax.swing.JFrame {
 
         MenuLine2.add(AboutUsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 50, 100, 40));
 
+        BrowsePage.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        BrowsePage.setText("Browse Articles");
+        BrowsePage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BrowsePageMouseClicked(evt);
+            }
+        });
+        MenuLine2.add(BrowsePage, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 60, 140, 30));
+
         FramePanel.add(MenuLine2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, -1, -1));
 
         CardLayoutPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -451,7 +472,6 @@ public class MainPage extends javax.swing.JFrame {
         MainPostLabelPanel.add(TopicMainPost, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
 
         MainLabelPost.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
-        MainLabelPost.setForeground(new java.awt.Color(0, 0, 0));
         MainLabelPost.setText("<html> Picture about a snow mountain  very fantastic for everybody </html>");
         MainPostLabelPanel.add(MainLabelPost, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 350, 130));
 
@@ -461,7 +481,6 @@ public class MainPage extends javax.swing.JFrame {
         HomeLayout.add(MainThumbnail, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, 600, 440));
 
         LabelPost2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        LabelPost2.setForeground(new java.awt.Color(0, 0, 0));
         LabelPost2.setText("<html>Windows 11 have some improvement about the performence of some game in many platform  </html>");
         LabelPost2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -477,7 +496,6 @@ public class MainPage extends javax.swing.JFrame {
         HomeLayout.add(Thumbnail1, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 40, 710, 140));
 
         LabelPost1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        LabelPost1.setForeground(new java.awt.Color(0, 0, 0));
         LabelPost1.setText("<html>Sunrise Lake is now available for tourise who want to checkin </html>");
         LabelPost1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -495,7 +513,6 @@ public class MainPage extends javax.swing.JFrame {
         PostD1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(220, 220, 220)));
         PostD1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        PostImage1.setForeground(new java.awt.Color(0, 0, 0));
         PostImage1.setText("Image1");
         PostD1.add(PostImage1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 90));
 
@@ -535,6 +552,7 @@ public class MainPage extends javax.swing.JFrame {
         EditBackground1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         EditBtn1.setBackground(new java.awt.Color(255, 255, 255));
+        EditBtn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_support_50px.png"))); // NOI18N
         EditBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 EditBtn1MouseClicked(evt);
@@ -566,6 +584,7 @@ public class MainPage extends javax.swing.JFrame {
         DeleteBackground1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         DeleteBtn1.setBackground(new java.awt.Color(255, 255, 255));
+        DeleteBtn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_Delete_50px_1.png"))); // NOI18N
         DeleteBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 DeleteBtn1MouseClicked(evt);
@@ -587,7 +606,6 @@ public class MainPage extends javax.swing.JFrame {
         PostD2.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(220, 220, 220)));
         PostD2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        PostImage2.setForeground(new java.awt.Color(0, 0, 0));
         PostImage2.setText("Image2");
         PostD2.add(PostImage2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 90));
 
@@ -625,6 +643,7 @@ public class MainPage extends javax.swing.JFrame {
         });
         DeleteBackground2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        DeleteBtn2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_Delete_50px_1.png"))); // NOI18N
         DeleteBtn2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 DeleteBtn2MouseClicked(evt);
@@ -654,6 +673,7 @@ public class MainPage extends javax.swing.JFrame {
         });
         EditBackground2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        EditBtn2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_support_50px.png"))); // NOI18N
         EditBtn2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 EditBtn2MouseClicked(evt);
@@ -675,7 +695,6 @@ public class MainPage extends javax.swing.JFrame {
         PostD3.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(220, 220, 220)));
         PostD3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        PostImage3.setForeground(new java.awt.Color(0, 0, 0));
         PostImage3.setText("Image3");
         PostD3.add(PostImage3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 90));
 
@@ -713,6 +732,7 @@ public class MainPage extends javax.swing.JFrame {
         });
         EditBackground3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        EditBtn3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_support_50px.png"))); // NOI18N
         EditBtn3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 EditBtn3MouseClicked(evt);
@@ -742,6 +762,7 @@ public class MainPage extends javax.swing.JFrame {
         });
         DeleteBackground3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        DeleteBtn3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_Delete_50px_1.png"))); // NOI18N
         DeleteBtn3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 DeleteBtn3MouseClicked(evt);
@@ -763,7 +784,6 @@ public class MainPage extends javax.swing.JFrame {
         PostD4.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(220, 220, 220)));
         PostD4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        PostImage4.setForeground(new java.awt.Color(0, 0, 0));
         PostImage4.setText("Image4");
         PostD4.add(PostImage4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 160, 90));
 
@@ -801,6 +821,7 @@ public class MainPage extends javax.swing.JFrame {
         });
         EditBackground4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        EditBtn4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_support_50px.png"))); // NOI18N
         EditBtn4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 EditBtn4MouseClicked(evt);
@@ -830,6 +851,7 @@ public class MainPage extends javax.swing.JFrame {
         });
         DeleteBackground4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        DeleteBtn4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_Delete_50px_1.png"))); // NOI18N
         DeleteBtn4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 DeleteBtn4MouseClicked(evt);
@@ -880,8 +902,37 @@ public class MainPage extends javax.swing.JFrame {
             }
         });
         DashboardLayout.add(NextBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1370, 200, -1, 80));
+
+        GolangAlert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/CuteAlert.png"))); // NOI18N
         DashboardLayout.add(GolangAlert, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 30, 250, 200));
+
+        GLPicture.setIcon(new javax.swing.ImageIcon(getClass().getResource("/golang.png"))); // NOI18N
         DashboardLayout.add(GLPicture, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 220, 390, 290));
+
+        jButton1.setText("Next");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        DashboardLayout.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, -1, -1));
+
+        jButton2.setText("Prev");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        DashboardLayout.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, -1, -1));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setText("Don't have any article");
+        DashboardLayout.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 360, 350, 50));
 
         CardLayoutPanel.add(DashboardLayout, "card2");
 
@@ -889,7 +940,6 @@ public class MainPage extends javax.swing.JFrame {
         AboutUsLayout.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("We are a coder team with 4 people and we hope enjoy using our app ");
         AboutUsLayout.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, -1, 150));
 
@@ -898,9 +948,7 @@ public class MainPage extends javax.swing.JFrame {
         SearchLayout.setBackground(new java.awt.Color(255, 255, 255));
         SearchLayout.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Table.setBackground(new java.awt.Color(255, 255, 255));
         Table.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        Table.setForeground(new java.awt.Color(0, 0, 0));
         Table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -922,15 +970,7 @@ public class MainPage extends javax.swing.JFrame {
             new String [] {
                 "POSTCODE", "POSTTITLE", "POSTAUTHOR", "UPLOADDAY"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         Table.setToolTipText("");
         Table.setFocusable(false);
         Table.setGridColor(new java.awt.Color(255, 255, 255));
@@ -1030,7 +1070,6 @@ public class MainPage extends javax.swing.JFrame {
         CommentTable.setEnabled(false);
         CommentTable.setGridColor(new java.awt.Color(0, 0, 0));
         CommentTable.setSelectionBackground(new java.awt.Color(0, 0, 0));
-        CommentTable.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(CommentTable);
 
         CommentPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 490, 350));
@@ -1061,12 +1100,12 @@ public class MainPage extends javax.swing.JFrame {
         });
         CommentPanel.add(GoBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 70, 40));
 
-        PageDetailLayout.add(CommentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 40, 490, 490));
+        PageDetailLayout.add(CommentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 50, 490, 480));
 
         PageDetailTitle.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         PageDetailTitle.setForeground(new java.awt.Color(51, 51, 51));
         PageDetailTitle.setText("Insert Page Title Here");
-        PageDetailLayout.add(PageDetailTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 380, -1));
+        PageDetailLayout.add(PageDetailTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 1390, -1));
 
         PageDetailImage.setText("Image Here");
         PageDetailLayout.add(PageDetailImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 500, 490));
@@ -1116,13 +1155,6 @@ public class MainPage extends javax.swing.JFrame {
         });
         PageDetailLayout.add(LikeBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 570, 100, 40));
 
-        jButton1.setText("Comment");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-            }
-        });
-        PageDetailLayout.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 420, -1, -1));
-
         CardLayoutPanel.add(PageDetailLayout, "card2");
 
         NewPostLayout.setBackground(new java.awt.Color(255, 255, 255));
@@ -1135,7 +1167,6 @@ public class MainPage extends javax.swing.JFrame {
         NewPostLayout.add(CreatePostTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, 440, -1));
 
         InputImageTitle.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
-        InputImageTitle.setForeground(new java.awt.Color(0, 0, 0));
         InputImageTitle.setText("IMG");
         NewPostLayout.add(InputImageTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 230, 50, -1));
 
@@ -1150,16 +1181,18 @@ public class MainPage extends javax.swing.JFrame {
                 ChooseImageBtnMouseClicked(evt);
             }
         });
+        ChooseImageBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChooseImageBtnActionPerformed(evt);
+            }
+        });
         NewPostLayout.add(ChooseImageBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 250, 380, 50));
 
         LabelTitleInput.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
-        LabelTitleInput.setForeground(new java.awt.Color(0, 0, 0));
         LabelTitleInput.setText("Title");
         NewPostLayout.add(LabelTitleInput, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 120, 50, -1));
 
-        InputPostTitle.setBackground(new java.awt.Color(255, 255, 255));
         InputPostTitle.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        InputPostTitle.setForeground(new java.awt.Color(0, 0, 0));
         InputPostTitle.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(204, 204, 204)));
         InputPostTitle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1169,16 +1202,13 @@ public class MainPage extends javax.swing.JFrame {
         NewPostLayout.add(InputPostTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 380, 50));
 
         DescriptionTitle.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
-        DescriptionTitle.setForeground(new java.awt.Color(0, 0, 0));
         DescriptionTitle.setText("Description");
         NewPostLayout.add(DescriptionTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 120, 110, -1));
 
         jScrollPane3.setBorder(null);
 
-        InputPostDescription.setBackground(new java.awt.Color(255, 255, 255));
         InputPostDescription.setColumns(20);
         InputPostDescription.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        InputPostDescription.setForeground(new java.awt.Color(0, 0, 0));
         InputPostDescription.setRows(5);
         InputPostDescription.setBorder(javax.swing.BorderFactory.createMatteBorder(2, 2, 2, 2, new java.awt.Color(204, 204, 204)));
         jScrollPane3.setViewportView(InputPostDescription);
@@ -1186,10 +1216,10 @@ public class MainPage extends javax.swing.JFrame {
         NewPostLayout.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 140, 660, 340));
 
         Line1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
-        NewPostLayout.add(Line1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 490, 400, 20));
+        NewPostLayout.add(Line1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 490, 410, 20));
 
         YourChoseImage.setText("Your Image ");
-        NewPostLayout.add(YourChoseImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 320, 380, 170));
+        NewPostLayout.add(YourChoseImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 330, 380, 170));
 
         ClearPostBtn.setBorder(null);
         ClearPostBtn.setText("ClearPost");
@@ -1218,6 +1248,11 @@ public class MainPage extends javax.swing.JFrame {
         UpPostBtn.setkHoverStartColor(new java.awt.Color(255, 0, 0));
         UpPostBtn.setkSelectedColor(new java.awt.Color(255, 0, 0));
         UpPostBtn.setkStartColor(new java.awt.Color(255, 0, 0));
+        UpPostBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                UpPostBtnMouseClicked(evt);
+            }
+        });
         UpPostBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UpPostBtnActionPerformed(evt);
@@ -1239,6 +1274,19 @@ public class MainPage extends javax.swing.JFrame {
         EmptyPostImgWarning.setForeground(new java.awt.Color(255, 0, 0));
         EmptyPostImgWarning.setText("Please choose your post image!");
         NewPostLayout.add(EmptyPostImgWarning, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, 210, 20));
+
+        Updatebtn.setText("UpdatePost");
+        Updatebtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                UpdatebtnMouseClicked(evt);
+            }
+        });
+        Updatebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdatebtnActionPerformed(evt);
+            }
+        });
+        NewPostLayout.add(Updatebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 530, 100, 40));
 
         CardLayoutPanel.add(NewPostLayout, "card2");
 
@@ -1278,10 +1326,12 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_NewPostLabelMouseExited
 
     private void NewPostLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NewPostLabelMouseClicked
+        UpPostBtn.setVisible(true);
         changePage(CardLayoutPanel, NewPostLayout);
         InputPostDescription.setLineWrap(true);
         InputPostDescription.setWrapStyleWord(true);
-        
+        CreatePostTitle.setText("Create Post");
+        clearCreatePostPage();
         
     }//GEN-LAST:event_NewPostLabelMouseClicked
 
@@ -1348,9 +1398,11 @@ public class MainPage extends javax.swing.JFrame {
         }else{
             PostState4.setForeground(new Color(255, 0, 0));
         }
-        
+        articledto.getSingle(1);
+        articledto.getAllArticle(String.valueOf(logindto.makeId()));
         fillToDashBoard();
-
+        PageNumber.setText(page+"/"+articledto.getLenDash());
+        disableField();
     }//GEN-LAST:event_DashboardLabelMouseClicked
 
     private void AboutUsPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AboutUsPanelMouseEntered
@@ -1386,6 +1438,7 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_LogoutPanelMouseExited
 
     private void LogoutPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoutPanelMouseClicked
+        logindto.logout();
         close();
         LoginPage form = new LoginPage();
         form.setVisible(true);
@@ -1469,13 +1522,13 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_LogoLabelMouseClicked
 
     private void LabelPost1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelPost1MouseClicked
-
+        
         changePage(CardLayoutPanel, PageDetailLayout);
 
         try {
             fillToDetailPage("/SunriseLake.png", PageDetailImage, "");
-            id_article = 11;
-            commentdto.fillTable(tblModel, String.valueOf(id_article));
+            indentIntoArticle(0);
+            
         } catch (IOException ex) {
             Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1487,8 +1540,7 @@ public class MainPage extends javax.swing.JFrame {
 
         try {
             fillToDetailPage("/WindowsB.png", PageDetailImage, "");
-            id_article = 11;
-            commentdto.fillTable(tblModel, String.valueOf(id_article));
+            indentIntoArticle(1);
         } catch (IOException ex) {
             Logger.getLogger(MainPage.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1518,7 +1570,7 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_InputCommentActionPerformed
 
     private void ConfirmBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmBtnActionPerformed
-
+        doComment();
     }//GEN-LAST:event_ConfirmBtnActionPerformed
 
     private void GoBackMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GoBackMouseEntered
@@ -1579,7 +1631,7 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_EditBackground1MouseExited
 
     private void EditBackground1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBackground1MouseClicked
-        changePage(CardLayoutPanel, NewPostLayout);
+        updateArticle(0);
     }//GEN-LAST:event_EditBackground1MouseClicked
 
     private void DeleteBackground1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBackground1MouseEntered
@@ -1593,6 +1645,7 @@ public class MainPage extends javax.swing.JFrame {
     private void DeleteBackground1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBackground1MouseClicked
         // TODO add your handling code here:string
         deleteArticle(0);
+        
     }//GEN-LAST:event_DeleteBackground1MouseClicked
 
     private void DeleteBackground2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBackground2MouseEntered
@@ -1629,7 +1682,7 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_EditBackground2MouseExited
 
     private void EditBackground2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBackground2MouseClicked
-        changePage(CardLayoutPanel, NewPostLayout);
+        updateArticle(1);
     }//GEN-LAST:event_EditBackground2MouseClicked
 
     private void EditBtn2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBtn2MouseEntered
@@ -1653,7 +1706,7 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_EditBackground3MouseExited
 
     private void EditBackground3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBackground3MouseClicked
-        changePage(CardLayoutPanel, NewPostLayout);
+        updateArticle(2);
     }//GEN-LAST:event_EditBackground3MouseClicked
 
     private void EditBtn3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBtn3MouseEntered
@@ -1677,7 +1730,7 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_DeleteBackground3MouseExited
 
     private void DeleteBackground3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBackground3MouseClicked
-
+        deleteArticle(2);
         changePage(CardLayoutPanel, NewPostLayout);
 
     }//GEN-LAST:event_DeleteBackground3MouseClicked
@@ -1742,6 +1795,7 @@ public class MainPage extends javax.swing.JFrame {
 
     private void EditBackground4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBackground4MouseClicked
         // TODO add your handling code here:
+        updateArticle(3);
     }//GEN-LAST:event_EditBackground4MouseClicked
 
     private void DeleteBtn4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBtn4MouseClicked
@@ -1753,28 +1807,29 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_BackBtnMouseClicked
 
     private void PostTitle1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PostTitle1MouseClicked
-        changePage(CardLayoutPanel, PageDetailLayout);
+        
     }//GEN-LAST:event_PostTitle1MouseClicked
 
     private void PostTitle2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PostTitle2MouseClicked
-        changePage(CardLayoutPanel, PageDetailLayout);
+       
     }//GEN-LAST:event_PostTitle2MouseClicked
 
     private void PostTitle3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PostTitle3MouseClicked
-        changePage(CardLayoutPanel, PageDetailLayout);
+        
     }//GEN-LAST:event_PostTitle3MouseClicked
 
     private void PostTitle4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PostTitle4MouseClicked
-        changePage(CardLayoutPanel, PageDetailLayout);
+        
     }//GEN-LAST:event_PostTitle4MouseClicked
 
 
     private void TableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableMouseClicked
         if (evt.getClickCount() == 2) {
             changePage(CardLayoutPanel, PageDetailLayout);
+            int a =  Integer.parseInt((String) Table.getModel().getValueAt(Table.getSelectedRow(), 0));
+            System.out.println(""+a);
+            articledto.showDetailSearch(PageDetailTitle, PageDetailContent, PageDetailImage, tblModel, a);
         }
-
-
         //dua thong tin len trang detail
     }//GEN-LAST:event_TableMouseClicked
 
@@ -1813,6 +1868,57 @@ public class MainPage extends javax.swing.JFrame {
         clearCreatePostPage();
     }//GEN-LAST:event_ClearPostBtnActionPerformed
 
+    private void ChooseImageBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChooseImageBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ChooseImageBtnActionPerformed
+
+    private void UpdatebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdatebtnActionPerformed
+        // TODO add your handling code here:
+        clickUpdate(current_article);
+    }//GEN-LAST:event_UpdatebtnActionPerformed
+
+    private void UpPostBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UpPostBtnMouseClicked
+        // TODO add your handling code here:
+        createNewPost();
+        disableField();
+    }//GEN-LAST:event_UpPostBtnMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        articledto.nextDashBoard(PageNumber);
+        fillToDashBoard();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        articledto.prevDashBoard(PageNumber);
+        fillToDashBoard();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void SearchBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SearchBtnMouseClicked
+        // TODO add your handling code here:
+        initSearch();
+    }//GEN-LAST:event_SearchBtnMouseClicked
+
+    private void BrowsePageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BrowsePageMouseClicked
+        // TODO add your handling code here:
+        enterBrowse();
+    }//GEN-LAST:event_BrowsePageMouseClicked
+
+    private void FramePanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FramePanelMouseClicked
+        // TODO add your handling code here:
+        setWelcomeLabel();
+    }//GEN-LAST:event_FramePanelMouseClicked
+
+    private void UpdatebtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UpdatebtnMouseClicked
+        // TODO add your handling code here:
+        clickUpdate(current_article);
+    }//GEN-LAST:event_UpdatebtnMouseClicked
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -1825,7 +1931,95 @@ public class MainPage extends javax.swing.JFrame {
     int colorCount = 0;
     DefaultTableModel dtm;
     String imagePath = ""; //duong dan cua hinh duoc chon
+    int current_article = 0;
+    int current_dash = 0;
 
+    public void initObject(){
+        initTable();
+        initValidation();
+    }
+    
+    public void initTable(){
+        String[] columnContent = new String[]{"user", "comment"};
+
+        tblModel = new DefaultTableModel(){
+      
+          @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        tblModel.setColumnIdentifiers(columnContent);
+        CommentTable.setModel(tblModel);
+        disableField();
+    }
+
+    public void disableField(){
+        String a = articledto.getAmountArticle(String.valueOf(logindto.makeId()));
+        System.out.println("ss: "+a);
+        if (a.equals("")||a.equals("1")){
+            PostD1.setVisible(false);
+            PostD2.setVisible(false);
+            PostD3.setVisible(false);
+            PostD4.setVisible(false);
+            jLabel1.setVisible(true);
+        }
+        if(a.equals("2")){
+            PostD1.setVisible(true);
+            PostD2.setVisible(false);
+            PostD3.setVisible(false);
+            PostD4.setVisible(false);
+            jLabel1.setVisible(false);
+            articledto.fillEachArticle(PostImage1, PostTitle1, UploadDayPost1, PostState1, 0);
+        }
+        else if(a.equals("3")){
+            PostD1.setVisible(true);
+            PostD2.setVisible(true);
+            PostD3.setVisible(false);
+            PostD4.setVisible(false);
+            jLabel1.setVisible(false);
+            articledto.fillEachArticle(PostImage1, PostTitle1, UploadDayPost1, PostState1, 0);
+            articledto.fillEachArticle(PostImage2, PostTitle2, UploadDayPost2, PostState2, 1);
+        }
+        else if(a.equals("4")){
+            PostD1.setVisible(true);
+            PostD2.setVisible(true);
+            PostD3.setVisible(true);
+            PostD4.setVisible(false);
+            jLabel1.setVisible(false);
+            articledto.fillEachArticle(PostImage1, PostTitle1, UploadDayPost1, PostState1, 0);
+            articledto.fillEachArticle(PostImage2, PostTitle2, UploadDayPost2, PostState2, 1);
+            articledto.fillEachArticle(PostImage3, PostTitle3, UploadDayPost3, PostState3, 2);
+        }
+        else {
+            jLabel1.setVisible(false);
+        }
+    }
+    
+    public void initValidation(){
+        if(logindto.checkRole().equals("user")){
+            BrowsePage.setVisible(false);
+        }
+    }
+    
+    public void initSearch(){
+        String[] columnContent = new String[]{"PostCode", "PostTittle", "Comments","PostAuthor", "UploadDay"};
+
+        tblSearch = new DefaultTableModel(){
+      
+          @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        tblSearch.setColumnIdentifiers(columnContent);
+        Table.setModel(tblSearch);
+        articledto.searchArticle(tblSearch , SearchInput.getText(), "done");
+        ResultSearchLabel.setText("Result for '"+SearchInput.getText()+"'");
+        SearchInput.setText("");    
+    }
+    
+    
     public void fillToDetailPage(String imagePath, JLabel imageJLabel, String pageContent) throws IOException {
         setImagePage(imagePath, imageJLabel);
         PageDetailContent.setText("");
@@ -1901,28 +2095,29 @@ public class MainPage extends javax.swing.JFrame {
     }
     
     public void setWelcomeLabel() {
-        String stringWelcome = "Welcome " + logindto.changeUsername();
+        String stringWelcome = "Welcome " + logindto.changeUsername()+"--" +logindto.checkRole();
+        String dashboard = logindto.changeUsername()+" + DASHBOARD";
         WelcomeLabel.setText(stringWelcome);
+        DashBoardTitle.setText(dashboard);
         
     }
 
     public void indentIntoArticle(int i){
-        articledto.showDetail(PageDetailTitle, PageDetailContent, PageDetailImage, i);      
+        ArrayList<Article> top2 = articledto.Top2View();
+        PageDetailTitle.setText(top2.get(i).getTitle());
+        PageDetailContent.setText(top2.get(i).getDescription());
+        articledto.setImagePage(top2.get(i).getImage(), PageDetailImage);  
     }
 
-    public void initTable(){
-        String[] columnContent = new String[]{"user", "comment"};
-
-        tblModel = new DefaultTableModel();
-        tblModel.setColumnIdentifiers(columnContent);
-        CommentTable.setModel(tblModel);
-    }
-
+    
     public void doComment(){
-        Comment comm = new Comment(logindto.makeId(), id_article, InputComment.getText());
-        commentdto.doComment(comm);
-        commentdto.fillTable(tblModel, String.valueOf(id_article));
-        InputComment.setText("");
+        if(InputComment.getText().equals("")){
+            jOptionPane1.showConfirmDialog(this, "Please enter your content!!!");
+        }
+        else {
+            articledto.comment(InputComment, tblModel,  logindto.makeId());
+        }
+        
     }
 
     public void fillToDashBoard(){
@@ -1939,12 +2134,82 @@ public class MainPage extends javax.swing.JFrame {
                     "Do you want to proceed?", "Select an Option...",JOptionPane.YES_NO_CANCEL_OPTION);
 
             if(input==0){
-                articledto.delete_article(id);
+                articledto.delete_article(id, page);
+                fillToDashBoard();
             }
         }
         else {
-            jOptionPane1.showMessageDialog(this, "You must be admin");
+            jOptionPane1.showMessageDialog(this, "This article must be sesored!!!");
         }
+    }
+    
+    public void updateArticle(int id){
+        if(articledto.checkState(id)){
+            UpPostBtn.setVisible(false);
+            CreatePostTitle.setText("Update Post");
+            InputPostDescription.setLineWrap(true);
+            InputPostDescription.setWrapStyleWord(true);
+            ArrayList<Article> temp = articledto.returnTemp();
+            InputPostTitle.setText(temp.get(id).getTitle());
+            InputPostDescription.setText(temp.get(id).getDescription());
+            articledto.setImagePage(temp.get(id).getImage(), YourChoseImage);
+            fillToDashBoard();
+            changePage(CardLayoutPanel, NewPostLayout);
+            current_article = temp.get(id).getId();
+            current_dash = id;
+        }
+        else {
+            jOptionPane1.showMessageDialog(this, "This article must be sesored!!!");
+        }
+    }
+    
+    public void clickUpdate(int id){
+        ArrayList<Article> temp = articledto.returnTemp();
+        String image = "";
+        if(imagePath.equals("")){
+            image = temp.get(current_dash).getImage();
+        }
+        else {
+            image = imagePath;
+        }
+        if(checkUpCreFiled()){
+            articledto.updateArticle(InputPostTitle.getText(), image, InputPostDescription.getText(), id);
+            changePage(CardLayoutPanel, DashboardLayout);
+            fillToDashBoard();
+            InputPostTitle.setText("");
+            YourChoseImage.setText("");
+            InputPostDescription.setText("");
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "You must enter all field");
+        }
+    }
+    
+    public void createNewPost(){
+        if(checkUpCreFiled()){
+            articledto.createNewPost(InputPostTitle.getText(), imagePath, InputPostDescription.getText(), String.valueOf(logindto.makeId()));
+            changePage(CardLayoutPanel, DashboardLayout);
+            InputPostTitle.setText("");
+            YourChoseImage.setText("");
+            InputPostDescription.setText("");
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "You must enter all field");
+        }
+    }
+    
+    public boolean checkUpCreFiled(){
+        if(InputPostTitle.getText().equals("<html></html>")||InputPostDescription.getText().equals("")){
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+    
+    public void enterBrowse(){
+        AdminPage ad = new AdminPage();
+        ad.setVisible(true);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1952,6 +2217,7 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JPanel AboutUsLayout;
     private javax.swing.JPanel AboutUsPanel;
     private javax.swing.JLabel BackBtn;
+    private javax.swing.JLabel BrowsePage;
     private javax.swing.JPanel CardLayoutPanel;
     private javax.swing.JTextField ChooseImageBtn;
     private com.k33ptoo.components.KButton ClearPostBtn;
@@ -2045,6 +2311,8 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel TopicMainPost;
     private javax.swing.JLabel TotalOfPostLabel;
     private com.k33ptoo.components.KButton UpPostBtn;
+    private javax.swing.JButton UpdateBtn;
+    private javax.swing.JButton Updatebtn;
     private javax.swing.JLabel UploadDayPost1;
     private javax.swing.JLabel UploadDayPost2;
     private javax.swing.JLabel UploadDayPost3;
@@ -2052,6 +2320,8 @@ public class MainPage extends javax.swing.JFrame {
     private javax.swing.JLabel WelcomeLabel;
     private javax.swing.JLabel YourChoseImage;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JScrollPane jScrollPane1;
