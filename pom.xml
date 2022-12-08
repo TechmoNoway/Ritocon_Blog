@@ -41,42 +41,57 @@
         </dependency>-->
     </dependencies>
     <build>
-        <finalName>Blog_App</finalName>
-        <plugins>
+
+            <plugins>
+
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>copy-dependencies</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>
-                                copy-dependencies
-                            </goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>
-                                ${project.build.}/lib
-                            </outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
+
+            <artifactId>maven-assembly-plugin</artifactId>
+
+            <version>2.4</version>
+
+            <configuration>
+
+            <descriptorRefs>
+
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+
+            </descriptorRefs>
+
+            <archive>
+
+            <manifest>
+
+            <mainClass>View.LoginPage</mainClass>
+
+            </manifest>
+
+            </archive>
+
+            </configuration>
+
+            <executions>
+
+            <execution>
+
+            <id>test</id>
+
+            <phase>package</phase>
+
+            <goals>
+
+            <goal>single</goal>
+
+            </goals>
+
+            </execution>
+
+            </executions>
+
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.0</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>View.LoginPage</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+
+            </plugins>
+
+        </build>
+    <name>Rito_Blog</name>
 </project>
