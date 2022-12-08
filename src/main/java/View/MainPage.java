@@ -1453,6 +1453,7 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_LogoutLabelMouseExited
 
     private void LogoutLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LogoutLabelMouseClicked
+        logindto.logout();
         close();
         LoginPage form = new LoginPage();
         form.setVisible(true);
