@@ -1609,6 +1609,7 @@ public class MainPage extends javax.swing.JFrame {
 
     private void DeleteBtn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBtn1MouseClicked
         // TODO add your handling code here:
+        deleteArticle(0);
     }//GEN-LAST:event_DeleteBtn1MouseClicked
 
     private void EditBtn1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBtn1MouseEntered
@@ -1620,7 +1621,7 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_EditBtn1MouseExited
 
     private void EditBtn1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBtn1MouseClicked
-        changePage(CardLayoutPanel, NewPostLayout);
+        updateArticle(0);
     }//GEN-LAST:event_EditBtn1MouseClicked
 
     private void EditBackground1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBackground1MouseEntered
@@ -1672,6 +1673,7 @@ public class MainPage extends javax.swing.JFrame {
 
     private void DeleteBtn2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBtn2MouseClicked
         // TODO add your handling code here:
+        deleteArticle(1);
     }//GEN-LAST:event_DeleteBtn2MouseClicked
 
     private void EditBackground2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBackground2MouseEntered
@@ -1695,7 +1697,7 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_EditBtn2MouseExited
 
     private void EditBtn2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBtn2MouseClicked
-        changePage(CardLayoutPanel, NewPostLayout);
+        updateArticle(1);
     }//GEN-LAST:event_EditBtn2MouseClicked
 
     private void EditBackground3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBackground3MouseEntered
@@ -1719,7 +1721,7 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_EditBtn3MouseExited
 
     private void EditBtn3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBtn3MouseClicked
-        changePage(CardLayoutPanel, NewPostLayout);
+        updateArticle(2);
     }//GEN-LAST:event_EditBtn3MouseClicked
 
     private void DeleteBackground3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBackground3MouseEntered
@@ -1746,7 +1748,7 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_DeleteBtn3MouseExited
 
     private void DeleteBtn3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBtn3MouseClicked
-        // TODO add your handling code here:
+        deleteArticle(2);
     }//GEN-LAST:event_DeleteBtn3MouseClicked
 
     private void EditBackground4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBackground4MouseEntered
@@ -1770,7 +1772,7 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_EditBtn4MouseExited
 
     private void EditBtn4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EditBtn4MouseClicked
-        changePage(CardLayoutPanel, NewPostLayout);
+        updateArticle(3);
     }//GEN-LAST:event_EditBtn4MouseClicked
 
     private void DeleteBackground4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBackground4MouseEntered
@@ -1801,6 +1803,7 @@ public class MainPage extends javax.swing.JFrame {
 
     private void DeleteBtn4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DeleteBtn4MouseClicked
         // TODO add your handling code here:
+        deleteArticle(3);
     }//GEN-LAST:event_DeleteBtn4MouseClicked
 
     private void BackBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BackBtnMouseClicked
